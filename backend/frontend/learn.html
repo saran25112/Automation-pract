@@ -1,0 +1,937 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Learn AutomateLearn | Selenium & Java Automation Tutorials</title>
+ <meta name="description" content="Step-by-step tutorials for Java, Selenium WebDriver, TestNG, Maven, Extent Reports, Eclipse IDE, and POM Design Pattern.">
+ <link rel="stylesheet" href="static/css/style.css?v=20260403-staff-fix2">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'></text></svg>">
+</head>
+<body>
+
+ <!-- Background Effects -->
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <!-- Main Content -->
+ <main class="main-content">
+ <div class="learn-layout">
+
+ <div id="learnSidebarMount"></div>
+
+ <!-- Content Area -->
+ <div class="learn-content" id="learnContent">
+
+ <!-- JAVA BASICS -->
+ <div class="topic-content" id="topic-java">
+ <div class="learn-topic-header">
+ <div class="learn-topic-badge"> Module 01</div>
+ <h1 class="learn-topic-title">Java Basics for Automation</h1>
+ <p class="learn-topic-desc">Learn the essential Java concepts you need to write Selenium automation scripts.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>Why Java for Automation?</h2>
+ <p>Java is one of the most widely used languages for Selenium automation. It has excellent community support, rich libraries, and integrates seamlessly with TestNG, Maven, and CI/CD tools.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>Variables & Data Types</h2>
+ <p>Java is strongly typed. You must declare a variable's type before using it.</p>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Primitive data types</span>
+<span class="code-keyword">int</span> age = 25;
+<span class="code-keyword">double</span> price = 99.99;
+<span class="code-keyword">boolean</span> isActive = <span class="code-keyword">true</span>;
+<span class="code-keyword">char</span> grade = <span class="code-string">'A'</span>;
+
+<span class="code-comment">// Reference types</span>
+<span class="code-class">String</span> name = <span class="code-string">"Selenium Learner"</span>;
+<span class="code-class">String</span>[] browsers = {<span class="code-string">"Chrome"</span>, <span class="code-string">"Firefox"</span>, <span class="code-string">"Edge"</span>};</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>Object-Oriented Programming (OOP)</h2>
+ <p>OOP is fundamental for the POM Design Pattern used in Selenium. Here are the core concepts:</p>
+ <ul>
+ <li><strong>Class & Object</strong> Blueprint and instance of that blueprint</li>
+ <li><strong>Encapsulation</strong> Wrapping data with methods (getters/setters)</li>
+ <li><strong>Inheritance</strong> Child class inherits from parent class</li>
+ <li><strong>Polymorphism</strong> Same method, different behaviors</li>
+ </ul>
+
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">public class</span> <span class="code-class">BasePage</span> {
+ <span class="code-keyword">protected</span> <span class="code-class">WebDriver</span> driver;
+
+ <span class="code-keyword">public</span> <span class="code-method">BasePage</span>(<span class="code-class">WebDriver</span> driver) {
+ <span class="code-keyword">this</span>.driver = driver;
+ }
+
+ <span class="code-keyword">public</span> <span class="code-class">String</span> <span class="code-method">getTitle</span>() {
+ <span class="code-keyword">return</span> driver.<span class="code-method">getTitle</span>();
+ }
+}
+
+<span class="code-keyword">public class</span> <span class="code-class">LoginPage</span> <span class="code-keyword">extends</span> <span class="code-class">BasePage</span> {
+ <span class="code-keyword">public</span> <span class="code-method">LoginPage</span>(<span class="code-class">WebDriver</span> driver) {
+ <span class="code-keyword">super</span>(driver);
+ }
+}</pre>
+ </div>
+ </div>
+
+ <div class="key-point">
+ <h4> Key Takeaway</h4>
+ <p>Focus on Classes, Inheritance, and String methods these are the most used Java concepts in Selenium automation.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>Control Flow</h2>
+ <p>Control flow statements help you make decisions and loop through elements.</p>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// If-else for conditional checks</span>
+<span class="code-keyword">if</span> (driver.<span class="code-method">getTitle</span>().<span class="code-method">contains</span>(<span class="code-string">"Login"</span>)) {
+ <span class="code-class">System</span>.out.<span class="code-method">println</span>(<span class="code-string">"On login page"</span>);
+} <span class="code-keyword">else</span> {
+ <span class="code-class">System</span>.out.<span class="code-method">println</span>(<span class="code-string">"Not on login page"</span>);
+}
+
+<span class="code-comment">// For loop - iterate over elements</span>
+<span class="code-class">List</span>&lt;<span class="code-class">WebElement</span>&gt; links = driver.<span class="code-method">findElements</span>(<span class="code-class">By</span>.<span class="code-method">tagName</span>(<span class="code-string">"a"</span>));
+<span class="code-keyword">for</span> (<span class="code-class">WebElement</span> link : links) {
+ <span class="code-class">System</span>.out.<span class="code-method">println</span>(link.<span class="code-method">getText</span>());
+}</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>Methods</h2>
+ <p>Methods help you write reusable automation code. Every Selenium action can be wrapped in a method.</p>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">public void</span> <span class="code-method">enterText</span>(<span class="code-class">By</span> locator, <span class="code-class">String</span> text) {
+ <span class="code-class">WebElement</span> element = driver.<span class="code-method">findElement</span>(locator);
+ element.<span class="code-method">clear</span>();
+ element.<span class="code-method">sendKeys</span>(text);
+}
+
+<span class="code-keyword">public</span> <span class="code-class">String</span> <span class="code-method">getElementText</span>(<span class="code-class">By</span> locator) {
+ <span class="code-keyword">return</span> driver.<span class="code-method">findElement</span>(locator).<span class="code-method">getText</span>();
+}
+
+<span class="code-keyword">public boolean</span> <span class="code-method">isDisplayed</span>(<span class="code-class">By</span> locator) {
+ <span class="code-keyword">return</span> driver.<span class="code-method">findElement</span>(locator).<span class="code-method">isDisplayed</span>();
+}</pre>
+ </div>
+ </div>
+ </div>
+
+ <!-- SELENIUM WEBDRIVER -->
+ <div class="topic-content" id="topic-selenium" style="display:none;">
+ <div class="learn-topic-header">
+ <div class="learn-topic-badge"> Module 02</div>
+ <h1 class="learn-topic-title">Selenium WebDriver</h1>
+ <p class="learn-topic-desc">Master the core Selenium WebDriver API for browser automation.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>What is Selenium WebDriver?</h2>
+ <p>Selenium WebDriver is a browser automation framework that allows you to control web browsers programmatically. It supports multiple browsers including Chrome, Firefox, Edge, and Safari.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>Setting Up WebDriver</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Chrome WebDriver setup</span>
+<span class="code-class">WebDriverManager</span>.<span class="code-method">chromedriver</span>().<span class="code-method">setup</span>();
+<span class="code-class">WebDriver</span> driver = <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span>();
+
+<span class="code-comment">// Navigate to URL</span>
+driver.<span class="code-method">get</span>(<span class="code-string">"https://your-practice-site.com"</span>);
+
+<span class="code-comment">// Maximize window</span>
+driver.<span class="code-method">manage</span>().<span class="code-method">window</span>().<span class="code-method">maximize</span>();
+
+<span class="code-comment">// Set implicit wait</span>
+driver.<span class="code-method">manage</span>().<span class="code-method">timeouts</span>()
+ .<span class="code-method">implicitlyWait</span>(<span class="code-class">Duration</span>.<span class="code-method">ofSeconds</span>(10));</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>Locators Finding Elements</h2>
+ <p>Selenium provides 8 locator strategies to find elements on a web page:</p>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// By ID most reliable</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"username"</span>));
+
+<span class="code-comment">// By Name</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">name</span>(<span class="code-string">"email"</span>));
+
+<span class="code-comment">// By Class Name</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">className</span>(<span class="code-string">"submit-btn"</span>));
+
+<span class="code-comment">// By CSS Selector</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">cssSelector</span>(<span class="code-string">"input[type='password']"</span>));
+
+<span class="code-comment">// By XPath</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">xpath</span>(<span class="code-string">"//button[@id='loginBtn']"</span>));
+
+<span class="code-comment">// By Link Text</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">linkText</span>(<span class="code-string">"Sign Up"</span>));
+
+<span class="code-comment">// By Tag Name</span>
+driver.<span class="code-method">findElements</span>(<span class="code-class">By</span>.<span class="code-method">tagName</span>(<span class="code-string">"input"</span>));</pre>
+ </div>
+ </div>
+
+ <div class="key-point success">
+ <h4> Best Practice</h4>
+ <p>Use <strong>ID</strong> > <strong>CSS Selector</strong> > <strong>XPath</strong> as your locator priority. IDs are fastest and most reliable.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>Common WebDriver Actions</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Type text into input field</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"password"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"developer2020"</span>);
+
+<span class="code-comment">// Click a button</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"loginBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Get text from element</span>
+<span class="code-class">String</span> msg = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"message"</span>)).<span class="code-method">getText</span>();
+
+<span class="code-comment">// Clear input field</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"search"</span>)).<span class="code-method">clear</span>();
+
+<span class="code-comment">// Get attribute value</span>
+<span class="code-class">String</span> val = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"email"</span>)).<span class="code-method">getAttribute</span>(<span class="code-string">"value"</span>);
+
+<span class="code-comment">// Select dropdown</span>
+<span class="code-class">Select</span> dropdown = <span class="code-keyword">new</span> <span class="code-class">Select</span>(driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"country"</span>)));
+dropdown.<span class="code-method">selectByVisibleText</span>(<span class="code-string">"India"</span>);</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>WebDriver Waits</h2>
+ <p>Waits are crucial in automation. They handle dynamic content that loads asynchronously.</p>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Explicit Wait wait for specific condition</span>
+<span class="code-class">WebDriverWait</span> wait = <span class="code-keyword">new</span> <span class="code-class">WebDriverWait</span>(driver, <span class="code-class">Duration</span>.<span class="code-method">ofSeconds</span>(10));
+
+<span class="code-comment">// Wait until element is visible</span>
+<span class="code-class">WebElement</span> elem = wait.<span class="code-method">until</span>(
+ <span class="code-class">ExpectedConditions</span>.<span class="code-method">visibilityOfElementLocated</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"result"</span>))
+);
+
+<span class="code-comment">// Wait until element is clickable</span>
+wait.<span class="code-method">until</span>(
+ <span class="code-class">ExpectedConditions</span>.<span class="code-method">elementToBeClickable</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"submitBtn"</span>))
+).<span class="code-method">click</span>();
+
+<span class="code-comment">// Wait until text is present</span>
+wait.<span class="code-method">until</span>(
+ <span class="code-class">ExpectedConditions</span>.<span class="code-method">textToBePresentInElementLocated</span>(
+ <span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"status"</span>), <span class="code-string">"Success"</span>
+ )
+);</pre>
+ </div>
+ </div>
+
+ <div class="key-point warning">
+ <h4> Avoid Thread.sleep()</h4>
+ <p>Never use <code>Thread.sleep()</code> in production automation. Use Explicit Waits (<code>WebDriverWait</code>) instead they're smarter and faster.</p>
+ </div>
+ </div>
+
+ <!-- TESTNG -->
+ <div class="topic-content" id="topic-testng" style="display:none;">
+ <div class="learn-topic-header">
+ <div class="learn-topic-badge"> Module 03</div>
+ <h1 class="learn-topic-title">TestNG Framework</h1>
+ <p class="learn-topic-desc">Organize, run, and report your Selenium test cases with TestNG.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>What is TestNG?</h2>
+ <p>TestNG (Test Next Generation) is a testing framework inspired by JUnit. It's the most popular framework for Selenium because it offers annotations, assertions, parallel execution, and detailed reporting.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>TestNG Annotations</h2>
+ <p>Annotations control the order and behavior of your test methods:</p>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">public class</span> <span class="code-class">LoginTests</span> {
+
+ <span class="code-class">WebDriver</span> driver;
+
+ <span class="code-keyword">@BeforeSuite</span>
+ <span class="code-keyword">public void</span> <span class="code-method">beforeSuite</span>() {
+ <span class="code-class">System</span>.out.<span class="code-method">println</span>(<span class="code-string">"Runs once before all tests"</span>);
+ }
+
+ <span class="code-keyword">@BeforeMethod</span>
+ <span class="code-keyword">public void</span> <span class="code-method">setUp</span>() {
+ driver = <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span>();
+ driver.<span class="code-method">manage</span>().<span class="code-method">window</span>().<span class="code-method">maximize</span>();
+ }
+
+ <span class="code-keyword">@Test</span>(priority = 1)
+ <span class="code-keyword">public void</span> <span class="code-method">testValidLogin</span>() {
+ driver.<span class="code-method">get</span>(<span class="code-string">"https://practice-site.com"</span>);
+ <span class="code-comment">// Test steps...</span>
+ <span class="code-class">Assert</span>.<span class="code-method">assertEquals</span>(driver.<span class="code-method">getTitle</span>(), <span class="code-string">"Dashboard"</span>);
+ }
+
+ <span class="code-keyword">@Test</span>(priority = 2)
+ <span class="code-keyword">public void</span> <span class="code-method">testInvalidLogin</span>() {
+ <span class="code-comment">// Test with wrong credentials...</span>
+ <span class="code-class">Assert</span>.<span class="code-method">assertTrue</span>(errorMsg.<span class="code-method">isDisplayed</span>());
+ }
+
+ <span class="code-keyword">@AfterMethod</span>
+ <span class="code-keyword">public void</span> <span class="code-method">tearDown</span>() {
+ driver.<span class="code-method">quit</span>();
+ }
+}</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>Common Assertions</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Verify exact match</span>
+<span class="code-class">Assert</span>.<span class="code-method">assertEquals</span>(actual, expected);
+
+<span class="code-comment">// Verify condition is true</span>
+<span class="code-class">Assert</span>.<span class="code-method">assertTrue</span>(element.<span class="code-method">isDisplayed</span>());
+
+<span class="code-comment">// Verify condition is false</span>
+<span class="code-class">Assert</span>.<span class="code-method">assertFalse</span>(element.<span class="code-method">isSelected</span>());
+
+<span class="code-comment">// Verify not null</span>
+<span class="code-class">Assert</span>.<span class="code-method">assertNotNull</span>(driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"result"</span>)));</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>TestNG XML Suite</h2>
+ <p>Use XML suite files to organize and configure test execution:</p>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">XML</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="code-keyword">&lt;suite</span> name=<span class="code-string">"AutomationSuite"</span> parallel=<span class="code-string">"tests"</span> thread-count=<span class="code-string">"2"</span><span class="code-keyword">&gt;</span>
+ <span class="code-keyword">&lt;test</span> name=<span class="code-string">"LoginTests"</span><span class="code-keyword">&gt;</span>
+ <span class="code-keyword">&lt;classes&gt;</span>
+ <span class="code-keyword">&lt;class</span> name=<span class="code-string">"com.tests.LoginTests"</span> <span class="code-keyword">/&gt;</span>
+ <span class="code-keyword">&lt;/classes&gt;</span>
+ <span class="code-keyword">&lt;/test&gt;</span>
+ <span class="code-keyword">&lt;test</span> name=<span class="code-string">"FormTests"</span><span class="code-keyword">&gt;</span>
+ <span class="code-keyword">&lt;classes&gt;</span>
+ <span class="code-keyword">&lt;class</span> name=<span class="code-string">"com.tests.FormTests"</span> <span class="code-keyword">/&gt;</span>
+ <span class="code-keyword">&lt;/classes&gt;</span>
+ <span class="code-keyword">&lt;/test&gt;</span>
+<span class="code-keyword">&lt;/suite&gt;</span></pre>
+ </div>
+ </div>
+
+ <div class="key-point">
+ <h4> Pro Tip</h4>
+ <p>Use <code>@DataProvider</code> for data-driven testing run the same test with different inputs automatically.</p>
+ </div>
+ </div>
+
+ <!-- MAVEN -->
+ <div class="topic-content" id="topic-maven" style="display:none;">
+ <div class="learn-topic-header">
+ <div class="learn-topic-badge"> Module 04</div>
+ <h1 class="learn-topic-title">Maven Build Tool</h1>
+ <p class="learn-topic-desc">Manage dependencies and build your Selenium project with Maven.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>What is Maven?</h2>
+ <p>Maven is a build automation tool that manages project dependencies, builds, and project structure. It uses a <code>pom.xml</code> file to define everything your project needs.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>Project Structure</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Text</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre>selenium-project/
+ pom.xml
+ src/
+ main/
+ java/
+ pages/ <span class="code-comment"> Page Object classes</span>
+ test/
+ java/
+ tests/ <span class="code-comment"> Test classes</span>
+ resources/
+ testng.xml <span class="code-comment"> TestNG suite file</span>
+ target/ <span class="code-comment"> Build output</span></pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>pom.xml Essential Dependencies</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">XML</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">&lt;project&gt;</span>
+ <span class="code-keyword">&lt;modelVersion&gt;</span>4.0.0<span class="code-keyword">&lt;/modelVersion&gt;</span>
+ <span class="code-keyword">&lt;groupId&gt;</span>com.automatelearn<span class="code-keyword">&lt;/groupId&gt;</span>
+ <span class="code-keyword">&lt;artifactId&gt;</span>selenium-tests<span class="code-keyword">&lt;/artifactId&gt;</span>
+ <span class="code-keyword">&lt;version&gt;</span>1.0<span class="code-keyword">&lt;/version&gt;</span>
+
+ <span class="code-keyword">&lt;dependencies&gt;</span>
+ <span class="code-comment">&lt;!-- Selenium WebDriver --&gt;</span>
+ <span class="code-keyword">&lt;dependency&gt;</span>
+ <span class="code-keyword">&lt;groupId&gt;</span>org.seleniumhq.selenium<span class="code-keyword">&lt;/groupId&gt;</span>
+ <span class="code-keyword">&lt;artifactId&gt;</span>selenium-java<span class="code-keyword">&lt;/artifactId&gt;</span>
+ <span class="code-keyword">&lt;version&gt;</span>4.15.0<span class="code-keyword">&lt;/version&gt;</span>
+ <span class="code-keyword">&lt;/dependency&gt;</span>
+
+ <span class="code-comment">&lt;!-- TestNG --&gt;</span>
+ <span class="code-keyword">&lt;dependency&gt;</span>
+ <span class="code-keyword">&lt;groupId&gt;</span>org.testng<span class="code-keyword">&lt;/groupId&gt;</span>
+ <span class="code-keyword">&lt;artifactId&gt;</span>testng<span class="code-keyword">&lt;/artifactId&gt;</span>
+ <span class="code-keyword">&lt;version&gt;</span>7.8.0<span class="code-keyword">&lt;/version&gt;</span>
+ <span class="code-keyword">&lt;/dependency&gt;</span>
+
+ <span class="code-comment">&lt;!-- WebDriverManager --&gt;</span>
+ <span class="code-keyword">&lt;dependency&gt;</span>
+ <span class="code-keyword">&lt;groupId&gt;</span>io.github.bonigarcia<span class="code-keyword">&lt;/groupId&gt;</span>
+ <span class="code-keyword">&lt;artifactId&gt;</span>webdrivermanager<span class="code-keyword">&lt;/artifactId&gt;</span>
+ <span class="code-keyword">&lt;version&gt;</span>5.6.2<span class="code-keyword">&lt;/version&gt;</span>
+ <span class="code-keyword">&lt;/dependency&gt;</span>
+
+ <span class="code-comment">&lt;!-- Extent Reports --&gt;</span>
+ <span class="code-keyword">&lt;dependency&gt;</span>
+ <span class="code-keyword">&lt;groupId&gt;</span>com.aventstack<span class="code-keyword">&lt;/groupId&gt;</span>
+ <span class="code-keyword">&lt;artifactId&gt;</span>extentreports<span class="code-keyword">&lt;/artifactId&gt;</span>
+ <span class="code-keyword">&lt;version&gt;</span>5.1.1<span class="code-keyword">&lt;/version&gt;</span>
+ <span class="code-keyword">&lt;/dependency&gt;</span>
+ <span class="code-keyword">&lt;/dependencies&gt;</span>
+<span class="code-keyword">&lt;/project&gt;</span></pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>Maven Commands</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Bash</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment"># Clean and compile</span>
+mvn clean compile
+
+<span class="code-comment"># Run tests</span>
+mvn test
+
+<span class="code-comment"># Run specific test suite</span>
+mvn test -DsuiteXmlFile=testng.xml
+
+<span class="code-comment"># Package project</span>
+mvn package
+
+<span class="code-comment"># Install dependencies</span>
+mvn install</pre>
+ </div>
+ </div>
+
+ <div class="key-point success">
+ <h4> Remember</h4>
+ <p>Maven automatically downloads dependencies from Maven Central Repository. Just add them to pom.xml and Maven handles the rest!</p>
+ </div>
+ </div>
+
+ <!-- EXTENT REPORTS -->
+ <div class="topic-content" id="topic-extent" style="display:none;">
+ <div class="learn-topic-header">
+ <div class="learn-topic-badge"> Module 05</div>
+ <h1 class="learn-topic-title">Extent Reports</h1>
+ <p class="learn-topic-desc">Generate beautiful HTML test reports with screenshots and detailed logs.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>What are Extent Reports?</h2>
+ <p>Extent Reports is a reporting library that generates interactive, visually appealing HTML reports for your test results. It supports screenshots, logs, categories, and device information.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>Setting Up Extent Reports</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">public class</span> <span class="code-class">ExtentManager</span> {
+ <span class="code-keyword">static</span> <span class="code-class">ExtentReports</span> extent;
+ <span class="code-keyword">static</span> <span class="code-class">ExtentTest</span> test;
+
+ <span class="code-keyword">public static</span> <span class="code-class">ExtentReports</span> <span class="code-method">getInstance</span>() {
+ <span class="code-keyword">if</span> (extent == <span class="code-keyword">null</span>) {
+ extent = <span class="code-keyword">new</span> <span class="code-class">ExtentReports</span>();
+ <span class="code-class">ExtentSparkReporter</span> spark =
+ <span class="code-keyword">new</span> <span class="code-class">ExtentSparkReporter</span>(<span class="code-string">"reports/TestReport.html"</span>);
+ spark.<span class="code-method">config</span>().<span class="code-method">setTheme</span>(<span class="code-class">Theme</span>.DARK);
+ spark.<span class="code-method">config</span>().<span class="code-method">setDocumentTitle</span>(<span class="code-string">"Automation Report"</span>);
+ spark.<span class="code-method">config</span>().<span class="code-method">setReportName</span>(<span class="code-string">"Test Results"</span>);
+ extent.<span class="code-method">attachReporter</span>(spark);
+ }
+ <span class="code-keyword">return</span> extent;
+ }
+}</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>Using with TestNG Listener</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">public class</span> <span class="code-class">TestListener</span> <span class="code-keyword">implements</span> <span class="code-class">ITestListener</span> {
+
+ <span class="code-keyword">@Override</span>
+ <span class="code-keyword">public void</span> <span class="code-method">onTestSuccess</span>(<span class="code-class">ITestResult</span> result) {
+ test.<span class="code-method">log</span>(<span class="code-class">Status</span>.PASS, <span class="code-string">"Test Passed: "</span> + result.<span class="code-method">getName</span>());
+ }
+
+ <span class="code-keyword">@Override</span>
+ <span class="code-keyword">public void</span> <span class="code-method">onTestFailure</span>(<span class="code-class">ITestResult</span> result) {
+ test.<span class="code-method">log</span>(<span class="code-class">Status</span>.FAIL, <span class="code-string">"Test Failed: "</span> + result.<span class="code-method">getName</span>());
+
+ <span class="code-comment">// Add screenshot on failure</span>
+ <span class="code-class">String</span> screenshotPath = <span class="code-method">captureScreenshot</span>(driver);
+ test.<span class="code-method">addScreenCaptureFromPath</span>(screenshotPath);
+ }
+
+ <span class="code-keyword">public</span> <span class="code-class">String</span> <span class="code-method">captureScreenshot</span>(<span class="code-class">WebDriver</span> driver) {
+ <span class="code-class">TakesScreenshot</span> ts = (<span class="code-class">TakesScreenshot</span>) driver;
+ <span class="code-class">File</span> src = ts.<span class="code-method">getScreenshotAs</span>(<span class="code-class">OutputType</span>.FILE);
+ <span class="code-class">String</span> path = <span class="code-string">"screenshots/"</span> + <span class="code-class">System</span>.<span class="code-method">currentTimeMillis</span>() + <span class="code-string">".png"</span>;
+ <span class="code-class">FileUtils</span>.<span class="code-method">copyFile</span>(src, <span class="code-keyword">new</span> <span class="code-class">File</span>(path));
+ <span class="code-keyword">return</span> path;
+ }
+}</pre>
+ </div>
+ </div>
+
+ <div class="key-point">
+ <h4> Pro Tip</h4>
+ <p>Always capture screenshots on test failure and attach them to Extent Reports. This makes debugging much easier!</p>
+ </div>
+ </div>
+
+ <!-- ECLIPSE IDE -->
+ <div class="topic-content" id="topic-eclipse" style="display:none;">
+ <div class="learn-topic-header">
+ <div class="learn-topic-badge"> Module 06</div>
+ <h1 class="learn-topic-title">Eclipse IDE Setup</h1>
+ <p class="learn-topic-desc">Set up your development environment for Selenium automation.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>Prerequisites</h2>
+ <ul>
+ <li><strong>JDK 11+</strong> Download from Oracle or AdoptOpenJDK</li>
+ <li><strong>Eclipse IDE for Java Developers</strong> Download from eclipse.org</li>
+ <li><strong>Maven</strong> Usually bundled with Eclipse</li>
+ </ul>
+ </div>
+
+ <div class="content-block">
+ <h2>Step 1: Install Eclipse</h2>
+ <p>Download Eclipse IDE for Java Developers from <code>eclipse.org/downloads</code>. Extract the zip file and run <code>eclipse.exe</code>.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>Step 2: Create Maven Project</h2>
+ <ul>
+ <li>File New Maven Project</li>
+ <li>Check "Create a simple project" Next</li>
+ <li>Enter Group ID: <code>com.automatelearn</code></li>
+ <li>Enter Artifact ID: <code>selenium-tests</code> Finish</li>
+ </ul>
+ </div>
+
+ <div class="content-block">
+ <h2>Step 3: Install TestNG Plugin</h2>
+ <ul>
+ <li>Help Eclipse Marketplace</li>
+ <li>Search for "TestNG" Install</li>
+ <li>Restart Eclipse</li>
+ </ul>
+ </div>
+
+ <div class="content-block">
+ <h2>Essential Shortcuts</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Shortcuts</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre>Ctrl + Space Auto-complete
+Ctrl + Shift + O Organize imports
+Ctrl + Shift + F Format code
+Ctrl + D Delete line
+Ctrl + / Toggle comment
+Alt + Shift + R Rename variable/method
+F11 Run last test
+Ctrl + F11 Run current file
+Ctrl + Shift + F11 Debug current file</pre>
+ </div>
+ </div>
+
+ <div class="key-point success">
+ <h4> Quick Setup Checklist</h4>
+ <p>JDK installed Eclipse installed Maven project created Dependencies in pom.xml TestNG plugin installed Ready to automate! </p>
+ </div>
+ </div>
+
+ <!-- POM DESIGN PATTERN -->
+ <div class="topic-content" id="topic-pom" style="display:none;">
+ <div class="learn-topic-header">
+ <div class="learn-topic-badge"> Module 07</div>
+ <h1 class="learn-topic-title">POM Design Pattern</h1>
+ <p class="learn-topic-desc">Structure your automation project with the Page Object Model pattern.</p>
+ </div>
+
+ <div class="content-block">
+ <h2>What is Page Object Model (POM)?</h2>
+ <p>POM is a design pattern that creates an Object Repository for web elements. Each web page has a corresponding Page Class that contains the web elements and methods for that page.</p>
+ <ul>
+ <li><strong>Separation of concerns</strong> Tests and page logic are separate</li>
+ <li><strong>Reusability</strong> Page methods can be reused across tests</li>
+ <li><strong>Maintainability</strong> Changes to UI only need updates in one place</li>
+ </ul>
+ </div>
+
+ <div class="content-block">
+ <h2>POM Project Structure</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Text</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre>src/
+ main/java/
+ pages/
+ BasePage.java <span class="code-comment"> Common methods</span>
+ LoginPage.java <span class="code-comment"> Login page elements & actions</span>
+ HomePage.java <span class="code-comment"> Home page elements & actions</span>
+ RegistrationPage.java
+ utils/
+ DriverFactory.java <span class="code-comment"> WebDriver setup</span>
+ ConfigReader.java <span class="code-comment"> Read config properties</span>
+ test/java/
+ tests/
+ BaseTest.java <span class="code-comment"> @Before/@After setup</span>
+ LoginTest.java <span class="code-comment"> Login test cases</span>
+ RegistrationTest.java</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>BasePage Class</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">public class</span> <span class="code-class">BasePage</span> {
+ <span class="code-keyword">protected</span> <span class="code-class">WebDriver</span> driver;
+ <span class="code-keyword">protected</span> <span class="code-class">WebDriverWait</span> wait;
+
+ <span class="code-keyword">public</span> <span class="code-method">BasePage</span>(<span class="code-class">WebDriver</span> driver) {
+ <span class="code-keyword">this</span>.driver = driver;
+ <span class="code-keyword">this</span>.wait = <span class="code-keyword">new</span> <span class="code-class">WebDriverWait</span>(driver, <span class="code-class">Duration</span>.<span class="code-method">ofSeconds</span>(10));
+ }
+
+ <span class="code-keyword">protected void</span> <span class="code-method">click</span>(<span class="code-class">By</span> locator) {
+ wait.<span class="code-method">until</span>(<span class="code-class">ExpectedConditions</span>.<span class="code-method">elementToBeClickable</span>(locator)).<span class="code-method">click</span>();
+ }
+
+ <span class="code-keyword">protected void</span> <span class="code-method">type</span>(<span class="code-class">By</span> locator, <span class="code-class">String</span> text) {
+ <span class="code-class">WebElement</span> el = wait.<span class="code-method">until</span>(<span class="code-class">ExpectedConditions</span>.<span class="code-method">visibilityOfElementLocated</span>(locator));
+ el.<span class="code-method">clear</span>();
+ el.<span class="code-method">sendKeys</span>(text);
+ }
+
+ <span class="code-keyword">protected</span> <span class="code-class">String</span> <span class="code-method">getText</span>(<span class="code-class">By</span> locator) {
+ <span class="code-keyword">return</span> wait.<span class="code-method">until</span>(<span class="code-class">ExpectedConditions</span>.<span class="code-method">visibilityOfElementLocated</span>(locator)).<span class="code-method">getText</span>();
+ }
+}</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>Login Page Class</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">public class</span> <span class="code-class">LoginPage</span> <span class="code-keyword">extends</span> <span class="code-class">BasePage</span> {
+ <span class="code-comment">// Locators</span>
+ <span class="code-keyword">private</span> <span class="code-class">By</span> usernameField = <span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"username"</span>);
+ <span class="code-keyword">private</span> <span class="code-class">By</span> passwordField = <span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"password"</span>);
+ <span class="code-keyword">private</span> <span class="code-class">By</span> loginButton = <span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"loginBtn"</span>);
+ <span class="code-keyword">private</span> <span class="code-class">By</span> errorMessage = <span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"error-msg"</span>);
+
+ <span class="code-keyword">public</span> <span class="code-method">LoginPage</span>(<span class="code-class">WebDriver</span> driver) {
+ <span class="code-keyword">super</span>(driver);
+ }
+
+ <span class="code-comment">// Page Actions</span>
+ <span class="code-keyword">public void</span> <span class="code-method">enterUsername</span>(<span class="code-class">String</span> username) {
+ <span class="code-method">type</span>(usernameField, username);
+ }
+
+ <span class="code-keyword">public void</span> <span class="code-method">enterPassword</span>(<span class="code-class">String</span> password) {
+ <span class="code-method">type</span>(passwordField, password);
+ }
+
+ <span class="code-keyword">public</span> <span class="code-class">HomePage</span> <span class="code-method">clickLogin</span>() {
+ <span class="code-method">click</span>(loginButton);
+ <span class="code-keyword">return new</span> <span class="code-class">HomePage</span>(driver);
+ }
+
+ <span class="code-keyword">public</span> <span class="code-class">String</span> <span class="code-method">getErrorMessage</span>() {
+ <span class="code-keyword">return</span> <span class="code-method">getText</span>(errorMessage);
+ }
+
+ <span class="code-comment">// Combine steps for convenience</span>
+ <span class="code-keyword">public</span> <span class="code-class">HomePage</span> <span class="code-method">loginAs</span>(<span class="code-class">String</span> user, <span class="code-class">String</span> pass) {
+ <span class="code-method">enterUsername</span>(user);
+ <span class="code-method">enterPassword</span>(pass);
+ <span class="code-keyword">return</span> <span class="code-method">clickLogin</span>();
+ }
+}</pre>
+ </div>
+ </div>
+
+ <div class="content-block">
+ <h2>Test Class Using POM</h2>
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-keyword">public class</span> <span class="code-class">LoginTest</span> <span class="code-keyword">extends</span> <span class="code-class">BaseTest</span> {
+
+ <span class="code-keyword">@Test</span>
+ <span class="code-keyword">public void</span> <span class="code-method">testSuccessfulLogin</span>() {
+ <span class="code-class">LoginPage</span> loginPage = <span class="code-keyword">new</span> <span class="code-class">LoginPage</span>(driver);
+ <span class="code-class">HomePage</span> homePage = loginPage.<span class="code-method">loginAs</span>(<span class="code-string">"admin"</span>, <span class="code-string">"pass123"</span>);
+
+ <span class="code-class">Assert</span>.<span class="code-method">assertEquals</span>(
+ homePage.<span class="code-method">getWelcomeMessage</span>(),
+ <span class="code-string">"Welcome, admin!"</span>
+ );
+ }
+
+ <span class="code-keyword">@Test</span>
+ <span class="code-keyword">public void</span> <span class="code-method">testInvalidLogin</span>() {
+ <span class="code-class">LoginPage</span> loginPage = <span class="code-keyword">new</span> <span class="code-class">LoginPage</span>(driver);
+ loginPage.<span class="code-method">loginAs</span>(<span class="code-string">"wrong"</span>, <span class="code-string">"wrong"</span>);
+
+ <span class="code-class">Assert</span>.<span class="code-method">assertEquals</span>(
+ loginPage.<span class="code-method">getErrorMessage</span>(),
+ <span class="code-string">"Invalid credentials"</span>
+ );
+ }
+}</pre>
+ </div>
+ </div>
+
+ <div class="key-point success">
+ <h4> POM Benefits</h4>
+ <p>If a web element's locator changes, you only update it in <strong>one place</strong> (the Page class). All tests using that page will automatically use the updated locator.</p>
+ </div>
+ </div>
+
+ </div>
+ </div>
+ </main>
+
+ <!-- Sidebar Toggle (mobile) -->
+ <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()"><span class="sidebar-link-icon">📖</span></button>
+
+ <button class="learn-admin-add-btn" id="learnAdminAddBtn" type="button" hidden>Add</button>
+
+ <div class="learn-admin-modal" id="learnAdminModal" hidden>
+  <div class="glass-card learn-admin-modal-card">
+   <div class="learn-admin-modal-head">
+    <div>
+     <div class="learn-topic-badge">Content Editor</div>
+     <h3>Add Learn Content</h3>
+     <p id="learnAdminTopicLabel">Topic: Java Basics</p>
+    </div>
+    <button class="learn-admin-close-btn" id="learnAdminCloseBtn" type="button" aria-label="Close editor"></button>
+   </div>
+
+   <div class="form-group">
+    <label for="learnBlockType">Preset</label>
+    <div class="learn-admin-preset-row">
+     <select id="learnBlockType">
+      <option value="heading">Heading</option>
+      <option value="subheading">Subheading</option>
+      <option value="content">Content</option>
+      <option value="code">Code</option>
+     </select>
+     <button class="practice-btn practice-btn-blue" id="learnAddCodeBtn" type="button">Add Code</button>
+    </div>
+   </div>
+
+   <div class="form-group">
+    <label for="learnBlockContent">Text</label>
+    <textarea id="learnBlockContent" rows="12" placeholder="Write your content here..."></textarea>
+   </div>
+
+   <div class="learn-admin-style-grid">
+    <div class="form-group" id="learnBlockColorGroup">
+     <label for="learnBlockColor">Text Color</label>
+     <select id="learnBlockColor">
+      <option value="black">Black</option>
+      <option value="white">White</option>
+      <option value="blue">Blue</option>
+      <option value="red">Red</option>
+      <option value="green">Green</option>
+      <option value="yellow">Yellow</option>
+      <option value="orange">Orange</option>
+      <option value="purple">Purple</option>
+      <option value="pink">Pink</option>
+      <option value="gray">Gray</option>
+     </select>
+    </div>
+
+    <div class="form-group" id="learnBlockFontSizeGroup">
+     <label for="learnBlockFontSize">Font Size</label>
+     <input id="learnBlockFontSize" type="number" min="12" max="72" value="18">
+    </div>
+
+    <div class="form-group">
+     <label for="learnBlockAlign">Alignment</label>
+     <select id="learnBlockAlign">
+      <option value="left">Left</option>
+      <option value="center">Center</option>
+      <option value="right">Right</option>
+     </select>
+    </div>
+   </div>
+
+   <div class="learn-admin-preview-wrap">
+    <div class="learn-admin-preview-label">Preview</div>
+    <div class="learn-admin-preview" id="learnAdminPreview">Your styled content will appear here.</div>
+   </div>
+
+   <div class="learn-admin-actions">
+    <button class="practice-btn practice-btn-green" id="learnAdminSaveBtn" type="button">Save</button>
+    <button class="practice-btn practice-btn-blue" id="learnAdminCancelBtn" type="button">Cancel</button>
+   </div>
+
+   <div class="admin-status" id="learnAdminStatus"></div>
+  </div>
+ </div>
+
+ <div class="learn-admin-modal" id="learnAdminConfirmModal" hidden>
+  <div class="glass-card learn-admin-modal-card learn-admin-confirm-card">
+   <div class="learn-topic-badge">Warning</div>
+   <h3 id="learnAdminConfirmTitle">Confirm Action</h3>
+   <p id="learnAdminConfirmText">Are you sure?</p>
+   <div class="learn-admin-actions">
+    <button class="practice-btn practice-btn-green" id="learnAdminConfirmYesBtn" type="button">Confirm</button>
+    <button class="practice-btn practice-btn-blue" id="learnAdminConfirmNoBtn" type="button">Cancel</button>
+   </div>
+   <div class="admin-status" id="learnAdminConfirmStatus"></div>
+  </div>
+ </div>
+
+ <div class="learn-admin-modal" id="learnRequestModal" hidden>
+  <div class="glass-card learn-admin-modal-card learn-admin-confirm-card">
+   <div class="learn-topic-badge">Permission Request</div>
+   <h3 id="learnRequestTitle">Request Permission</h3>
+   <p id="learnRequestText">Explain why you want to update this content.</p>
+
+   <div class="form-group">
+    <label for="learnRequestComment">Request Comment</label>
+    <textarea id="learnRequestComment" rows="6" placeholder="Write why this content needs to be edited or deleted..."></textarea>
+   </div>
+
+   <div class="learn-admin-actions">
+    <button class="practice-btn practice-btn-green" id="learnRequestSendBtn" type="button">Send Request</button>
+    <button class="practice-btn practice-btn-blue" id="learnRequestCancelBtn" type="button">Cancel</button>
+   </div>
+
+   <div class="admin-status" id="learnRequestStatus"></div>
+  </div>
+ </div>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js?v=20260403-staff-fix2"></script>
+</body>
+</html>
+

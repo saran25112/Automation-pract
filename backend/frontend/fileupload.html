@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>File Upload — Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice file upload with a normal input element and a custom upload control without a visible input.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="stylesheet" href="static/css/pages/fileupload.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>File Upload <span class="gradient-text">Practice</span></h1>
+ <p>Practice uploading files using a normal file input and a custom upload control without a visible input field.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">File upload practice page loaded.</span></div>
+ </div>
+
+ <div class="practice-section" data-category="file-upload">
+ <div class="practice-section-header">
+ <div class="practice-section-icon">📄</div>
+ <div>
+ <h2>File Upload</h2>
+ <p>Practice standard file selection and hidden/custom upload flows.</p>
+ </div>
+ </div>
+
+ <div class="upload-grid">
+ <div class="glass-card upload-card">
+ <h3>1. With Input Tag</h3>
+ <p>Use the normal file input element below. This is the classic Selenium `sendKeys(filePath)` case.</p>
+
+ <div class="form-group">
+ <label for="standardFileUpload">Choose File</label>
+ <input type="file" id="standardFileUpload" name="standardFileUpload">
+ </div>
+
+ <div class="btn-group">
+ <button type="button" class="practice-btn practice-btn-green" id="standardUploadBtn">Upload</button>
+ </div>
+
+ <div class="upload-file-name" id="standardFileName">No file selected yet.</div>
+ <div class="form-result" id="standardUploadResult"></div>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Upload file using visible input element</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"standardFileUpload"</span>))
+    .<span class="code-method">sendKeys</span>(<span class="code-string">"C:\\path\\to\\sample.txt"</span>);
+
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"standardUploadBtn"</span>)).<span class="code-method">click</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="glass-card upload-card">
+ <h3>2. Without Input Tag</h3>
+ <p>This upload uses a custom visible area and opens the native file chooser without any file input tag in the page markup. This is useful for Robot class practice.</p>
+
+ <div class="upload-zone" id="customUploadTrigger" role="button" tabindex="0">
+ <strong>Click here to choose a file</strong>
+ <div style="margin-top: 8px; color: var(--text-muted);">Native file picker flow without input tag</div>
+ </div>
+
+ <div class="btn-group" style="margin-top: 16px;">
+ <button type="button" class="practice-btn practice-btn-green" id="customUploadBtn">Upload</button>
+ </div>
+
+ <div class="upload-file-name" id="customFileName">No file selected yet.</div>
+ <div class="form-result" id="customUploadResult"></div>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Click custom upload area to open native dialog</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"customUploadTrigger"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Handle OS file chooser using Robot class</span>
+<span class="code-class">Robot</span> robot = <span class="code-keyword">new</span> <span class="code-class">Robot</span>();
+
+<span class="code-class">StringSelection</span> filePath = <span class="code-keyword">new</span> <span class="code-class">StringSelection</span>(<span class="code-string">"C:\\Users\\name\\Desktop\\test.png"</span>);
+<span class="code-class">Toolkit</span>.<span class="code-method">getDefaultToolkit</span>().<span class="code-method">getSystemClipboard</span>().<span class="code-method">setContents</span>(filePath, <span class="code-keyword">null</span>);
+
+robot.<span class="code-method">keyPress</span>(<span class="code-class">KeyEvent</span>.VK_CONTROL);
+robot.<span class="code-method">keyPress</span>(<span class="code-class">KeyEvent</span>.VK_V);
+robot.<span class="code-method">keyRelease</span>(<span class="code-class">KeyEvent</span>.VK_CONTROL);
+robot.<span class="code-method">keyRelease</span>(<span class="code-class">KeyEvent</span>.VK_V);
+
+robot.<span class="code-method">keyPress</span>(<span class="code-class">KeyEvent</span>.VK_ENTER);
+robot.<span class="code-method">keyRelease</span>(<span class="code-class">KeyEvent</span>.VK_ENTER);
+
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"customUploadBtn"</span>)).<span class="code-method">click</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+ <script>
+ function showUploadResult(resultElement, message, type) {
+   resultElement.textContent = message;
+   resultElement.classList.add('show');
+
+   if (type === 'error') {
+     resultElement.style.borderColor = 'rgba(251, 146, 60, 0.3)';
+     resultElement.style.background = 'rgba(251, 146, 60, 0.05)';
+     resultElement.style.color = '#fb923c';
+     return;
+   }
+
+   resultElement.style.borderColor = 'rgba(0, 255, 136, 0.3)';
+   resultElement.style.background = 'rgba(0, 255, 136, 0.05)';
+   resultElement.style.color = '#00ff88';
+ }
+
+ function getSelectedFileName(inputElement) {
+   return inputElement.files && inputElement.files.length ? inputElement.files[0].name : '';
+ }
+
+ document.addEventListener('DOMContentLoaded', () => {
+   const standardInput = document.getElementById('standardFileUpload');
+   const standardBtn = document.getElementById('standardUploadBtn');
+   const standardFileName = document.getElementById('standardFileName');
+   const standardResult = document.getElementById('standardUploadResult');
+
+   const customTrigger = document.getElementById('customUploadTrigger');
+   const customBtn = document.getElementById('customUploadBtn');
+   const customFileName = document.getElementById('customFileName');
+   const customResult = document.getElementById('customUploadResult');
+   let customSelectedFileName = '';
+
+   standardInput.addEventListener('change', () => {
+     const fileName = getSelectedFileName(standardInput);
+     standardFileName.textContent = fileName ? `Selected file: ${fileName}` : 'No file selected yet.';
+     addLog(fileName ? `Standard file selected: ${fileName}` : 'Standard file selection cleared.');
+   });
+
+   standardBtn.addEventListener('click', () => {
+     const fileName = getSelectedFileName(standardInput);
+     if (!fileName) {
+       showUploadResult(standardResult, 'Please choose a file before uploading.', 'error');
+       addLog('Standard upload blocked because no file was selected.');
+       return;
+     }
+
+     showUploadResult(standardResult, `Success: ${fileName} uploaded using input tag.`, 'success');
+     addLog(`Standard upload simulated for ${fileName}.`);
+   });
+
+   async function openNativePicker() {
+     if (!window.showOpenFilePicker) {
+       showUploadResult(customResult, 'This browser does not support native picker API for this demo.', 'error');
+       addLog('Native picker API is not supported in this browser.');
+       return;
+     }
+
+     try {
+       const [fileHandle] = await window.showOpenFilePicker();
+       const file = await fileHandle.getFile();
+       customSelectedFileName = file.name;
+       customFileName.textContent = `Selected file: ${customSelectedFileName}`;
+       customResult.classList.remove('show');
+       addLog(`Custom upload file selected: ${customSelectedFileName}`);
+     } catch (error) {
+       if (error && error.name === 'AbortError') {
+         addLog('Native file picker was closed without choosing a file.');
+         return;
+       }
+
+       showUploadResult(customResult, 'Could not open native file picker.', 'error');
+       addLog('Native file picker failed to open.');
+     }
+   }
+
+   customTrigger.addEventListener('click', () => {
+     openNativePicker();
+   });
+   customTrigger.addEventListener('keydown', (event) => {
+     if (event.key === 'Enter' || event.key === ' ') {
+       event.preventDefault();
+       openNativePicker();
+     }
+   });
+
+   customBtn.addEventListener('click', () => {
+     if (!customSelectedFileName) {
+       showUploadResult(customResult, 'Please choose a file before uploading.', 'error');
+       addLog('Custom upload blocked because no file was selected.');
+       return;
+     }
+
+     showUploadResult(customResult, `Success: ${customSelectedFileName} uploaded using custom control.`, 'success');
+     addLog(`Custom upload simulated for ${customSelectedFileName}.`);
+   });
+ });
+ </script>
+</body>
+</html>

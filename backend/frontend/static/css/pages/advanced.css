@@ -1,0 +1,210 @@
+ .advanced-layout {
+   display: grid;
+   gap: var(--space-xl);
+ }
+
+ .advanced-grid {
+   display: grid;
+   gap: 18px;
+ }
+
+ .advanced-card {
+   padding: 24px;
+ }
+
+ .advanced-card-head {
+   display: flex;
+   justify-content: space-between;
+   gap: 16px;
+   align-items: flex-start;
+   margin-bottom: 16px;
+ }
+
+ .advanced-card-head h3 {
+   margin: 0 0 8px;
+ }
+
+ .advanced-card-url {
+   word-break: break-word;
+   color: var(--text-muted);
+   font-size: 0.95rem;
+ }
+
+ .advanced-card-desc {
+   margin: 0 0 18px;
+   color: var(--text-secondary);
+   white-space: pre-wrap;
+ }
+
+ .advanced-card-actions {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+ }
+
+ .advanced-editor[hidden],
+ .advanced-empty[hidden] {
+   display: none !important;
+ }
+
+ .advanced-editor {
+   padding: 24px;
+ }
+
+ .advanced-editor-grid {
+   display: grid;
+   gap: 14px;
+ }
+
+ .advanced-editor-grid textarea,
+ .advanced-editor-grid input {
+   width: 100%;
+ }
+
+ .advanced-editor-actions,
+ .advanced-item-actions {
+   display: flex;
+   gap: 10px;
+   flex-wrap: wrap;
+ }
+
+ .advanced-status {
+   min-height: 24px;
+   margin-top: 14px;
+ }
+
+ .advanced-helper {
+   color: var(--text-muted);
+   margin-top: 8px;
+ }
+
+ .advanced-role-badge {
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+   padding: 8px 14px;
+   border-radius: 999px;
+   background: rgba(56, 189, 248, 0.12);
+   color: #38bdf8;
+   font-weight: 700;
+   letter-spacing: 0.03em;
+   text-transform: uppercase;
+   font-size: 0.82rem;
+ }
+
+ .advanced-empty {
+   padding: 24px;
+   text-align: center;
+   color: var(--text-muted);
+ }
+
+ .advanced-live-badge {
+   position: relative;
+   width: 72px;
+   height: 58px;
+   border-radius: 18px;
+   background:
+     linear-gradient(180deg, rgba(10, 30, 52, 0.92), rgba(8, 22, 40, 0.92)),
+     linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(37, 99, 235, 0.12));
+   border: 1px solid rgba(56, 189, 248, 0.18);
+   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+   flex-shrink: 0;
+   overflow: visible;
+ }
+
+ .advanced-live-pill {
+   position: absolute;
+   left: 12px;
+   top: 50%;
+   transform: translateY(-50%);
+   display: inline-flex;
+   align-items: center;
+   min-width: 36px;
+   height: 26px;
+   padding: 0 10px 0 8px;
+   border-radius: 999px;
+   background: linear-gradient(135deg, #ef4444, #dc2626);
+   box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
+   transition: min-width 0.22s ease, padding 0.22s ease, transform 0.22s ease;
+   transform-origin: left center;
+ }
+
+ .advanced-live-badge:hover .advanced-live-pill {
+   min-width: 82px;
+   padding-right: 14px;
+ }
+
+ .advanced-live-play {
+   position: relative;
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background: rgba(255, 255, 255, 0.16);
+   flex-shrink: 0;
+ }
+
+ .advanced-live-play::before {
+   content: '';
+   position: absolute;
+   left: 7px;
+   top: 5px;
+   width: 0;
+   height: 0;
+   border-top: 5px solid transparent;
+   border-bottom: 5px solid transparent;
+   border-left: 8px solid #fff;
+ }
+
+ .advanced-live-text {
+   max-width: 0;
+   opacity: 0;
+   overflow: hidden;
+   white-space: nowrap;
+   color: #fff;
+   font-size: 0.78rem;
+   font-weight: 800;
+   letter-spacing: 0.16em;
+   margin-left: 0;
+   transition: max-width 0.22s ease, opacity 0.18s ease, margin-left 0.22s ease;
+ }
+
+ .advanced-live-badge:hover .advanced-live-text {
+   max-width: 56px;
+   opacity: 1;
+   margin-left: 8px;
+ }
+
+ .advanced-live-dot {
+   position: absolute;
+   top: 9px;
+   right: 10px;
+   width: 8px;
+   height: 8px;
+   border-radius: 50%;
+   background: #22c55e;
+   box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
+   animation: advancedLivePulse 1.8s infinite;
+ }
+
+ @keyframes advancedLivePulse {
+   0% {
+     box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
+   }
+   70% {
+     box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+   }
+   100% {
+     box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+   }
+ }
+
+ .practice-btn-red {
+   background: linear-gradient(135deg, #ef4444, #dc2626);
+   color: #fff;
+ }
+
+ .practice-btn-red:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 10px 20px rgba(220, 38, 38, 0.25);
+ }
+ 

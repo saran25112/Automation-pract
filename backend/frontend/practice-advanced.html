@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Advanced Practice - Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice on live websites with guided tasks, custom links, and editable instructions for advanced Selenium learners.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="stylesheet" href="static/css/pages/advanced.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Live Website Practice</div>
+ <h1>Advanced <span class="gradient-text">Practice</span></h1>
+ <p>Practice on real websites with guided tasks. Admin and staff can add a live link, button name, and instructions for learners.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="advanced-layout">
+ <section class="glass-card advanced-editor" id="advancedEditor" hidden>
+ <div class="practice-section-header">
+ <div class="practice-section-icon">✏️
+ </div>
+ <div>
+ <h2>Editor Panel</h2>
+ <p>Add a live practice item with a page title, instructions, button text, and the website link learners should open.</p>
+ </div>
+ </div>
+
+ <div class="advanced-role-badge" id="advancedRoleBadge">Editor Access</div>
+
+ <form class="advanced-editor-grid" id="advancedEditorForm">
+ <div class="form-group">
+ <label for="advancedTitle">Content Title</label>
+ <input type="text" id="advancedTitle" maxlength="120" placeholder="Example: Demo Store Login Practice" required>
+ </div>
+
+ <div class="form-group">
+ <label for="advancedDescription">Description / What to do</label>
+ <textarea id="advancedDescription" rows="6" maxlength="2500" placeholder="Explain what learners should practice on that website." required></textarea>
+ </div>
+
+ <div class="form-group">
+ <label for="advancedButtonText">Button Name</label>
+ <input type="text" id="advancedButtonText" maxlength="60" placeholder="Example: Open Demo Store" required>
+ </div>
+
+ <div class="form-group">
+ <label for="advancedTargetUrl">Website Link</label>
+ <input type="url" id="advancedTargetUrl" placeholder="https://example.com" required>
+ <p class="advanced-helper">Use a full link starting with `https://` or `http://`.</p>
+ </div>
+
+ <div class="advanced-editor-actions">
+ <button type="submit" class="practice-btn practice-btn-green" id="advancedSaveBtn">Save Item</button>
+ <button type="button" class="practice-btn practice-btn-blue" id="advancedResetBtn">Clear</button>
+ </div>
+ </form>
+
+ <div class="advanced-status" id="advancedEditorStatus"></div>
+ </section>
+
+ <section class="practice-section">
+ <div class="practice-section-header">
+ <div class="advanced-live-badge" aria-hidden="true">
+ <span class="advanced-live-pill">
+ <span class="advanced-live-play"></span>
+ <span class="advanced-live-text">LIVE</span>
+ </span>
+ <span class="advanced-live-dot"></span>
+ </div>
+ <div>
+ <h2>Live Practice Links</h2>
+ <p>Each card can send learners to a live website and tell them exactly what to automate there.</p>
+ </div>
+ </div>
+
+ <div class="glass-card advanced-empty" id="advancedEmptyState" hidden>
+ No live practice links yet. Admin or staff can add the first one from the editor panel.
+ </div>
+
+ <div class="advanced-grid" id="advancedItemsGrid"></div>
+ </section>
+ </div>
+ </div>
+ </main>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/practice.js"></script>
+ <script>
+ const advancedState = {
+   items: [],
+   editingItemId: '',
+   canEdit: false,
+   role: '',
+ };
+
+ document.addEventListener('DOMContentLoaded', async () => {
+   bindAdvancedEditorEvents();
+   await loadAdvancedEditorAccess();
+   await loadAdvancedPracticeItems();
+ });
+
+ function bindAdvancedEditorEvents() {
+   const form = document.getElementById('advancedEditorForm');
+   const resetBtn = document.getElementById('advancedResetBtn');
+
+   form.addEventListener('submit', async (event) => {
+     event.preventDefault();
+     await saveAdvancedPracticeItem();
+   });
+
+   resetBtn.addEventListener('click', resetAdvancedEditor);
+ }
+
+ async function loadAdvancedEditorAccess() {
+   const editor = document.getElementById('advancedEditor');
+   const roleBadge = document.getElementById('advancedRoleBadge');
+
+   try {
+     const response = await fetch('/api/auth/session', { credentials: 'include' });
+     if (!response.ok) {
+       return;
+     }
+
+     const data = await response.json();
+     const role = data && data.user ? String(data.user.role || '') : '';
+     advancedState.canEdit = role === 'admin' || role === 'staff';
+     advancedState.role = role;
+
+     if (!advancedState.canEdit) {
+       return;
+     }
+
+     editor.hidden = false;
+     roleBadge.textContent = role === 'admin' ? 'Admin Editor Access' : 'Staff Editor Access';
+   } catch (error) {
+     console.error('Could not verify editor access.', error);
+   }
+ }
+
+ async function loadAdvancedPracticeItems() {
+   const grid = document.getElementById('advancedItemsGrid');
+   const emptyState = document.getElementById('advancedEmptyState');
+
+   grid.innerHTML = '';
+   emptyState.hidden = true;
+
+   try {
+     const response = await fetch('/api/practice-advanced/items');
+     const data = await response.json();
+
+     if (!response.ok) {
+       throw new Error(data.detail || 'Could not load practice items');
+     }
+
+     advancedState.items = Array.isArray(data.items) ? data.items : [];
+
+     if (!advancedState.items.length) {
+       emptyState.hidden = false;
+       return;
+     }
+
+     grid.innerHTML = advancedState.items.map(renderAdvancedItemCard).join('');
+   } catch (error) {
+     emptyState.hidden = false;
+     emptyState.textContent = error.message;
+   }
+ }
+
+ function renderAdvancedItemCard(item) {
+   const editorActions = advancedState.canEdit
+     ? `
+       <div class="advanced-item-actions">
+         <button type="button" class="practice-btn practice-btn-blue" onclick="startAdvancedEdit('${item.id}')">Edit</button>
+         <button type="button" class="practice-btn practice-btn-red" onclick="deleteAdvancedItem('${item.id}')">Delete</button>
+       </div>
+     `
+     : '';
+
+   return `
+     <article class="glass-card advanced-card">
+       <div class="advanced-card-head">
+         <div>
+           <h3>${escapeAdvancedHtml(item.title || '')}</h3>
+           <div class="advanced-card-url">${escapeAdvancedHtml(item.target_url || '')}</div>
+         </div>
+         ${editorActions}
+       </div>
+       <p class="advanced-card-desc">${escapeAdvancedHtml(item.description || '')}</p>
+       <div class="advanced-card-actions">
+         <a class="practice-btn practice-btn-green" href="${escapeAdvancedAttribute(item.target_url || '#')}" target="_blank" rel="noopener noreferrer">
+           ${escapeAdvancedHtml(item.button_text || 'Open Link')}
+         </a>
+       </div>
+     </article>
+   `;
+ }
+
+ function getAdvancedEditorPayload() {
+   return {
+     title: document.getElementById('advancedTitle').value.trim(),
+     description: document.getElementById('advancedDescription').value.trim(),
+     button_text: document.getElementById('advancedButtonText').value.trim(),
+     target_url: document.getElementById('advancedTargetUrl').value.trim(),
+   };
+ }
+
+ async function saveAdvancedPracticeItem() {
+   const saveBtn = document.getElementById('advancedSaveBtn');
+   const payload = getAdvancedEditorPayload();
+
+   if (payload.title.length < 2) {
+     setAdvancedStatus('Please enter a title with at least 2 characters.', 'error');
+     return;
+   }
+
+   if (payload.description.length < 10) {
+     setAdvancedStatus('Please add a clearer description with at least 10 characters.', 'error');
+     return;
+   }
+
+   if (payload.button_text.length < 2) {
+     setAdvancedStatus('Please enter a button name.', 'error');
+     return;
+   }
+
+   if (!/^https?:\/\//i.test(payload.target_url)) {
+     setAdvancedStatus('Please enter a full website link starting with http:// or https://', 'error');
+     return;
+   }
+
+   const isEdit = Boolean(advancedState.editingItemId);
+   const endpoint = isEdit
+     ? `/api/editor/practice-advanced/items/${advancedState.editingItemId}`
+     : '/api/editor/practice-advanced/items';
+   const method = isEdit ? 'PUT' : 'POST';
+
+   saveBtn.disabled = true;
+   saveBtn.textContent = isEdit ? 'Updating...' : 'Saving...';
+   setAdvancedStatus(isEdit ? 'Updating practice item...' : 'Saving practice item...', 'info');
+
+   try {
+     const response = await fetch(endpoint, {
+       method,
+       credentials: 'include',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify(payload),
+     });
+
+     const data = await response.json();
+     if (!response.ok) {
+       throw new Error(data.detail || 'Could not save practice item');
+     }
+
+     await loadAdvancedPracticeItems();
+     resetAdvancedEditor();
+     setAdvancedStatus(isEdit ? 'Practice item updated.' : 'Practice item saved.', 'success');
+     addLog(`${isEdit ? 'Updated' : 'Created'} advanced practice item: ${payload.title}`);
+   } catch (error) {
+     setAdvancedStatus(error.message, 'error');
+   } finally {
+     saveBtn.disabled = false;
+     saveBtn.textContent = advancedState.editingItemId ? 'Update Item' : 'Save Item';
+   }
+ }
+
+ function startAdvancedEdit(itemId) {
+   const item = advancedState.items.find((entry) => String(entry.id) === String(itemId));
+   if (!item) {
+     return;
+   }
+
+   advancedState.editingItemId = item.id;
+   document.getElementById('advancedTitle').value = item.title || '';
+   document.getElementById('advancedDescription').value = item.description || '';
+   document.getElementById('advancedButtonText').value = item.button_text || '';
+   document.getElementById('advancedTargetUrl').value = item.target_url || '';
+   document.getElementById('advancedSaveBtn').textContent = 'Update Item';
+   setAdvancedStatus(`Editing "${item.title}"`, 'info');
+   window.scrollTo({ top: 0, behavior: 'smooth' });
+ }
+
+ async function deleteAdvancedItem(itemId) {
+   const item = advancedState.items.find((entry) => String(entry.id) === String(itemId));
+   if (!item) {
+     return;
+   }
+
+   const shouldDelete = window.confirm(`Delete "${item.title}"?`);
+   if (!shouldDelete) {
+     return;
+   }
+
+   setAdvancedStatus('Deleting practice item...', 'info');
+
+   try {
+     const response = await fetch(`/api/editor/practice-advanced/items/${itemId}`, {
+       method: 'DELETE',
+       credentials: 'include',
+     });
+
+     const data = await response.json();
+     if (!response.ok) {
+       throw new Error(data.detail || 'Could not delete practice item');
+     }
+
+     if (advancedState.editingItemId === itemId) {
+       resetAdvancedEditor();
+     }
+
+     await loadAdvancedPracticeItems();
+     setAdvancedStatus('Practice item deleted.', 'success');
+     addLog(`Deleted advanced practice item: ${item.title}`);
+   } catch (error) {
+     setAdvancedStatus(error.message, 'error');
+   }
+ }
+
+ function resetAdvancedEditor() {
+   advancedState.editingItemId = '';
+   document.getElementById('advancedEditorForm').reset();
+   document.getElementById('advancedSaveBtn').textContent = 'Save Item';
+   setAdvancedStatus('', 'info');
+ }
+
+ function setAdvancedStatus(message, type) {
+   const status = document.getElementById('advancedEditorStatus');
+   status.textContent = message;
+
+   if (type === 'error') {
+     status.style.color = '#fb923c';
+     return;
+   }
+
+   if (type === 'success') {
+     status.style.color = '#00ff88';
+     return;
+   }
+
+   status.style.color = '#38bdf8';
+ }
+
+ function escapeAdvancedHtml(value) {
+   return String(value)
+     .replaceAll('&', '&amp;')
+     .replaceAll('<', '&lt;')
+     .replaceAll('>', '&gt;')
+     .replaceAll('"', '&quot;')
+     .replaceAll("'", '&#39;');
+ }
+
+ function escapeAdvancedAttribute(value) {
+   return escapeAdvancedHtml(value).replaceAll('`', '&#96;');
+ }
+ </script>
+</body>
+</html>

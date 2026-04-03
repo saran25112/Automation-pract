@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>AutomateLearn Master Web Automation with Selenium & Java</title>
+ <meta name="description" content="Learn and practice web automation using Java, Selenium WebDriver, TestNG, Maven, Extent Reports, and POM Design Pattern. Interactive practice lab included.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A4%96%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+ <!-- Background Effects -->
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <!-- Main Content -->
+ <main class="main-content">
+
+ <!-- Hero Section -->
+ <section class="hero">
+ <div class="container">
+ <div class="hero-content">
+ <div class="hero-badge"> Start Your Automation Journey</div>
+ <h1 class="hero-title">
+ Master <span class="gradient-text">Web Automation</span> with Selenium & Java
+ </h1>
+ <p class="hero-description">
+ Learn web automation from scratch Java, Selenium WebDriver, TestNG, Maven, 
+ and more. Practice on real interactive elements designed for Selenium automation.
+ </p>
+ <div class="hero-actions">
+ <a href="/learn" class="btn btn-primary" data-route="learn">
+ <span class="btn-icon"></span> Start Learning
+ </a>
+ <a href="/practice" class="btn btn-secondary" data-route="practice">
+ <span class="btn-icon"></span> Practice Lab
+ </a>
+ </div>
+ </div>
+
+ <!-- Hero Code Block -->
+ <div class="hero-visual">
+ <div class="hero-code-block">
+ <div class="hero-code-dots">
+ <span></span><span></span><span></span>
+ </div>
+ <div class="code-line"><span class="code-keyword">public class</span> <span class="code-class">LoginTest</span> {</div>
+ <div class="code-line"> <span class="code-keyword">@Test</span></div>
+ <div class="code-line"> <span class="code-keyword">public void</span> <span class="code-method">testLogin</span>() {</div>
+ <div class="code-line"> <span class="code-class">WebDriver</span> driver = <span class="code-keyword">new</span> <span class="code-class">ChromeDriver</span>();</div>
+ <div class="code-line"> driver.<span class="code-method">get</span>(<span class="code-string">"https://automatelearn.com"</span>);</div>
+ <div class="code-line"> driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"username"</span>))</div>
+ <div class="code-line"> .<span class="code-method">sendKeys</span>(<span class="code-string">"saran2511"</span>);</div>
+ <div class="code-line"> driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"loginBtn"</span>))</div>
+ <div class="code-line"> .<span class="code-method">click</span>();</div>
+ <div class="code-line"> }</div>
+ <div class="code-line">}</div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- Stats Section -->
+ <section class="section">
+ <div class="container">
+ <div class="stats-row animate-on-scroll">
+ <div class="stat-item glass-card">
+ <div class="stat-number">7+</div>
+ <div class="stat-label">Topics Covered</div>
+ </div>
+ <div class="stat-item glass-card">
+ <div class="stat-number">12+</div>
+ <div class="stat-label">Practice Elements</div>
+ </div>
+ <div class="stat-item glass-card">
+ <div class="stat-number">50+</div>
+ <div class="stat-label">Code Examples</div>
+ </div>
+ <div class="stat-item glass-card">
+ <div class="stat-number">100%</div>
+ <div class="stat-label">Free & Open</div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- Features Section -->
+ <section class="section" id="features">
+ <div class="container">
+ <div class="section-header animate-on-scroll">
+ <div class="section-badge"> What You Get</div>
+ <h2 class="section-title">
+ Everything You Need to <span class="gradient-text">Learn Automation</span>
+ </h2>
+ <p class="section-subtitle">
+ A complete learning platform with structured tutorials and hands-on practice elements.
+ </p>
+ </div>
+
+ <div class="features-grid">
+ <div class="glass-card feature-card animate-on-scroll">
+ <div class="feature-icon blue"></div>
+ <h3>Structured Learning Path</h3>
+ <p>
+ Step-by-step tutorials covering Java fundamentals, Selenium WebDriver, TestNG, 
+ Maven, Extent Reports, Eclipse IDE setup, and POM Design Pattern.
+ </p>
+ </div>
+
+ <div class="glass-card feature-card animate-on-scroll">
+ <div class="feature-icon green"></div>
+ <h3>Interactive Practice Lab</h3>
+ <p>
+ Real HTML elements designed specifically for Selenium practice forms, alerts, 
+ popups, dynamic loading, window handling, and more.
+ </p>
+ </div>
+
+ <div class="glass-card feature-card animate-on-scroll">
+ <div class="feature-icon purple"></div>
+ <h3>Ready-to-Use Code</h3>
+ <p>
+ Every practice element comes with sample Java/Selenium code snippets. 
+ Copy, paste, and run them in your Eclipse IDE.
+ </p>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- Topics Section -->
+ <section class="section" id="topics">
+ <div class="container">
+ <div class="section-header animate-on-scroll">
+ <div class="section-badge"> Topics Covered</div>
+ <h2 class="section-title">
+ Your Complete <span class="gradient-text">Learning Roadmap</span>
+ </h2>
+ <p class="section-subtitle">
+ Master all the essential tools and frameworks for web automation testing.
+ </p>
+ </div>
+
+ <div class="topics-grid">
+ <a href="/learn" class="glass-card topic-card animate-on-scroll" data-route="learn" data-topic="java">
+ <span class="topic-icon"></span>
+ <h4>Java Basics</h4>
+ <p>Variables, OOP, methods</p>
+ </a>
+ <a href="/learn" class="glass-card topic-card animate-on-scroll" data-route="learn" data-topic="selenium">
+ <span class="topic-icon"></span>
+ <h4>Selenium WebDriver</h4>
+ <p>Locators, commands, waits</p>
+ </a>
+ <a href="/learn" class="glass-card topic-card animate-on-scroll" data-route="learn" data-topic="testng">
+ <span class="topic-icon"></span>
+ <h4>TestNG Framework</h4>
+ <p>Annotations, assertions</p>
+ </a>
+ <a href="/learn" class="glass-card topic-card animate-on-scroll" data-route="learn" data-topic="maven">
+ <span class="topic-icon"></span>
+ <h4>Maven</h4>
+ <p>pom.xml, dependencies</p>
+ </a>
+ <a href="/learn" class="glass-card topic-card animate-on-scroll" data-route="learn" data-topic="extent">
+ <span class="topic-icon"></span>
+ <h4>Extent Reports</h4>
+ <p>HTML reports, screenshots</p>
+ </a>
+ <a href="/learn" class="glass-card topic-card animate-on-scroll" data-route="learn" data-topic="eclipse">
+ <span class="topic-icon"></span>
+ <h4>Eclipse IDE</h4>
+ <p>Setup, shortcuts, debug</p>
+ </a>
+ <a href="/learn" class="glass-card topic-card animate-on-scroll" data-route="learn" data-topic="pom">
+ <span class="topic-icon"></span>
+ <h4>POM Design Pattern</h4>
+ <p>Page Object Model</p>
+ </a>
+ </div>
+ </div>
+ </section>
+
+ <!-- Practice Preview Section -->
+ <section class="section" id="practice-preview">
+ <div class="container">
+ <div class="section-header animate-on-scroll">
+ <div class="section-badge"> Practice Lab</div>
+ <h2 class="section-title">
+ Hands-On <span class="gradient-text">Interactive Elements</span>
+ </h2>
+ <p class="section-subtitle">
+ Practice automating these real web elements with your Selenium scripts.
+ </p>
+ </div>
+
+ <div class="practice-preview-grid animate-on-scroll">
+ <a href="/practice-forms" class="glass-card practice-preview-item" data-route="practice_forms">
+ <span class="pp-icon"></span>
+ <span>Forms & Inputs</span>
+ </a>
+ <a href="/practice-alerts" class="glass-card practice-preview-item" data-route="practice_alerts">
+ <span class="pp-icon"></span>
+ <span>Alerts & Dialogs</span>
+ </a>
+ <a href="/practice-popup" class="glass-card practice-preview-item" data-route="practice_popup">
+ <span class="pp-icon"></span>
+ <span>Popup Modals</span>
+ </a>
+ <a href="/practice-scroll" class="glass-card practice-preview-item" data-route="practice_scroll">
+ <span class="pp-icon"></span>
+ <span>Scroll Down</span>
+ </a>
+ <a href="/practice-windows" class="glass-card practice-preview-item" data-route="practice_windows">
+ <span class="pp-icon"></span>
+ <span>Window Handling</span>
+ </a>
+ <a href="/practice-forms" class="glass-card practice-preview-item" data-route="practice_forms">
+ <span class="pp-icon"></span>
+ <span>Send Input</span>
+ </a>
+ <a href="/practice-clicks" class="glass-card practice-preview-item" data-route="practice_clicks">
+ <span class="pp-icon"></span>
+ <span>Click Buttons</span>
+ </a>
+ <a href="/practice-text" class="glass-card practice-preview-item" data-route="practice_text">
+ <span class="pp-icon"></span>
+ <span>Get Text</span>
+ </a>
+ <a href="/practice-waits" class="glass-card practice-preview-item" data-route="practice_waits">
+ <span class="pp-icon"></span>
+ <span>Wait Functions</span>
+ </a>
+ <a href="/practice-screenshot" class="glass-card practice-preview-item" data-route="practice_screenshot">
+ <span class="pp-icon"></span>
+ <span>Screenshot</span>
+ </a>
+ <a href="/practice-calendar" class="glass-card practice-preview-item" data-route="practice_calendar">
+ <span class="pp-icon"></span>
+ <span>Calendar Picker</span>
+ </a>
+ <a href="/practice-table" class="glass-card practice-preview-item" data-route="practice_table">
+ <span class="pp-icon"></span>
+ <span>Table Handling</span>
+ </a>
+ </div>
+ </div>
+ </section>
+
+ <!-- CTA Section -->
+ <section class="cta-section">
+ <div class="container">
+ <div class="cta-box glass-card animate-on-scroll">
+ <h2>Ready to Start <span class="gradient-text">Automating</span>? </h2>
+ <p>
+ Jump into our interactive practice lab and start writing your first Selenium test today.
+ </p>
+ <div class="hero-actions" style="justify-content: center;">
+ <a href="/practice" class="btn btn-primary" data-route="practice">
+ <span class="btn-icon"></span> Open Practice Lab
+ </a>
+ <a href="/learn" class="btn btn-secondary" data-route="learn">
+ <span class="btn-icon"></span> Read Tutorials
+ </a>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ </main>
+
+ <div id="siteFooter"></div>
+
+ <script>
+ async function applyPageRoutes() {
+   try {
+     const response = await fetch('/api/routes');
+     if (!response.ok) {
+       return;
+     }
+
+     const routes = await response.json();
+     const routeLinks = document.querySelectorAll('[data-route]');
+
+     routeLinks.forEach((link) => {
+       const routeKey = link.dataset.route;
+       const routeUrl = routes[routeKey];
+
+       if (routeUrl) {
+         link.href = routeUrl;
+       }
+     });
+   } catch (error) {
+     console.warn('Could not load page routes.', error);
+   }
+ }
+
+  document.querySelectorAll('[data-route="learn"][data-topic]').forEach((link) => {
+    link.addEventListener('click', () => {
+      sessionStorage.setItem('pendingLearnTopic', link.dataset.topic);
+    });
+  });
+
+ applyPageRoutes();
+ </script>
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+</body>
+</html>
+

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Register | AutomateLearn</title>
+ <meta name="description" content="Create a new account stored in the Supabase ap_users table.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="stylesheet" href="static/css/pages/register.css?v=20260403-register-spinner">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <section class="section">
+ <div class="container">
+ <div class="section-header animate-on-scroll">
+ <div class="section-badge">New Account</div>
+ <h1 class="section-title">Create Your <span class="gradient-text">Account</span></h1>
+ <p class="section-subtitle">
+ Join us today! Sign up to access all features with secure password protection. </p>
+ </div>
+
+ <div class="glass-card practice-box animate-on-scroll" style="max-width: 640px; margin: 0 auto;">
+ <h3> Registration Form</h3>
+ <br>
+ <form id="registerForm" class="practice-form">
+ <div class="form-row">
+ <div class="form-group">
+ <label for="registerName">Full Name</label>
+ <input type="text" id="registerName" name="registerName" placeholder="Enter your name" required>
+ </div>
+ <div class="form-group">
+ <label for="registerEmail">Email Address</label>
+ <input type="email" id="registerEmail" name="registerEmail" placeholder="you@example.com" required>
+ </div>
+ </div>
+
+ <div class="form-row">
+ <div class="form-group">
+ <label for="registerPhone">Phone Number</label>
+ <input type="tel" id="registerPhone" name="registerPhone" placeholder="Enter 10-digit mobile number" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" required>
+ </div>
+ <div class="form-group">
+ <label for="registerPassword">Password</label>
+ <input type="password" id="registerPassword" name="registerPassword" placeholder="Choose password" required>
+ </div>
+ </div>
+
+ <div class="form-group">
+ <label for="registerConfirmPassword">Confirm Password</label>
+ <input type="password" id="registerConfirmPassword" name="registerConfirmPassword" placeholder="Enter password again" required>
+ </div>
+
+ <div class="btn-group" style="justify-content: space-around;">
+ <button type="submit" class="practice-btn register-btn" id="registerSubmitBtn" style="flex: 0.25;">Register</button>
+ <!-- <a href="/login" class="practice-btn practice-btn-blue">Go To Login</a> -->
+ </div>
+  <p class="footer-text"  style="flex: 1; text-align: center; text-decoration: none; padding: 12px 24px; font-weight: 500; font-size: 0.95rem; display: inline-flex; justify-content: center; align-items: center;">
+    Already have an account?
+    <a href="/login">Login</a>
+ </p>
+ </form>
+
+ <div class="form-result" id="registerResult"></div>
+ </div>
+ </div>
+ </section>
+ </main>
+<!-- OTP SECTION -->
+<div id="otpSection" class="glass-card practice-box animate-on-scroll" >
+  <div style="background: rgba(255,100,200,0.15); color: #ff64c8; display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px;">
+    📧 Email Verification
+  </div>
+  <h2 class="otp-title">Enter OTP</h2>
+  <p class="otp-desc">
+    We sent a 6-digit OTP to your email. Enter it below to finish creating your account.
+  </p>
+
+  <div class="otp-email-box">
+    <div class="otp-email-label">Sent To</div>
+    <div id="otpEmail" class="otp-email-value"></div>
+  </div>
+
+  <div class="otp-group">
+    <label class="otp-label">OTP</label>
+    <div class="otp-input-wrapper">
+      <input type="text" maxlength="1" class="otp-input">
+      <input type="text" maxlength="1" class="otp-input">
+      <input type="text" maxlength="1" class="otp-input">
+      <input type="text" maxlength="1" class="otp-input">
+      <input type="text" maxlength="1" class="otp-input">
+      <input type="text" maxlength="1" class="otp-input">
+    </div>
+  </div>
+
+  <p id="otpTimerText"  style="font-size: 0.85rem; color: #808090; margin-bottom: 25px; line-height: 1.5;">
+    OTP can be used for 05:00. You can request a new OTP after 02:00.
+  </p>
+
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <button id="verifyOtpBtn" class="register-btn" style="background: rgba(139, 92, 246, 0.4); transition: background 0.3s ease; border-radius: 12px;border: 1px solid rgba(0, 255, 180, 0.2);">
+      Verify OTP
+    </button>
+    
+    <button id="resendOtpBtn" class="btn btn-primary">
+      Re-send OTP
+    </button>
+
+    <button id="backToRegisterBtn" class="back-btn">
+      ← Back to Register
+    </button>
+  </div>
+
+  <div class="form-result" id="otpResult" style="margin-top: 18px;"></div>
+</div>
+ <div id="siteFooter"></div>
+ <script src="static/js/shared-layout.js?v=20260403-register-spinner"></script>
+ <script src="static/js/main.js?v=20260403-register-spinner"></script>
+ <script type="module" src="static/js/register.js?v=20260403-register-spinner"></script>
+</body>
+</html>

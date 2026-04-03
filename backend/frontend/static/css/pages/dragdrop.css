@@ -1,0 +1,210 @@
+/* ========================================
+   DRAG AND DROP - Dedicated styles
+   Keeps drag/drop UI isolated for easier updates
+   ======================================== */
+
+.drag-drop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.drag-drop-progress,
+.drag-drop-prompt {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.drag-drop-progress {
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+.drag-drop-prompt {
+  color: var(--text-primary);
+}
+
+.drag-drop-intro.hidden,
+.drag-drop-lab.hidden {
+  display: none;
+}
+
+.drag-drop-intro-card {
+  min-height: 220px;
+  border: 1px solid rgba(203, 213, 225, 0.28);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 28px;
+  display: grid;
+  gap: 14px;
+  place-items: center;
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.drag-drop-intro-card h4,
+.drag-drop-intro-card p {
+  margin: 0;
+}
+
+.drag-drop-intro-card h4 {
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.drag-drop-intro-card p {
+  max-width: 680px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.drag-drop-intro-image {
+  width: min(260px, 100%);
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.drag-drop-lab {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto 12px;
+}
+
+.drag-source-panel,
+.drag-target-panel {
+  min-height: 520px;
+  border-radius: 0;
+  border: 1px solid rgba(203, 213, 225, 0.28);
+  background: rgba(255, 255, 255, 0.015);
+  padding: 12px;
+}
+
+.drag-panel-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #e5e7eb;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(203, 213, 225, 0.22);
+  padding: 6px 10px;
+}
+
+.drag-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.drag-card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0;
+  border: 1px solid rgba(203, 213, 225, 0.25);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  transition: all var(--transition-fast);
+}
+
+.drag-card img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  border-radius: 0;
+  border: 1px solid rgba(203, 213, 225, 0.18);
+}
+
+.drag-card:hover,
+.drag-card.active-item {
+  transform: translateY(-1px);
+  border-color: rgba(148, 163, 184, 0.6);
+  box-shadow: 0 4px 12px rgba(2, 6, 23, 0.18);
+}
+
+.drag-card.dragging {
+  opacity: 0.6;
+  transform: scale(0.98);
+}
+
+.drag-card.matched {
+  border-color: rgba(0, 255, 136, 0.35);
+  background: rgba(0, 255, 136, 0.08);
+}
+
+.drop-target-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.drag-card-grid,
+.drop-target-list {
+  align-content: start;
+}
+
+.drop-zone {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(203, 213, 225, 0.28);
+  background: rgba(255, 255, 255, 0.02);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  transition: all var(--transition-fast);
+}
+
+.drop-zone.drag-over {
+  border: 2px dashed #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+  color: #f8fafc;
+}
+
+.drop-zone.dropped {
+  border-style: solid;
+  border-color: rgba(0, 255, 136, 0.35);
+  background: rgba(0, 255, 136, 0.08);
+  color: var(--accent-green);
+}
+
+.drop-zone.wrong-drop {
+  border-color: rgba(251, 146, 60, 0.45);
+  background: rgba(251, 146, 60, 0.08);
+  color: #fb923c;
+}
+
+.advanced-drop-zone .drag-card {
+  width: 100%;
+  cursor: default;
+}
+
+.match-target-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+@media (max-width: 768px) {
+  .drag-drop-lab {
+    grid-template-columns: 1fr;
+  }
+
+  .drag-card-grid,
+  .drop-target-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}

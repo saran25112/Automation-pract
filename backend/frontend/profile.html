@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile | AutomateLearn</title>
+
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/pages/profile.css">
+
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow bg-glow-1"></div>
+<div class="bg-glow bg-glow-2"></div>
+
+<div id="siteHeader"></div>
+
+<main class="main-content">
+<section class="section">
+<div class="container profile-container">
+
+<div id="profileLoading" class="profile-loading">
+    <div class="glass-card profile-loading-card">
+        <div class="profile-loader"></div>
+        <div class="profile-loading-title">Loading your profile</div>
+        <div class="profile-loading-text">Please wait while we fetch your details.</div>
+    </div>
+</div>
+
+<div id="profileContent" class="profile-content" hidden>
+<div class="section-header">
+    <div class="section-badge">Your Profile</div>
+    <h1 class="section-title"><span class="gradient-text">Account Details</span></h1>
+    <p class="section-subtitle">Manage your personal information and settings.</p>
+</div>
+
+<div class="glass-card profile-card fade-in" id="profileCard">
+    <div class="profile-avatar-shell">
+        <img class="profile-avatar-image" id="avatarImage" src="/static/avatars/avatar0.svg" alt="Selected avatar">
+    </div>
+
+    <div class="profile-info">
+        <h2 id="userName">User</h2>
+        <p id="userEmail">user@example.com</p>
+        <p id="userPhone">No phone added</p>
+        <p id="profileModeHint" class="profile-mode-hint" hidden>Secret Mode Discovered!</p>
+    </div>
+</div>
+
+<div class="profile-edit-trigger-row">
+    <button type="button" class="profile-edit-trigger" id="profileEditTrigger" aria-expanded="false" aria-controls="profileFormCard">
+        <span class="profile-edit-trigger-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.04a1.003 1.003 0 0 0 0-1.42l-2.5-2.5a1.003 1.003 0 0 0-1.42 0l-1.96 1.96 3.75 3.75 2.13-1.79z"></path>
+            </svg>
+        </span>
+        <span class="profile-edit-trigger-label">Edit Profile</span>
+    </button>
+</div>
+
+<div class="glass-card profile-form fade-in profile-form-collapsed" id="profileFormCard" hidden>
+    <h3>Edit Profile</h3>
+
+    <form id="profileForm">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="nameInput" value="">
+        </div>
+
+        <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="tel" id="phoneInput" value="" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" required>
+        </div>
+
+        <div class="form-group" id="avatarPickerGroup" hidden>
+            <label>Choose Avatar</label>
+            <div class="avatar-picker" id="avatarPicker"></div>
+            <input type="hidden" id="avatarInput" value="/static/avatars/avatar0.svg">
+        </div>
+
+        <div class="profile-actions">
+            <button type="submit" class="practice-btn practice-btn-green" id="profileSaveBtn">Save Changes</button>
+            <button type="button" class="practice-btn practice-btn-blue" id="togglePasswordBtn">Change Password</button>
+            <button type="button" class="practice-btn practice-btn-blue" id="profileLogoutBtn" onclick="logout()">Logout</button>
+        </div>
+    </form>
+
+    <div id="resultMsg" class="status-message"></div>
+
+    <div id="passwordPanel" class="password-panel">
+        <h3>Change Password</h3>
+
+        <form id="passwordForm">
+            <div class="form-group">
+                <label>Old Password</label>
+                <input type="password" id="oldPasswordInput" required>
+            </div>
+
+            <div class="form-group">
+                <label>New Password</label>
+                <input type="password" id="newPasswordInput" required>
+            </div>
+
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPasswordInput" required>
+            </div>
+
+            <div class="profile-actions">
+                <button type="submit" class="practice-btn practice-btn-green" id="passwordSubmitBtn">Done</button>
+                <button type="button" class="practice-btn practice-btn-blue" id="cancelPasswordBtn">Cancel</button>
+            </div>
+        </form>
+
+        <div id="passwordResultMsg" class="status-message"></div>
+    </div>
+</div>
+
+</div>
+
+</div>
+</section>
+</main>
+
+<div id="siteFooter"></div>
+
+<script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+<script src="static/js/main.js?v=20260403-global-badge2"></script>
+
+<script>
+const defaultAvatarUrl = '/static/avatars/avatar0.svg';
+const allowedAvatars = Array.from({ length: 11 }, (_, index) => `/static/avatars/avatar${index}.svg`);
+
+document.addEventListener("DOMContentLoaded", async function() {
+    bindProfileEvents();
+    setAvatarPickerVisibility(false);
+    hydrateProfileFromCache();
+    await loadProfile();
+});
+
+function bindProfileEvents() {
+    document.getElementById("profileForm").addEventListener("submit", function(e) {
+        handleProfileSave(e);
+    });
+
+    document.getElementById("phoneInput").addEventListener("input", function(e) {
+        e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    });
+
+    document.getElementById("togglePasswordBtn").addEventListener("click", function() {
+        setEditPanelOpen(true);
+        togglePasswordPanel(true);
+    });
+
+    document.getElementById("cancelPasswordBtn").addEventListener("click", function() {
+        togglePasswordPanel(false);
+        clearPasswordForm();
+    });
+
+    document.getElementById("passwordForm").addEventListener("submit", function(e) {
+        handlePasswordChange(e);
+    });
+
+    document.getElementById("profileEditTrigger").addEventListener("click", function() {
+        const panel = document.getElementById("profileFormCard");
+        const isOpen = !panel.hidden;
+        setEditPanelOpen(!isOpen);
+    });
+}
+
+function setProfileLoading(isLoading) {
+    const loadingEl = document.getElementById("profileLoading");
+    const contentEl = document.getElementById("profileContent");
+
+    loadingEl.hidden = !isLoading;
+    loadingEl.style.display = isLoading ? "flex" : "none";
+    contentEl.hidden = isLoading;
+    contentEl.style.display = isLoading ? "none" : "block";
+}
+
+function populateProfile(user) {
+    const authUser = user || {};
+    const email = authUser.email || '';
+    const phone = authUser.phone || '';
+    const name = authUser.name || (email ? email.split('@')[0] : 'User');
+    const avatarUrl = allowedAvatars.includes(authUser.avatar_url) ? authUser.avatar_url : defaultAvatarUrl;
+    const hasDeveloperTheme = Boolean(authUser.page_status);
+
+    document.getElementById("userName").innerText = name;
+    document.getElementById("userEmail").innerText = email;
+    document.getElementById("userPhone").innerText = phone || 'No phone added';
+    document.getElementById("nameInput").value = name;
+    document.getElementById("phoneInput").value = phone;
+    document.getElementById("avatarImage").src = avatarUrl;
+    document.getElementById("avatarInput").value = avatarUrl;
+    document.getElementById("profileModeHint").hidden = !hasDeveloperTheme;
+    setAvatarPickerVisibility(hasDeveloperTheme);
+
+    document.body.classList.toggle('profile-developer', hasDeveloperTheme);
+    document.getElementById("profileCard").classList.toggle('profile-card-developer', hasDeveloperTheme);
+    document.getElementById("profileFormCard").classList.toggle('profile-card-developer', hasDeveloperTheme);
+    setSelectedAvatar(avatarUrl);
+}
+
+function buildAvatarPicker() {
+    const picker = document.getElementById("avatarPicker");
+    if (!picker || picker.childElementCount) {
+        return;
+    }
+
+    picker.innerHTML = allowedAvatars.map((avatarPath, index) => `
+        <button
+            type="button"
+            class="avatar-option"
+            data-avatar-url="${avatarPath}"
+            aria-label="Choose avatar ${index}"
+        >
+            <img src="${avatarPath}" alt="Avatar ${index}">
+        </button>
+    `).join('');
+
+    picker.addEventListener("click", function(event) {
+        const avatarButton = event.target.closest('.avatar-option');
+        if (!avatarButton) {
+            return;
+        }
+
+        const selectedAvatar = avatarButton.dataset.avatarUrl || defaultAvatarUrl;
+        document.getElementById("avatarInput").value = selectedAvatar;
+        document.getElementById("avatarImage").src = selectedAvatar;
+        setSelectedAvatar(selectedAvatar);
+    });
+}
+
+function setAvatarPickerVisibility(isVisible) {
+    const avatarGroup = document.getElementById("avatarPickerGroup");
+    const picker = document.getElementById("avatarPicker");
+
+    if (!avatarGroup || !picker) {
+        return;
+    }
+
+    avatarGroup.hidden = !isVisible;
+    avatarGroup.style.display = isVisible ? "block" : "none";
+
+    if (!isVisible) {
+        picker.innerHTML = "";
+        return;
+    }
+
+    if (!picker.childElementCount) {
+        buildAvatarPicker();
+    }
+}
+
+function setSelectedAvatar(avatarUrl) {
+    document.querySelectorAll('.avatar-option').forEach((button) => {
+        const isSelected = button.dataset.avatarUrl === avatarUrl;
+        button.classList.toggle('selected', isSelected);
+        button.setAttribute('aria-pressed', String(isSelected));
+    });
+}
+
+function setEditPanelOpen(isOpen) {
+    const panel = document.getElementById("profileFormCard");
+    const trigger = document.getElementById("profileEditTrigger");
+    if (!panel || !trigger) {
+        return;
+    }
+
+    panel.hidden = !isOpen;
+    panel.classList.toggle('profile-form-open', isOpen);
+    panel.classList.toggle('profile-form-collapsed', !isOpen);
+    trigger.classList.toggle('active', isOpen);
+    trigger.setAttribute('aria-expanded', String(isOpen));
+}
+
+function hydrateProfileFromCache() {
+    try {
+        const cachedUser = JSON.parse(localStorage.getItem('authUser') || 'null');
+        if (!cachedUser || !cachedUser.email) {
+            return;
+        }
+
+        populateProfile(cachedUser);
+        setProfileLoading(false);
+    } catch (error) {
+        console.warn("Could not read cached profile.", error);
+    }
+}
+
+async function loadProfile() {
+    try {
+        const hasCachedUser = Boolean(localStorage.getItem('authUser'));
+        if (!hasCachedUser) {
+            setProfileLoading(true);
+        }
+
+        const response = await fetch('/api/auth/session', {
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            window.location.replace('/login');
+            return;
+        }
+
+        const data = await response.json();
+        if (!data.authenticated || !data.user) {
+            window.location.replace('/login');
+            return;
+        }
+
+        const authUser = data.user;
+        localStorage.setItem('authUser', JSON.stringify(authUser));
+        populateProfile(authUser);
+        setProfileLoading(false);
+    } catch (error) {
+        console.error("Error loading profile:", error);
+        window.location.replace('/login');
+    } finally {
+        if (document.getElementById("userEmail").innerText.trim()) {
+            setProfileLoading(false);
+        }
+    }
+}
+
+async function handleProfileSave(e) {
+    e.preventDefault();
+
+    const resultMsg = document.getElementById("resultMsg");
+    const name = document.getElementById("nameInput").value.trim();
+    const phone = document.getElementById("phoneInput").value.trim().replace(/\D/g, '');
+    const avatarUrl = document.getElementById("avatarInput").value || defaultAvatarUrl;
+
+    if (phone.length !== 10) {
+        resultMsg.innerText = "Mobile number must be exactly 10 digits.";
+        return;
+    }
+
+    resultMsg.innerText = "Saving profile...";
+
+    try {
+        const response = await fetch('/api/user/profile', {
+            method: 'PUT',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, phone, avatar_url: avatarUrl })
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.detail || 'Could not update profile');
+        }
+
+        const user = data.user || {};
+        const email = user.email || document.getElementById("userEmail").innerText;
+        const savedName = user.name || name;
+        const savedPhone = user.phone || '';
+
+        document.getElementById("userName").innerText = savedName;
+        document.getElementById("userEmail").innerText = email;
+        document.getElementById("userPhone").innerText = savedPhone || 'No phone added';
+        document.getElementById("nameInput").value = savedName;
+        document.getElementById("phoneInput").value = savedPhone;
+        populateProfile(user);
+
+        localStorage.setItem('authUser', JSON.stringify(user));
+        resultMsg.innerText = data.message || "Profile updated successfully!";
+    } catch (error) {
+        resultMsg.innerText = error.message;
+    }
+}
+
+async function logout() {
+    try {
+        await fetch('/api/auth/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+
+        localStorage.removeItem('authUser');
+        localStorage.removeItem('authSession');
+        window.location.replace('/login');
+    } catch (err) {
+        console.error("Logout failed:", err);
+    }
+}
+
+function togglePasswordPanel(show) {
+    document.getElementById("passwordPanel").classList.toggle("show", show);
+}
+
+function clearPasswordForm() {
+    document.getElementById("passwordForm").reset();
+    document.getElementById("passwordResultMsg").innerText = "";
+}
+
+function setPasswordButtonLoading(isLoading) {
+    const button = document.getElementById("passwordSubmitBtn");
+    if (isLoading) {
+        button.disabled = true;
+        button.innerHTML = '<span class="loading-spinner"></span> Updating...';
+        return;
+    }
+
+    button.disabled = false;
+    button.textContent = "Done";
+}
+
+async function handlePasswordChange(e) {
+    e.preventDefault();
+
+    const profileResultMsg = document.getElementById("resultMsg");
+    const resultMsg = document.getElementById("passwordResultMsg");
+    const oldPassword = document.getElementById("oldPasswordInput").value;
+    const newPassword = document.getElementById("newPasswordInput").value;
+    const confirmPassword = document.getElementById("confirmPasswordInput").value;
+
+    if (oldPassword === newPassword) {
+        resultMsg.innerText = "Old password and new password cannot be the same.";
+        return;
+    }
+
+    if (newPassword.length < 6) {
+        resultMsg.innerText = "New password must be at least 6 characters.";
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        resultMsg.innerText = "New password and confirm password do not match.";
+        return;
+    }
+
+    resultMsg.innerText = "Updating password...";
+    setPasswordButtonLoading(true);
+
+    try {
+        const response = await fetch('/api/user/change-password', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                old_password: oldPassword,
+                new_password: newPassword
+            })
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.detail || 'Could not update password');
+        }
+
+        profileResultMsg.innerText = data.message || "Password updated successfully!";
+        clearPasswordForm();
+        togglePasswordPanel(false);
+    } catch (error) {
+        resultMsg.innerText = error.message;
+    } finally {
+        setPasswordButtonLoading(false);
+    }
+}
+</script>
+
+</body>
+</html>

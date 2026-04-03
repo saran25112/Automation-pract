@@ -1,0 +1,13 @@
+.practice-section-icon {
+    font-size: 48px;
+    color: #1e3a8a; /* better blue */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    }
+
+/* Dark theme fix */
+[data-theme="dark"] .practice-section-icon {
+    color: #22d3ee; /* aqua but softer */
+    }

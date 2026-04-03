@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Get Text — Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice reading visible text and element attributes.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>Get Text <span class="gradient-text">Practice</span></h1>
+ <p>Practice reading visible text and element attributes.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Get Text practice page loaded.</span></div>
+ </div>
+
+<div class="practice-section" data-category="text">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Get Text</h2>
+ <p>Practice getText(), getAttribute(), and reading element content</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Text Elements</h3>
+ <p>Practice extracting text from various elements using Selenium.</p>
+
+ <div class="text-element" id="visibleText">
+ <div class="label">Visible Text (use getText())</div>
+ <div id="visibleTextContent">Hello! This is a visible text element you can read with Selenium's getText() method.</div>
+ </div>
+
+ <div class="text-element" id="textWithAttribute">
+ <div class="label">Element with Attribute (use getAttribute())</div>
+ <input type="text" id="attributeInput" value="pre-filled value" data-custom="selenium-test-data" readonly style="width: 100%; padding: 8px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-body);">
+ </div>
+
+ <div class="text-element">
+ <div class="label">Hidden Text (toggle visibility)</div>
+ <button class="practice-btn practice-btn-blue" id="toggleHiddenBtn" onclick="revealHiddenText()" style="margin-bottom: var(--space-sm);">
+ Toggle Hidden Text
+ </button>
+ <div id="hiddenText" style="display: none; padding: 8px; background: rgba(0, 255, 136, 0.05); border-radius: var(--radius-sm); color: var(--accent-green);">
+ This was hidden! Use WebDriverWait to wait for visibility.
+ </div>
+ </div>
+
+ <div class="text-element">
+ <div class="label">Paragraph Text</div>
+ <p id="paragraphText">Selenium WebDriver is a collection of open source APIs which are used to automate the testing of a web application. This text can be extracted using the getText() method in your automation scripts.</p>
+ </div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Get visible text</span>
+<span class="code-class">String</span> text = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"visibleTextContent"</span>)).<span class="code-method">getText</span>();
+
+<span class="code-comment">// Get input value</span>
+<span class="code-class">String</span> value = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"attributeInput"</span>)).<span class="code-method">getAttribute</span>(<span class="code-string">"value"</span>);
+
+<span class="code-comment">// Get custom data attribute</span>
+<span class="code-class">String</span> data = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"attributeInput"</span>)).<span class="code-method">getAttribute</span>(<span class="code-string">"data-custom"</span>);
+
+<span class="code-comment">// Reveal hidden text and read it</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"toggleHiddenBtn"</span>)).<span class="code-method">click</span>();
+<span class="code-class">WebDriverWait</span> wait = <span class="code-keyword">new</span> <span class="code-class">WebDriverWait</span>(driver, <span class="code-class">Duration</span>.<span class="code-method">ofSeconds</span>(5));
+<span class="code-class">WebElement</span> hidden = wait.<span class="code-method">until</span>(
+ <span class="code-class">ExpectedConditions</span>.<span class="code-method">visibilityOfElementLocated</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"hiddenText"</span>))
+);
+<span class="code-class">System</span>.out.<span class="code-method">println</span>(hidden.<span class="code-method">getText</span>());
+
+<span class="code-comment">// Get paragraph text</span>
+<span class="code-class">String</span> para = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"paragraphText"</span>)).<span class="code-method">getText</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+<!-- Modal Overlay -->
+ <div class="modal-overlay" id="practiceModal">
+ <div class="modal-content">
+ <h3> Modal Popup</h3>
+ <p>This is a practice modal popup. In Selenium, you can interact with modal elements just like regular elements no need to switch context (unlike alerts).</p>
+ <p style="font-size: 0.85rem; color: var(--text-muted);">Modal ID: <code>practiceModal</code></p>
+ <div class="modal-actions">
+ <button class="practice-btn practice-btn-blue" id="modalCloseBtn" onclick="closeModal()"> Close</button>
+ <button class="practice-btn practice-btn-green" id="modalConfirmBtn" onclick="confirmModal()"> Confirm</button>
+ </div>
+ </div>
+ </div>
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+</body>
+</html>
+

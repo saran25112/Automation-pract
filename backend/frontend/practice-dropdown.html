@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Dropdown - Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice single select and multi select dropdown automation with Selenium.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="stylesheet" href="static/css/pages/dropdown.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">Interactive Lab</div>
+ <h1>Dropdown <span class="gradient-text">Practice</span></h1>
+ <p>Practice handling single-select and multi-select dropdowns with Selenium.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Dropdown practice page loaded.</span></div>
+ </div>
+
+ <div class="practice-section" data-category="dropdown">
+ <div class="practice-section-header">
+ <div class="practice-section-icon">&#9662;</div>
+ <div>
+ <h2>Dropdown Controls</h2>
+ <p>Practice Select class methods like selectByVisibleText(), selectByValue(), and getOptions()</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Single Select Dropdown</h3>
+ <p>Choose one automation tool from the dropdown below.</p>
+
+ <div class="form-group">
+ <label for="singleSelectDropdown">Choose a tool</label>
+ <select id="singleSelectDropdown" name="singleSelectDropdown">
+ <option value="">-- Select One --</option>
+ <option value="selenium">Selenium WebDriver</option>
+ <option value="testng">TestNG</option>
+ <option value="maven">Maven</option>
+ <option value="extent">Extent Reports</option>
+ </select>
+ </div>
+
+ <div class="form-result" id="singleDropdownResult">No option selected yet.</div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Multi Select Dropdown</h3>
+ <p>Select multiple skills using Ctrl/Cmd + click.</p>
+
+ <div class="form-group">
+ <label for="multiSelectDropdown">Choose multiple topics</label>
+ <select id="multiSelectDropdown" name="multiSelectDropdown" multiple size="6">
+ <option value="java">Java</option>
+ <option value="selenium">Selenium</option>
+ <option value="testng">TestNG</option>
+ <option value="maven">Maven</option>
+ <option value="pom">POM</option>
+ <option value="git">Git</option>
+ <option value="junit">JUnit</option>
+ <option value="cucumber">Cucumber</option>
+ <option value="jenkins">Jenkins</option>
+ <option value="restassured">RestAssured</option>
+ <option value="postman">Postman</option>
+ <option value="api">API Testing</option>
+ <option value="sql">SQL</option>
+ <option value="agile">Agile</option>
+ <option value="jira">Jira</option>
+ <option value="docker">Docker</option>
+ </select>
+ </div>
+
+ <div class="form-result" id="multiDropdownResult">No items selected yet.</div>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Single select dropdown</span>
+<span class="code-class">WebElement</span> toolDropdown = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"singleSelectDropdown"</span>));
+<span class="code-class">Select</span> toolSelect = <span class="code-keyword">new</span> <span class="code-class">Select</span>(toolDropdown);
+toolSelect.<span class="code-method">selectByVisibleText</span>(<span class="code-string">"Selenium WebDriver"</span>);
+
+<span class="code-comment">// Multi select dropdown</span>
+<span class="code-class">WebElement</span> skillsDropdown = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"multiSelectDropdown"</span>));
+<span class="code-class">Select</span> skillsSelect = <span class="code-keyword">new</span> <span class="code-class">Select</span>(skillsDropdown);
+skillsSelect.<span class="code-method">selectByVisibleText</span>(<span class="code-string">"Java"</span>);
+skillsSelect.<span class="code-method">selectByVisibleText</span>(<span class="code-string">"Selenium"</span>);
+
+<span class="code-comment">// Read selected options</span>
+<span class="code-class">List</span>&lt;<span class="code-class">WebElement</span>&gt; selectedOptions = skillsSelect.<span class="code-method">getAllSelectedOptions</span>();
+<span class="code-keyword">for</span> (<span class="code-class">WebElement</span> option : selectedOptions) {
+    <span class="code-class">System</span>.out.<span class="code-method">println</span>(option.<span class="code-method">getText</span>());
+}</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+</body>
+</html>

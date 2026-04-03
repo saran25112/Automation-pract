@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | AutomateLearn</title>
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/pages/admin.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow bg-glow-1"></div>
+<div class="bg-glow bg-glow-2"></div>
+
+<div id="siteHeader"></div>
+
+<main class="main-content">
+<section class="section">
+<div class="container admin-container">
+
+<div id="adminLoading" class="admin-loading">
+    <div class="glass-card admin-loading-card">
+        <div class="admin-loader"></div>
+        <h3>Loading admin panel</h3>
+        <p>Please wait while we verify your access.</p>
+    </div>
+</div>
+
+<div id="adminContent" class="admin-content" hidden>
+    <div class="section-header">
+        <div class="section-badge">Admin Panel</div>
+        <h1 class="section-title"><span class="gradient-text">Manage Users</span></h1>
+        <p class="section-subtitle">View users and perform admin-only actions with password confirmation.</p>
+    </div>
+
+    <div class="glass-card" style="padding: 20px; margin-bottom: 20px;">
+        <div id="adminPageStatus" class="admin-status"></div>
+    </div>
+
+    <div id="adminUsersGrid" class="admin-users-grid"></div>
+</div>
+
+</div>
+</section>
+</main>
+
+<div id="siteFooter"></div>
+
+<div id="adminPasswordModal" class="admin-modal" hidden>
+    <div class="glass-card admin-modal-card">
+        <h3 id="adminPasswordTitle">Admin Action</h3>
+        <p id="adminPasswordText"></p>
+
+        <div class="form-group">
+            <label for="adminPasswordInput">Enter your admin password</label>
+            <input type="password" id="adminPasswordInput" autocomplete="current-password">
+        </div>
+
+        <div id="adminPasswordStatus" class="admin-modal-status"></div>
+
+        <div class="admin-modal-actions">
+            <button type="button" class="practice-btn practice-btn-green" id="adminPasswordContinueBtn">Continue</button>
+            <button type="button" class="practice-btn practice-btn-blue" id="adminPasswordCancelBtn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="adminConfirmModal" class="admin-modal" hidden>
+    <div class="glass-card admin-modal-card">
+        <h3>Confirm Action</h3>
+        <p id="adminConfirmText"></p>
+
+        <div id="adminConfirmStatus" class="admin-modal-status"></div>
+
+        <div class="admin-modal-actions">
+            <button type="button" class="practice-btn practice-btn-green" id="adminConfirmYesBtn">Confirm</button>
+            <button type="button" class="practice-btn practice-btn-blue" id="adminConfirmNoBtn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+<script src="static/js/main.js?v=20260403-global-badge2"></script>
+<script>
+const adminActionState = {
+    userId: '',
+    action: '',
+    userEmail: '',
+    password: '',
+};
+
+document.addEventListener('DOMContentLoaded', async function() {
+    bindAdminEvents();
+    hydrateAdminFromCache();
+    await loadAdminPage();
+});
+
+function bindAdminEvents() {
+    document.getElementById('adminPasswordCancelBtn').addEventListener('click', closeAdminPasswordModal);
+    document.getElementById('adminPasswordContinueBtn').addEventListener('click', handleAdminPasswordSubmit);
+    document.getElementById('adminConfirmNoBtn').addEventListener('click', closeAdminConfirmModal);
+    document.getElementById('adminConfirmYesBtn').addEventListener('click', handleAdminConfirmedAction);
+}
+
+function setAdminLoading(isLoading) {
+    document.getElementById('adminLoading').hidden = !isLoading;
+    document.getElementById('adminContent').hidden = isLoading;
+}
+
+function getCachedAdminUser() {
+    try {
+        const cachedUser = JSON.parse(localStorage.getItem('authUser') || 'null');
+        if (!cachedUser || !cachedUser.email || cachedUser.role !== 'admin') {
+            return null;
+        }
+
+        return cachedUser;
+    } catch {
+        return null;
+    }
+}
+
+function hydrateAdminFromCache() {
+    const cachedAdmin = getCachedAdminUser();
+    if (!cachedAdmin) {
+        return;
+    }
+
+    setAdminLoading(false);
+    setStatus('adminPageStatus', 'Loading users...', 'info');
+    const container = document.getElementById('adminUsersGrid');
+    if (!container.innerHTML.trim()) {
+        container.innerHTML = '<div class="glass-card admin-user-card"><p>Loading users...</p></div>';
+    }
+}
+
+function setStatus(targetId, message, type = 'info') {
+    const element = document.getElementById(targetId);
+    element.textContent = message;
+    if (type === 'error') {
+        element.style.color = '#fb923c';
+        return;
+    }
+    if (type === 'success') {
+        element.style.color = '#00ff88';
+        return;
+    }
+    element.style.color = '#38bdf8';
+}
+
+async function loadAdminPage() {
+    try {
+        if (!getCachedAdminUser()) {
+            setAdminLoading(true);
+        }
+
+        const sessionResponse = await fetch('/api/auth/session', { credentials: 'include' });
+        if (!sessionResponse.ok) {
+            localStorage.removeItem('authUser');
+            window.location.replace('/login');
+            return;
+        }
+
+        const sessionData = await sessionResponse.json();
+        if (!sessionData.authenticated || !sessionData.user || sessionData.user.role !== 'admin') {
+            localStorage.removeItem('authUser');
+            window.location.replace('/profile');
+            return;
+        }
+
+        localStorage.setItem('authUser', JSON.stringify(sessionData.user));
+        setAdminLoading(false);
+        setStatus('adminPageStatus', 'Loading users...', 'info');
+
+        await loadAdminUsers();
+    } catch (error) {
+        setStatus('adminPageStatus', 'Could not load admin panel.', 'error');
+    } finally {
+        setAdminLoading(false);
+    }
+}
+
+async function loadAdminUsers() {
+    const response = await fetch('/api/admin/users', { credentials: 'include' });
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.detail || 'Could not load users');
+    }
+
+    renderUsers(data.users || []);
+    setStatus('adminPageStatus', 'Admin panel ready.', 'success');
+}
+
+function renderUsers(users) {
+    const container = document.getElementById('adminUsersGrid');
+    if (!users.length) {
+        container.innerHTML = '<div class="glass-card admin-user-card"><p>No users found.</p></div>';
+        return;
+    }
+
+    container.innerHTML = users.map((user) => {
+        const roleClass = user.role === 'blocked' ? 'blocked' : user.role === 'staff' ? 'staff' : '';
+        const developerFoundIndicator = user.page_status
+            ? '<span class="admin-page-status-dot" title="Developer page found"></span><span class="admin-page-status-label">Easter Egg Unlocked</span>'
+            : '';
+        const primaryActionButton = user.role === 'blocked'
+            ? `<button type="button" class="practice-btn practice-btn-orange" onclick="openAdminActionModal('${user.id}', 'unblock', '${escapeHtml(user.email)}')">Unblock User</button>`
+            : `<button type="button" class="practice-btn practice-btn-orange" onclick="openAdminActionModal('${user.id}', 'block', '${escapeHtml(user.email)}')">Block User</button>`;
+
+        const changeRoleButton = user.role === 'staff'
+            ? `<button type="button" class="practice-btn practice-btn-blue" onclick="openAdminActionModal('${user.id}', 'make_user', '${escapeHtml(user.email)}')">De-promote To User</button>`
+            : `<button type="button" class="practice-btn practice-btn-blue" onclick="openAdminActionModal('${user.id}', 'make_staff', '${escapeHtml(user.email)}')">Change To Staff</button>`;
+
+        const actionButtons = user.role === 'admin'
+            ? '<div class="checkbox-helper">Admin accounts can only be viewed.</div>'
+            : `
+                <div class="admin-actions">
+                    ${primaryActionButton}
+                    ${changeRoleButton}
+                    <button type="button" class="practice-btn practice-btn-green" onclick="openAdminActionModal('${user.id}', 'delete', '${escapeHtml(user.email)}')">Remove User</button>
+                </div>
+            `;
+
+        return `
+            <div class="glass-card admin-user-card">
+                <div class="admin-user-head">
+                    <div class="admin-user-meta">
+                        <div class="admin-user-name-row">
+                            <h3>${escapeHtml(user.name || 'Unnamed User')}</h3>
+                            ${developerFoundIndicator}
+                        </div>
+                        <p><strong>Email:</strong> ${escapeHtml(user.email || '')}</p>
+                        <p><strong>Mobile:</strong> ${escapeHtml(user.phone || 'No phone')}</p>
+                    </div>
+                    <span class="admin-role-badge ${roleClass}">${escapeHtml(user.role || 'user')}</span>
+                </div>
+                ${actionButtons}
+            </div>
+        `;
+    }).join('');
+}
+
+function openAdminActionModal(userId, action, userEmail) {
+    adminActionState.userId = userId;
+    adminActionState.action = action;
+    adminActionState.userEmail = userEmail;
+    adminActionState.password = '';
+
+    const actionLabel = getActionLabel(action);
+    const isDangerAction = action === 'block' || action === 'make_user';
+    const passwordModalCard = document.querySelector('#adminPasswordModal .admin-modal-card');
+    const confirmModalCard = document.querySelector('#adminConfirmModal .admin-modal-card');
+
+    passwordModalCard.classList.toggle('danger', isDangerAction);
+    confirmModalCard.classList.toggle('danger', isDangerAction);
+    document.getElementById('adminPasswordTitle').textContent = `${actionLabel} User`;
+    document.getElementById('adminPasswordText').textContent = `You are about to ${actionLabel.toLowerCase()} ${userEmail}. Enter your admin password to continue.`;
+    document.getElementById('adminPasswordInput').value = '';
+    document.getElementById('adminPasswordStatus').textContent = '';
+    document.getElementById('adminPasswordModal').hidden = false;
+}
+
+function closeAdminPasswordModal() {
+    document.getElementById('adminPasswordModal').hidden = true;
+}
+
+function closeAdminConfirmModal() {
+    document.getElementById('adminConfirmModal').hidden = true;
+}
+
+function getActionLabel(action) {
+    if (action === 'delete') return 'Remove';
+    if (action === 'block') return 'Block';
+    if (action === 'unblock') return 'Unblock';
+    if (action === 'make_user') return 'De-promote To User';
+    return 'Change To Staff';
+}
+
+function handleAdminPasswordSubmit() {
+    const password = document.getElementById('adminPasswordInput').value;
+    if (!password) {
+        setStatus('adminPasswordStatus', 'Please enter your password.', 'error');
+        return;
+    }
+
+    adminActionState.password = password;
+    closeAdminPasswordModal();
+    document.getElementById('adminConfirmText').textContent = `Please confirm that you want to ${getActionLabel(adminActionState.action).toLowerCase()} ${adminActionState.userEmail}.`;
+    document.getElementById('adminConfirmStatus').textContent = '';
+    document.getElementById('adminConfirmModal').hidden = false;
+}
+
+async function handleAdminConfirmedAction() {
+    const button = document.getElementById('adminConfirmYesBtn');
+    button.disabled = true;
+    button.innerHTML = '<span class="button-spinner"></span>Processing...';
+
+    try {
+        const response = await fetch(`/api/admin/users/${adminActionState.userId}/action`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: adminActionState.action,
+                password: adminActionState.password,
+            }),
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.detail || 'Admin action failed');
+        }
+
+        closeAdminConfirmModal();
+        setStatus('adminPageStatus', data.message || 'Admin action completed.', 'success');
+        await loadAdminUsers();
+    } catch (error) {
+        setStatus('adminConfirmStatus', error.message, 'error');
+    } finally {
+        button.disabled = false;
+        button.textContent = 'Confirm';
+    }
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+}
+</script>
+</body>
+</html>

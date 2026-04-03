@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Scroll — Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice scrolling to targets and working with long pages.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+<div id="loginPopup" class="login-popup">
+    <div class="popup-box">
+                <span class="popup-close" onclick="closePopup()">✖</span>
+
+        <h3>Login Required</h3>
+        <p>You must login to view this content.</p>
+
+        <button class="practice-btn practice-btn-blue" onclick="goToLogin()">Login</button>
+    </div>
+</div>
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>Scroll <span class="gradient-text">Practice</span></h1>
+ <p>Practice scrolling to targets and working with long pages.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Scroll practice page loaded.</span></div>
+ </div>
+
+<div class="practice-section" data-category="scroll">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Scroll Down</h2>
+ <p>Practice scrolling to elements using JavascriptExecutor.scrollIntoView()</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Scroll Targets</h3>
+ <p>Click the buttons to smooth scroll to targets, or use Selenium to scroll programmatically.</p>
+
+ <div class="btn-group" style="margin-bottom: var(--space-xl);">
+ <button class="practice-btn practice-btn-blue" onclick="scrollToTarget('scrollTarget1')">Scroll to Target 1</button>
+ <button class="practice-btn practice-btn-green" onclick="scrollToTarget('scrollTarget2')">Scroll to Target 2</button>
+ <button class="practice-btn practice-btn-purple" onclick="scrollToTarget('scrollTarget3')">Scroll to Target 3</button>
+ </div>
+
+ <div style="height: 200px;"></div>
+ <div class="scroll-target scroll-target-1" id="scrollTarget1">
+ Scroll Target 1 <code>id="scrollTarget1"</code>
+ </div>
+
+ <div style="height: 300px;"></div>
+ <div class="scroll-target scroll-target-2" id="scrollTarget2">
+ Scroll Target 2 <code>id="scrollTarget2"</code>
+ </div>
+
+ <div style="height: 300px;"></div>
+ <div class="scroll-target scroll-target-3" id="scrollTarget3">
+ Scroll Target 3 <code>id="scrollTarget3"</code>
+ </div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle" style="margin-top: var(--space-xl);">
+ <!-- <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div> -->
+ <div class="sample-code-btn open" onclick="handleSampleClick(this)">
+    <span class="arrow"></span> View Selenium Code
+</div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Scroll to element using JavascriptExecutor</span>
+<span class="code-class">WebElement</span> target = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"scrollTarget1"</span>));
+<span class="code-class">JavascriptExecutor</span> js = (<span class="code-class">JavascriptExecutor</span>) driver;
+js.<span class="code-method">executeScript</span>(<span class="code-string">"arguments[0].scrollIntoView(true);"</span>, target);
+
+<span class="code-comment">// Scroll by pixels</span>
+js.<span class="code-method">executeScript</span>(<span class="code-string">"window.scrollBy(0, 500);"</span>);
+
+<span class="code-comment">// Scroll to bottom of page</span>
+js.<span class="code-method">executeScript</span>(<span class="code-string">"window.scrollTo(0, document.body.scrollHeight);"</span>);
+
+<span class="code-comment">// Scroll to top</span>
+js.<span class="code-method">executeScript</span>(<span class="code-string">"window.scrollTo(0, 0);"</span>);</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+<!-- Modal Overlay -->
+ <div class="modal-overlay" id="practiceModal">
+ <div class="modal-content">
+ <h3> Modal Popup</h3>
+ <p>This is a practice modal popup. In Selenium, you can interact with modal elements just like regular elements no need to switch context (unlike alerts).</p>
+ <p style="font-size: 0.85rem; color: var(--text-muted);">Modal ID: <code>practiceModal</code></p>
+ <div class="modal-actions">
+ <button class="practice-btn practice-btn-blue" id="modalCloseBtn" onclick="closeModal()"> Close</button>
+ <button class="practice-btn practice-btn-green" id="modalConfirmBtn" onclick="confirmModal()"> Confirm</button>
+ </div>
+ </div>
+ </div>
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+ <script>
+
+async function isLoggedIn() {
+    try {
+        const res = await fetch('/api/auth/session', {
+            credentials: 'include'
+        });
+
+        const data = await res.json();
+        return data.authenticated;
+
+    } catch {
+        return false;
+    }
+}
+
+async function handleSampleClick(el) {
+    const loggedIn = await isLoggedIn();
+
+    if (loggedIn) {
+        toggleSampleCode(el); // your existing function
+    } else {
+        showLoginPopup();
+    }
+}
+
+function showLoginPopup() {
+    const popup = document.getElementById("loginPopup");
+    popup.style.display = "flex";
+
+    // auto close after 5 sec
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, 5000);
+}
+
+function goToLogin() {
+    window.location.href = "/login";
+}
+function closePopup() {
+    document.getElementById("loginPopup").style.display = "none";
+}
+</script>
+</body>
+</html>
+

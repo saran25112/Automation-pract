@@ -1,0 +1,38 @@
+.upload-grid {
+   display: grid;
+   gap: var(--space-lg);
+ }
+
+ .upload-card {
+   padding: var(--space-lg);
+ }
+
+ .upload-zone {
+   margin-top: 16px;
+   padding: 28px 20px;
+   border: 2px dashed rgba(56, 189, 248, 0.35);
+   border-radius: var(--radius-md);
+   background: rgba(56, 189, 248, 0.06);
+   text-align: center;
+   cursor: pointer;
+   transition: border-color var(--transition-fast), transform var(--transition-fast);
+ }
+
+ .upload-zone:hover {
+   border-color: rgba(0, 255, 136, 0.5);
+   transform: translateY(-2px);
+ }
+
+ .upload-hidden-input {
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   overflow: hidden;
+   opacity: 0;
+   pointer-events: none;
+ }
+
+ .upload-file-name {
+   margin-top: 12px;
+   color: var(--text-muted);
+ }

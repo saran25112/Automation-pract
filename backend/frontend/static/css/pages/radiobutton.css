@@ -1,0 +1,53 @@
+.radio-practice-grid {
+   display: grid;
+   gap: var(--space-lg);
+ }
+
+ .radio-block {
+   padding: var(--space-lg);
+ }
+
+ .radio-stack {
+   display: grid;
+   gap: 12px;
+   margin-top: 14px;
+ }
+
+ .radio-option-card {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   padding: 14px 16px;
+   border: 1px solid rgba(255, 255, 255, 0.08);
+   border-radius: var(--radius-md);
+   background: rgba(255, 255, 255, 0.03);
+ }
+
+ .radio-option-card.disabled {
+   opacity: 0.5;
+   cursor: not-allowed;
+ }
+
+ .radio-option-card input[type="radio"] {
+   width: 18px;
+   height: 18px;
+ }
+
+ .radio-helper {
+   margin-top: 10px;
+   color: var(--text-muted);
+   font-size: 0.95rem;
+ }
+
+ .dynamic-panel {
+   margin-top: 16px;
+   padding: 16px;
+   border-radius: var(--radius-md);
+   background: rgba(56, 189, 248, 0.08);
+   border: 1px solid rgba(56, 189, 248, 0.2);
+   display: none;
+ }
+
+ .dynamic-panel.show {
+   display: block;
+ }

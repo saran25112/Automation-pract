@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Radio Buttons — Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice selecting radio buttons, checking selected state, validating errors, and handling disabled and dynamic radio options.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="stylesheet" href="static/css/pages/radiobutton.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>Radio Button <span class="gradient-text">Practice</span></h1>
+ <p>Practice selecting radio buttons, checking selection, validating disabled states, and handling dynamic updates after submit.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Radio button practice page loaded.</span></div>
+ </div>
+
+ <div class="practice-section" data-category="radio-button">
+ <div class="practice-section-header">
+ <div class="practice-section-icon">◉</div>
+ <div>
+ <h2>Radio Buttons</h2>
+ <p>Practice only-one-selected behavior, pre-selected options, disabled radios, validation, and dynamic messages.</p>
+ </div>
+ </div>
+
+ <div class="radio-practice-grid">
+ <div class="glass-card radio-block">
+ <h3>Section 1: Basic Radio Buttons (Gender)</h3>
+ <p>Select a gender option. Only one option can be selected at a time. Default state: none selected.</p>
+ <div class="radio-stack" id="genderRadioGroup">
+ <label class="radio-option-card" for="genderMalePractice">
+ <input type="radio" name="practiceGender" id="genderMalePractice" value="Male">
+ <span>Male</span>
+ </label>
+ <label class="radio-option-card" for="genderFemalePractice">
+ <input type="radio" name="practiceGender" id="genderFemalePractice" value="Female">
+ <span>Female</span>
+ </label>
+ <label class="radio-option-card" for="genderOtherPractice">
+ <input type="radio" name="practiceGender" id="genderOtherPractice" value="Other">
+ <span>Other</span>
+ </label>
+ </div>
+ <div class="radio-helper" id="genderSelectionState">No option selected yet.</div>
+ </div>
+
+ <div class="glass-card radio-block">
+ <h3>Pre-selected Radio Button</h3>
+ <p>This group helps testers verify `isSelected()` on an option that starts selected.</p>
+ <div class="radio-stack" id="preselectedRadioGroup">
+ <label class="radio-option-card" for="optionAPractice">
+ <input type="radio" name="preselectedOption" id="optionAPractice" value="Option A" checked>
+ <span>Option A (pre-selected)</span>
+ </label>
+ <label class="radio-option-card" for="optionBPractice">
+ <input type="radio" name="preselectedOption" id="optionBPractice" value="Option B">
+ <span>Option B</span>
+ </label>
+ <label class="radio-option-card" for="optionCPractice">
+ <input type="radio" name="preselectedOption" id="optionCPractice" value="Option C">
+ <span>Option C</span>
+ </label>
+ </div>
+ <div class="radio-helper" id="preselectedState">Current selection: Option A</div>
+ </div>
+
+ <div class="glass-card radio-block">
+ <h3>Disabled Radio Button</h3>
+ <p>Use this group to verify enabled vs disabled radio behavior.</p>
+ <div class="radio-stack" id="disabledRadioGroup">
+ <label class="radio-option-card" for="enabledRadioOption">
+ <input type="radio" name="availabilityOption" id="enabledRadioOption" value="Enabled Option">
+ <span>Enabled Option</span>
+ </label>
+ <label class="radio-option-card disabled" for="disabledRadioOption">
+ <input type="radio" name="availabilityOption" id="disabledRadioOption" value="Disabled Option" disabled>
+ <span>Disabled Option (should not be clickable)</span>
+ </label>
+ </div>
+ <div class="radio-helper" id="disabledState">Disabled option cannot be selected.</div>
+ </div>
+
+ <div class="glass-card radio-block">
+ <h3>Validation</h3>
+ <p>Choose one testing level and click Submit. If no option is selected, an error message should appear. If one is selected, a success message and dynamic content will show.</p>
+ <div class="radio-stack" id="validationRadioGroup">
+ <label class="radio-option-card" for="validationBeginner">
+ <input type="radio" name="validationOption" id="validationBeginner" value="Beginner">
+ <span>Beginner</span>
+ </label>
+ <label class="radio-option-card" for="validationIntermediate">
+ <input type="radio" name="validationOption" id="validationIntermediate" value="Intermediate">
+ <span>Intermediate</span>
+ </label>
+ <label class="radio-option-card" for="validationAdvanced">
+ <input type="radio" name="validationOption" id="validationAdvanced" value="Advanced">
+ <span>Advanced</span>
+ </label>
+ </div>
+
+ <div class="btn-group" style="margin-top: 18px;">
+ <button type="button" class="practice-btn practice-btn-green" id="radioSubmitBtn">Submit</button>
+ </div>
+
+ <div class="form-result" id="radioValidationResult"></div>
+ <div class="dynamic-panel" id="radioDynamicPanel">
+ <strong>Dynamic Section:</strong>
+ <span id="dynamicSelectionText">You selected an option.</span>
+ </div>
+ </div>
+
+ <div class="glass-card radio-block">
+ <h3>What Testers Can Practice Here</h3>
+ <ul>
+ <li>Selecting radio buttons</li>
+ <li>Verifying selection with `isSelected()`</li>
+ <li>Handling disabled radio buttons</li>
+ <li>Handling dynamic elements after click</li>
+ <li>Validating error and success messages</li>
+ <li>Looping through radio groups</li>
+ </ul>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Basic radio group</span>
+List&lt;WebElement&gt; genders = driver.<span class="code-method">findElements</span>(<span class="code-class">By</span>.<span class="code-method">name</span>(<span class="code-string">"practiceGender"</span>));
+for (<span class="code-class">WebElement</span> gender : genders) {
+    if (gender.<span class="code-method">getAttribute</span>(<span class="code-string">"value"</span>).<span class="code-method">equals</span>(<span class="code-string">"Female"</span>)) {
+        gender.<span class="code-method">click</span>();
+        <span class="code-keyword">break</span>;
+    }
+}
+
+<span class="code-comment">// Verify pre-selected radio</span>
+<span class="code-class">WebElement</span> optionA = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"optionAPractice"</span>));
+boolean isDefaultSelected = optionA.<span class="code-method">isSelected</span>();
+
+<span class="code-comment">// Disabled radio verification</span>
+<span class="code-class">WebElement</span> disabled = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"disabledRadioOption"</span>));
+boolean disabledState = !disabled.<span class="code-method">isEnabled</span>();
+
+<span class="code-comment">// Validation flow</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"radioSubmitBtn"</span>)).<span class="code-method">click</span>();
+<span class="code-class">WebElement</span> result = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"radioValidationResult"</span>));
+String resultText = result.<span class="code-method">getText</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+ <script>
+ function setResultState(element, message, type) {
+   element.textContent = message;
+   element.classList.add('show');
+
+   if (type === 'error') {
+     element.style.borderColor = 'rgba(251, 146, 60, 0.3)';
+     element.style.background = 'rgba(251, 146, 60, 0.05)';
+     element.style.color = '#fb923c';
+     return;
+   }
+
+   element.style.borderColor = 'rgba(0, 255, 136, 0.3)';
+   element.style.background = 'rgba(0, 255, 136, 0.05)';
+   element.style.color = '#00ff88';
+ }
+
+ function getSelectedValue(name) {
+   const selected = document.querySelector(`input[name="${name}"]:checked`);
+   return selected ? selected.value : '';
+ }
+
+ document.addEventListener('DOMContentLoaded', () => {
+   const genderRadios = document.querySelectorAll('input[name="practiceGender"]');
+   const preselectedRadios = document.querySelectorAll('input[name="preselectedOption"]');
+   const disabledRadios = document.querySelectorAll('input[name="availabilityOption"]');
+   const validationRadios = document.querySelectorAll('input[name="validationOption"]');
+   const genderSelectionState = document.getElementById('genderSelectionState');
+   const preselectedState = document.getElementById('preselectedState');
+   const disabledState = document.getElementById('disabledState');
+   const radioValidationResult = document.getElementById('radioValidationResult');
+   const radioDynamicPanel = document.getElementById('radioDynamicPanel');
+   const dynamicSelectionText = document.getElementById('dynamicSelectionText');
+   const radioSubmitBtn = document.getElementById('radioSubmitBtn');
+
+   genderRadios.forEach((radio) => {
+     radio.addEventListener('change', () => {
+       genderSelectionState.textContent = `Selected gender: ${radio.value}`;
+       addLog(`Gender radio selected: ${radio.value}`);
+     });
+   });
+
+   preselectedRadios.forEach((radio) => {
+     radio.addEventListener('change', () => {
+       preselectedState.textContent = `Current selection: ${radio.value}`;
+       addLog(`Pre-selected group changed to ${radio.value}`);
+     });
+   });
+
+   disabledRadios.forEach((radio) => {
+     radio.addEventListener('change', () => {
+       disabledState.textContent = `Selected enabled option: ${radio.value}`;
+       addLog(`Enabled availability option selected: ${radio.value}`);
+     });
+   });
+
+   validationRadios.forEach((radio) => {
+     radio.addEventListener('change', () => {
+       radioValidationResult.classList.remove('show');
+       radioDynamicPanel.classList.remove('show');
+       addLog(`Validation group changed to ${radio.value}`);
+     });
+   });
+
+   radioSubmitBtn.addEventListener('click', () => {
+     const selectedValue = getSelectedValue('validationOption');
+     if (!selectedValue) {
+       setResultState(radioValidationResult, 'Please select an option', 'error');
+       radioDynamicPanel.classList.remove('show');
+       addLog('Validation submit blocked because no radio option was selected.');
+       return;
+     }
+
+     setResultState(radioValidationResult, `Success: ${selectedValue} selected successfully.`, 'success');
+     dynamicSelectionText.textContent = `Dynamic content loaded for ${selectedValue}.`;
+     radioDynamicPanel.classList.add('show');
+     addLog(`Validation submit succeeded with ${selectedValue}.`);
+   });
+ });
+ </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Screenshot — Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice page and element screenshot scenarios.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>Screenshot <span class="gradient-text">Practice</span></h1>
+ <p>Practice page and element screenshot scenarios.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Screenshot practice page loaded.</span></div>
+ </div>
+
+<div class="practice-section" data-category="screenshot">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Screenshot</h2>
+ <p>Practice TakesScreenshot and capturing page/element screenshots</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <div class="screenshot-box" id="screenshotArea">
+ <h3> Screenshot Practice Area</h3>
+ <p>Capture this section using Selenium's TakesScreenshot capability.</p>
+ <div class="screenshot-timestamp" id="screenshotTimestamp">Timestamp: Loading...</div>
+ <div style="margin-top: var(--space-md); display: flex; justify-content: center; gap: var(--space-md);">
+ <span style="font-size: 2rem;"></span>
+ <span style="font-size: 2rem;"></span>
+ <span style="font-size: 2rem;"></span>
+ </div>
+ </div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Take full page screenshot</span>
+<span class="code-class">TakesScreenshot</span> ts = (<span class="code-class">TakesScreenshot</span>) driver;
+<span class="code-class">File</span> screenshot = ts.<span class="code-method">getScreenshotAs</span>(<span class="code-class">OutputType</span>.FILE);
+<span class="code-class">FileHandler</span>.<span class="code-method">copy</span>(screenshot, <span class="code-keyword">new</span> <span class="code-class">File</span>(<span class="code-string">"screenshot.png"</span>));
+
+<span class="code-comment">// Take element screenshot</span>
+<span class="code-class">WebElement</span> area = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"screenshotArea"</span>));
+<span class="code-class">File</span> elemShot = area.<span class="code-method">getScreenshotAs</span>(<span class="code-class">OutputType</span>.FILE);
+<span class="code-class">FileHandler</span>.<span class="code-method">copy</span>(elemShot, <span class="code-keyword">new</span> <span class="code-class">File</span>(<span class="code-string">"element_screenshot.png"</span>));
+
+<span class="code-comment">// Screenshot as Base64 (for Extent Reports)</span>
+<span class="code-class">String</span> base64 = ts.<span class="code-method">getScreenshotAs</span>(<span class="code-class">OutputType</span>.BASE64);</pre>
+ 
+</div>
+<div class="alert-note">
+  <div class="alert-title">⚠️ Important</div>
+  <div class="alert-message">
+    Ensure the element is scrolled into view before Screenshot using element.
+  </div>
+</div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+<!-- Modal Overlay -->
+ <div class="modal-overlay" id="practiceModal">
+ <div class="modal-content">
+ <h3> Modal Popup</h3>
+ <p>This is a practice modal popup. In Selenium, you can interact with modal elements just like regular elements no need to switch context (unlike alerts).</p>
+ <p style="font-size: 0.85rem; color: var(--text-muted);">Modal ID: <code>practiceModal</code></p>
+ <div class="modal-actions">
+ <button class="practice-btn practice-btn-blue" id="modalCloseBtn" onclick="closeModal()"> Close</button>
+ <button class="practice-btn practice-btn-green" id="modalConfirmBtn" onclick="confirmModal()"> Confirm</button>
+ </div>
+ </div>
+ </div>
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+</body>
+</html>
+

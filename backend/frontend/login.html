@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Login | AutomateLearn</title>
+ <meta name="description" content="Login page powered by a Python backend and the Supabase ap_users table.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="stylesheet" href="static/css/pages/login.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <section class="section">
+ <div class="container">
+ <div class="section-header animate-on-scroll">
+ <div class="section-badge">Secure Access</div>
+ <h1 class="section-title"><span class="gradient-text">Login</span></h1>
+ <p class="section-subtitle">
+ Welcome back. Sign in, or reset your password without leaving this page.
+ </p>
+ </div>
+
+ <div class="login-flow-shell animate-on-scroll is-login-only" id="loginFlowShell">
+   <div class="login-flow-aside glass-card">
+     <div class="login-flow-chip">Account Access</div>
+     <h2>One place for login and password recovery.</h2>
+     <p>If your password is wrong, use the reset flow below. We will send a 6-digit OTP to your email.</p>
+     <div class="login-step-list">
+       <div class="login-step-item active" data-step-indicator="request">
+         <span>01</span>
+         <div>
+           <strong>Request Reset</strong>
+           <p>Enter your email and request an OTP.</p>
+         </div>
+       </div>
+       <div class="login-step-item" data-step-indicator="otp">
+         <span>02</span>
+         <div>
+           <strong>Verify OTP</strong>
+           <p>OTP expires in 5 minutes and can be resent after 2 minutes.</p>
+         </div>
+       </div>
+       <div class="login-step-item" data-step-indicator="reset">
+         <span>03</span>
+         <div>
+           <strong>Reset Password</strong>
+           <p>Choose a new password and finish securely.</p>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <div class="login-flow-main">
+     <div class="glass-card login-card">
+       <div id="loginPanels" class="login-panels">
+         <section class="login-panel is-active" data-step="login">
+           <h3>Account Login</h3>
+           <p>Login to continue and access your account.</p>
+
+           <form id="loginForm" class="practice-form">
+             <div class="form-group">
+               <label for="loginEmail">Email Address</label>
+               <input type="email" id="loginEmail" name="loginEmail" placeholder="you@example.com" required>
+             </div>
+
+             <div class="form-group">
+               <label for="loginPassword">Password</label>
+               <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter password" required>
+             </div>
+
+             <div class="login-inline-actions">
+               <button type="button" class="login-inline-link" id="showForgotPasswordBtn" hidden>Forgot password?</button>
+             </div>
+
+             <div class="btn-group" style="justify-content: space-around;">
+               <button type="submit" class="practice-btn login-btn" id="loginSubmitBtn" style="flex: 0.25;">Login</button>
+             </div>
+             <p class="footer-text" style="flex: 1; text-align: center; text-decoration: none; padding: 12px 24px; font-weight: 500; font-size: 0.95rem; display: inline-flex; justify-content: center; align-items: center;">
+               Don't have an account?
+               <a href="/register">Create one</a>
+             </p>
+           </form>
+         </section>
+
+         <section class="login-panel" data-step="request">
+           <div class="login-flow-chip warm">Password Reset</div>
+           <h3>Reset your password</h3>
+           <p>Enter your email. If it exists in our database, we will send you a password reset OTP.</p>
+
+           <form id="forgotPasswordForm" class="practice-form">
+             <div class="form-group">
+               <label for="forgotEmail">Email Address</label>
+               <input type="email" id="forgotEmail" name="forgotEmail" placeholder="you@example.com" required>
+             </div>
+
+             <div class="btn-group login-form-buttons">
+               <button type="submit" class="practice-btn practice-btn-orange" id="forgotProcessBtn">Process</button>
+               <button type="button" class="practice-btn practice-btn-blue" id="backToLoginBtn">Back To Login</button>
+             </div>
+           </form>
+         </section>
+
+         <section class="login-panel" data-step="otp">
+           <div class="login-flow-chip sky">OTP Verification</div>
+           <h3>Enter OTP</h3>
+           <p>We sent a 6-digit OTP to <strong id="forgotOtpEmail">your email</strong>.</p>
+
+           <div class="login-timer-grid">
+             <div class="login-timer-card">
+               <span>OTP Expires In</span>
+               <strong id="otpExpiryTimer">05:00</strong>
+             </div>
+             <div class="login-timer-card">
+               <span>Re-send Available In</span>
+               <strong id="otpResendTimer">02:00</strong>
+             </div>
+           </div>
+
+           <div class="login-otp-row">
+             <input type="text" maxlength="1" class="login-otp-input" inputmode="numeric">
+             <input type="text" maxlength="1" class="login-otp-input" inputmode="numeric">
+             <input type="text" maxlength="1" class="login-otp-input" inputmode="numeric">
+             <input type="text" maxlength="1" class="login-otp-input" inputmode="numeric">
+             <input type="text" maxlength="1" class="login-otp-input" inputmode="numeric">
+             <input type="text" maxlength="1" class="login-otp-input" inputmode="numeric">
+           </div>
+
+           <div class="btn-group login-form-buttons">
+             <button type="button" class="practice-btn practice-btn-green" id="verifyForgotOtpBtn">Verify OTP</button>
+             <button type="button" class="practice-btn practice-btn-blue" id="resendForgotOtpBtn" disabled>Re-send OTP</button>
+           </div>
+
+           <div class="login-inline-actions centered">
+             <button type="button" class="login-inline-link" id="backToForgotFormBtn">Change email</button>
+           </div>
+         </section>
+
+         <section class="login-panel" data-step="reset">
+           <div class="login-flow-chip green">Password Ready</div>
+           <h3>Create a new password</h3>
+           <p>Your OTP is verified. Enter a new password and confirm it below.</p>
+
+           <form id="resetPasswordForm" class="practice-form">
+             <div class="form-group">
+               <label for="resetNewPassword">New Password</label>
+               <input type="password" id="resetNewPassword" name="resetNewPassword" placeholder="Enter new password" required>
+             </div>
+
+             <div class="form-group">
+               <label for="resetConfirmPassword">Confirm Password</label>
+               <input type="password" id="resetConfirmPassword" name="resetConfirmPassword" placeholder="Confirm new password" required>
+             </div>
+
+             <div class="btn-group login-form-buttons">
+               <button type="submit" class="practice-btn practice-btn-green" id="resetPasswordDoneBtn">Done</button>
+             </div>
+           </form>
+         </section>
+
+         <section class="login-panel" data-step="success">
+           <div class="success-burst" id="successBurst" aria-hidden="true">
+             <span class="success-core-ring"></span>
+             <span class="success-core-ring delayed"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+             <span class="burst-dot"></span>
+           </div>
+           <div class="login-flow-chip green">Success</div>
+           <h3>Password changed successfully</h3>
+           <p class="success-message">Everything is ready. You can now log in with your new password.</p>
+           <div class="success-party-card">
+             <strong>Welcome back!</strong>
+             <span>Your password reset is complete.</span>
+           </div>
+           <p class="success-auto-text">Returning to login in <strong id="successRedirectTimer">10</strong> seconds.</p>
+           <div class="btn-group login-form-buttons">
+             <button type="button" class="practice-btn practice-btn-green" id="successBackToLoginBtn">Go To Login</button>
+           </div>
+         </section>
+       </div>
+
+       <div class="form-result" id="loginResult"></div>
+     </div>
+   </div>
+ </div>
+ </div>
+ </section>
+ </main>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/login.js"></script>
+</body>
+</html>

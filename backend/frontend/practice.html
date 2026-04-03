@@ -1,0 +1,1267 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Practice Lab AutomateLearn | Interactive Selenium Practice</title>
+ <meta name="description" content="Interactive practice elements for Selenium automation forms, alerts, popups, scroll handling, dynamic loading, window handling, and more.">
+ <link rel="stylesheet" href="static/css/style.css?v=20260321-calendar4">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'></text></svg>">
+</head>
+<body>
+
+ <!-- Background Effects -->
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <!-- Main Content -->
+ <main class="main-content">
+ <div class="container">
+
+ <!-- Practice Hero -->
+ <div class="practice-hero">
+ <div class="section-badge"> Interactive Lab</div>
+ <h1>Practice <span class="gradient-text">Lab</span></h1>
+ <p>Automate these real HTML elements with your Selenium scripts. Each element has unique IDs for easy targeting.</p>
+ </div>
+
+ <!-- Navigation Tabs -->
+ <div id="practiceNav"></div>
+
+ <!-- Action Log -->
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Practice Lab loaded start automating!</span></div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- FORMS SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="forms">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Forms & Inputs</h2>
+ <p>Practice sendKeys(), click(), Select dropdown, checkboxes, and form submission</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Registration Form</h3>
+ <p>Fill out this form using Selenium text fields, dropdowns, radio buttons, checkboxes, and submit.</p>
+
+ <form id="registrationForm" class="practice-form" onsubmit="event.preventDefault();">
+ <div class="form-row">
+ <div class="form-group">
+ <label for="firstName">First Name *</label>
+ <input type="text" id="firstName" name="firstName" placeholder="Enter first name">
+ </div>
+ <div class="form-group">
+ <label for="lastName">Last Name *</label>
+ <input type="text" id="lastName" name="lastName" placeholder="Enter last name">
+ </div>
+ </div>
+
+ <div class="form-row">
+ <div class="form-group">
+ <label for="email">Email Address *</label>
+ <input type="email" id="email" name="email" placeholder="you@example.com">
+ </div>
+ <div class="form-group">
+ <label for="phone">Phone Number</label>
+ <input type="tel" id="phone" name="phone" placeholder="+91 9876543210">
+ </div>
+ </div>
+
+ <div class="form-group">
+ <label>Gender</label>
+ <div class="radio-group">
+ <label><input type="radio" name="gender" value="Male" id="genderMale"> Male</label>
+ <label><input type="radio" name="gender" value="Female" id="genderFemale"> Female</label>
+ <label><input type="radio" name="gender" value="Other" id="genderOther"> Other</label>
+ </div>
+ </div>
+
+ <div class="form-group">
+ <label for="country">Country</label>
+ <select id="country" name="country">
+ <option value="">-- Select Country --</option>
+ <option value="India">India</option>
+ <option value="USA">USA</option>
+ <option value="UK">UK</option>
+ <option value="Canada">Canada</option>
+ <option value="Australia">Australia</option>
+ <option value="Germany">Germany</option>
+ <option value="Japan">Japan</option>
+ </select>
+ </div>
+
+ <div class="form-group">
+ <label>Hobbies</label>
+ <div class="checkbox-group">
+ <label><input type="checkbox" name="hobby" value="Reading" id="hobbyReading"> Reading</label>
+ <label><input type="checkbox" name="hobby" value="Coding" id="hobbyCoding"> Coding</label>
+ <label><input type="checkbox" name="hobby" value="Sports" id="hobbySports"> Sports</label>
+ <label><input type="checkbox" name="hobby" value="Music" id="hobbyMusic"> Music</label>
+ <label><input type="checkbox" name="hobby" value="Travel" id="hobbyTravel"> Travel</label>
+ </div>
+ </div>
+
+ <div class="form-group">
+ <label for="message">Message</label>
+ <textarea id="message" name="message" placeholder="Write something..."></textarea>
+ </div>
+
+ <div class="btn-group">
+ <button type="button" class="practice-btn practice-btn-green" id="submitBtn" onclick="submitRegistrationForm()"> Submit Form</button>
+ <button type="button" class="practice-btn practice-btn-orange" id="resetBtn" onclick="resetRegistrationForm()"> Reset Form</button>
+ </div>
+ </form>
+
+ <div class="form-result" id="formResult"></div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <!-- <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div> -->
+ <div class="sample-code-btn open">
+    <span class="arrow"></span> View Selenium Code
+</div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Fill out the registration form</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"firstName"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"John"</span>);
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"lastName"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"Doe"</span>);
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"email"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"john@example.com"</span>);
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"phone"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"+91 9876543210"</span>);
+
+<span class="code-comment">// Select radio button</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"genderMale"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Select from dropdown</span>
+<span class="code-class">Select</span> country = <span class="code-keyword">new</span> <span class="code-class">Select</span>(driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"country"</span>)));
+country.<span class="code-method">selectByVisibleText</span>(<span class="code-string">"India"</span>);
+
+<span class="code-comment">// Check checkboxes</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"hobbyCoding"</span>)).<span class="code-method">click</span>();
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"hobbyReading"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Enter text in textarea</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"message"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"Hello!"</span>);
+
+<span class="code-comment">// Submit form</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"submitBtn"</span>)).<span class="code-method">click</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- ALERTS SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="alerts">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Alerts & Dialogs</h2>
+ <p>Practice switchTo().alert(), accept(), dismiss(), and sendKeys() on alert</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> JavaScript Alerts</h3>
+ <p>Trigger different types of JavaScript dialogs and handle them with Selenium.</p>
+
+ <div class="btn-group">
+ <button class="practice-btn practice-btn-blue" id="simpleAlertBtn" onclick="triggerSimpleAlert()">
+ Simple Alert
+ </button>
+ <button class="practice-btn practice-btn-purple" id="confirmAlertBtn" onclick="triggerConfirmAlert()">
+ Confirm Dialog
+ </button>
+ <button class="practice-btn practice-btn-orange" id="promptAlertBtn" onclick="triggerPromptAlert()">
+ Prompt Dialog
+ </button>
+ </div>
+
+ <div class="form-result" id="alertResult"></div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Trigger and handle Simple Alert</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"simpleAlertBtn"</span>)).<span class="code-method">click</span>();
+<span class="code-class">Alert</span> alert = driver.<span class="code-method">switchTo</span>().<span class="code-method">alert</span>();
+<span class="code-class">String</span> alertText = alert.<span class="code-method">getText</span>();
+alert.<span class="code-method">accept</span>();
+
+<span class="code-comment">// Handle Confirm Dialog</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"confirmAlertBtn"</span>)).<span class="code-method">click</span>();
+<span class="code-class">Alert</span> confirm = driver.<span class="code-method">switchTo</span>().<span class="code-method">alert</span>();
+confirm.<span class="code-method">accept</span>(); <span class="code-comment">// Click OK</span>
+<span class="code-comment">// confirm.dismiss(); // Click Cancel</span>
+
+<span class="code-comment">// Handle Prompt Dialog</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"promptAlertBtn"</span>)).<span class="code-method">click</span>();
+<span class="code-class">Alert</span> prompt = driver.<span class="code-method">switchTo</span>().<span class="code-method">alert</span>();
+prompt.<span class="code-method">sendKeys</span>(<span class="code-string">"My Name"</span>);
+prompt.<span class="code-method">accept</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- POPUP MODAL SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="popup">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Popup Modal</h2>
+ <p>Practice opening, interacting with, and closing overlay modals</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Modal Popup</h3>
+ <p>Open a modal popup, interact with its buttons, and close it.</p>
+
+ <button class="practice-btn practice-btn-blue" id="openModalBtn" onclick="openModal()">
+ Open Modal
+ </button>
+
+ <div class="form-result" id="modalResult"></div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Open modal</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"openModalBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Wait for modal to be visible</span>
+<span class="code-class">WebDriverWait</span> wait = <span class="code-keyword">new</span> <span class="code-class">WebDriverWait</span>(driver, <span class="code-class">Duration</span>.<span class="code-method">ofSeconds</span>(5));
+wait.<span class="code-method">until</span>(<span class="code-class">ExpectedConditions</span>.<span class="code-method">visibilityOfElementLocated</span>(
+ <span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"practiceModal"</span>)
+));
+
+<span class="code-comment">// Click confirm button inside modal</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"modalConfirmBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Or close modal</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"modalCloseBtn"</span>)).<span class="code-method">click</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- SCROLL SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="scroll">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Scroll Down</h2>
+ <p>Practice scrolling to elements using JavascriptExecutor.scrollIntoView()</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Scroll Targets</h3>
+ <p>Click the buttons to smooth scroll to targets, or use Selenium to scroll programmatically.</p>
+
+ <div class="btn-group" style="margin-bottom: var(--space-xl);">
+ <button class="practice-btn practice-btn-blue" onclick="scrollToTarget('scrollTarget1')">Scroll to Target 1</button>
+ <button class="practice-btn practice-btn-green" onclick="scrollToTarget('scrollTarget2')">Scroll to Target 2</button>
+ <button class="practice-btn practice-btn-purple" onclick="scrollToTarget('scrollTarget3')">Scroll to Target 3</button>
+ </div>
+
+ <div style="height: 200px;"></div>
+ <div class="scroll-target scroll-target-1" id="scrollTarget1">
+ Scroll Target 1 <code>id="scrollTarget1"</code>
+ </div>
+
+ <div style="height: 300px;"></div>
+ <div class="scroll-target scroll-target-2" id="scrollTarget2">
+ Scroll Target 2 <code>id="scrollTarget2"</code>
+ </div>
+
+ <div style="height: 300px;"></div>
+ <div class="scroll-target scroll-target-3" id="scrollTarget3">
+ Scroll Target 3 <code>id="scrollTarget3"</code>
+ </div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle" style="margin-top: var(--space-xl);">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Scroll to element using JavascriptExecutor</span>
+<span class="code-class">WebElement</span> target = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"scrollTarget1"</span>));
+<span class="code-class">JavascriptExecutor</span> js = (<span class="code-class">JavascriptExecutor</span>) driver;
+js.<span class="code-method">executeScript</span>(<span class="code-string">"arguments[0].scrollIntoView(true);"</span>, target);
+
+<span class="code-comment">// Scroll by pixels</span>
+js.<span class="code-method">executeScript</span>(<span class="code-string">"window.scrollBy(0, 500);"</span>);
+
+<span class="code-comment">// Scroll to bottom of page</span>
+js.<span class="code-method">executeScript</span>(<span class="code-string">"window.scrollTo(0, document.body.scrollHeight);"</span>);
+
+<span class="code-comment">// Scroll to top</span>
+js.<span class="code-method">executeScript</span>(<span class="code-string">"window.scrollTo(0, 0);"</span>);</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- WINDOW HANDLING SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="windows">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Window Handling</h2>
+ <p>Practice getWindowHandles(), switchTo().window(), and managing multiple windows/tabs</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Open New Windows & Tabs</h3>
+ <p>Open new browser windows/tabs and practice switching between them.</p>
+
+ <div class="btn-group">
+ <button class="practice-btn practice-btn-blue" id="openWindowBtn" onclick="openNewWindow()">
+ Open New Window
+ </button>
+ <button class="practice-btn practice-btn-green" id="openTabBtn" onclick="openNewTab()">
+ Open New Tab
+ </button>
+ </div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Store current window handle</span>
+<span class="code-class">String</span> mainWindow = driver.<span class="code-method">getWindowHandle</span>();
+
+<span class="code-comment">// Click button to open new window</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"openWindowBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Get all window handles</span>
+<span class="code-class">Set</span>&lt;<span class="code-class">String</span>&gt; handles = driver.<span class="code-method">getWindowHandles</span>();
+
+<span class="code-comment">// Switch to new window</span>
+<span class="code-keyword">for</span> (<span class="code-class">String</span> handle : handles) {
+ <span class="code-keyword">if</span> (!handle.<span class="code-method">equals</span>(mainWindow)) {
+ driver.<span class="code-method">switchTo</span>().<span class="code-method">window</span>(handle);
+ <span class="code-keyword">break</span>;
+ }
+}
+
+<span class="code-comment">// Perform actions on new window</span>
+<span class="code-class">System</span>.out.<span class="code-method">println</span>(driver.<span class="code-method">getTitle</span>());
+
+<span class="code-comment">// Close new window and switch back</span>
+driver.<span class="code-method">close</span>();
+driver.<span class="code-method">switchTo</span>().<span class="code-method">window</span>(mainWindow);</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- WAITS / DYNAMIC LOADING SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="waits">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Wait Functions & Dynamic Loading</h2>
+ <p>Practice WebDriverWait and ExpectedConditions with dynamically appearing elements</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Dynamic Element Loader</h3>
+ <p>Click to load an element after a <strong>3-second delay</strong>. Use WebDriverWait to handle this.</p>
+
+ <button class="practice-btn practice-btn-blue" id="loadElementBtn" onclick="loadDynamicElement()">
+ Load Element (3s delay)
+ </button>
+ <div class="dynamic-container" id="dynamicContainer" style="margin-top: var(--space-md);"></div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Click the load button</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"loadElementBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Wait for the dynamic element to appear</span>
+<span class="code-class">WebDriverWait</span> wait = <span class="code-keyword">new</span> <span class="code-class">WebDriverWait</span>(driver, <span class="code-class">Duration</span>.<span class="code-method">ofSeconds</span>(10));
+<span class="code-class">WebElement</span> result = wait.<span class="code-method">until</span>(
+ <span class="code-class">ExpectedConditions</span>.<span class="code-method">visibilityOfElementLocated</span>(
+ <span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dynamicResult"</span>)
+ )
+);
+<span class="code-class">System</span>.out.<span class="code-method">println</span>(result.<span class="code-method">getText</span>());</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Delayed Button</h3>
+ <p>This button appears after a <strong>5-second delay</strong>. Use <code>elementToBeClickable</code>.</p>
+
+ <button class="practice-btn practice-btn-purple" id="loadDelayedBtn" onclick="loadDelayedButton()">
+ Load Delayed Button (5s)
+ </button>
+ <div class="dynamic-container" id="delayedBtnContainer" style="margin-top: var(--space-md);"></div>
+ <div class="form-result" id="delayedBtnResult"></div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Click to start loading</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"loadDelayedBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Wait for delayed button to be clickable (max 10s)</span>
+<span class="code-class">WebDriverWait</span> wait = <span class="code-keyword">new</span> <span class="code-class">WebDriverWait</span>(driver, <span class="code-class">Duration</span>.<span class="code-method">ofSeconds</span>(10));
+<span class="code-class">WebElement</span> delayedBtn = wait.<span class="code-method">until</span>(
+ <span class="code-class">ExpectedConditions</span>.<span class="code-method">elementToBeClickable</span>(
+ <span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"delayedButton"</span>)
+ )
+);
+delayedBtn.<span class="code-method">click</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- GET TEXT SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="text">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Get Text</h2>
+ <p>Practice getText(), getAttribute(), and reading element content</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Text Elements</h3>
+ <p>Practice extracting text from various elements using Selenium.</p>
+
+ <div class="text-element" id="visibleText">
+ <div class="label">Visible Text (use getText())</div>
+ <div id="visibleTextContent">Hello! This is a visible text element you can read with Selenium's getText() method.</div>
+ </div>
+
+ <div class="text-element" id="textWithAttribute">
+ <div class="label">Element with Attribute (use getAttribute())</div>
+ <input type="text" id="attributeInput" value="pre-filled value" data-custom="selenium-test-data" readonly style="width: 100%; padding: 8px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-body);">
+ </div>
+
+ <div class="text-element">
+ <div class="label">Hidden Text (toggle visibility)</div>
+ <button class="practice-btn practice-btn-blue" id="toggleHiddenBtn" onclick="revealHiddenText()" style="margin-bottom: var(--space-sm);">
+ Toggle Hidden Text
+ </button>
+ <div id="hiddenText" style="display: none; padding: 8px; background: rgba(0, 255, 136, 0.05); border-radius: var(--radius-sm); color: var(--accent-green);">
+ This was hidden! Use WebDriverWait to wait for visibility.
+ </div>
+ </div>
+
+ <div class="text-element">
+ <div class="label">Paragraph Text</div>
+ <p id="paragraphText">Selenium WebDriver is a collection of open source APIs which are used to automate the testing of a web application. This text can be extracted using the getText() method in your automation scripts.</p>
+ </div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Get visible text</span>
+<span class="code-class">String</span> text = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"visibleTextContent"</span>)).<span class="code-method">getText</span>();
+
+<span class="code-comment">// Get input value</span>
+<span class="code-class">String</span> value = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"attributeInput"</span>)).<span class="code-method">getAttribute</span>(<span class="code-string">"value"</span>);
+
+<span class="code-comment">// Get custom data attribute</span>
+<span class="code-class">String</span> data = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"attributeInput"</span>)).<span class="code-method">getAttribute</span>(<span class="code-string">"data-custom"</span>);
+
+<span class="code-comment">// Reveal hidden text and read it</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"toggleHiddenBtn"</span>)).<span class="code-method">click</span>();
+<span class="code-class">WebDriverWait</span> wait = <span class="code-keyword">new</span> <span class="code-class">WebDriverWait</span>(driver, <span class="code-class">Duration</span>.<span class="code-method">ofSeconds</span>(5));
+<span class="code-class">WebElement</span> hidden = wait.<span class="code-method">until</span>(
+ <span class="code-class">ExpectedConditions</span>.<span class="code-method">visibilityOfElementLocated</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"hiddenText"</span>))
+);
+<span class="code-class">System</span>.out.<span class="code-method">println</span>(hidden.<span class="code-method">getText</span>());
+
+<span class="code-comment">// Get paragraph text</span>
+<span class="code-class">String</span> para = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"paragraphText"</span>)).<span class="code-method">getText</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- CLICK ACTIONS SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="clicks">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Click Actions</h2>
+ <p>Practice click(), Actions class for double-click, right-click, and hover</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Click Targets</h3>
+ <p>Different types of click actions you can perform with Selenium.</p>
+
+ <div class="btn-group" style="margin-bottom: var(--space-md);">
+ <button class="practice-btn practice-btn-blue" id="singleClickBtn" onclick="singleClick()">
+ Single Click
+ </button>
+ <button class="practice-btn practice-btn-purple" id="doubleClickBtn" ondblclick="doubleClickAction()">
+ Double Click Me
+ </button>
+ <button class="practice-btn practice-btn-orange" id="rightClickBtn" oncontextmenu="rightClickAction(event)">
+ Right Click Me
+ </button>
+ <button class="practice-btn practice-btn-green" id="hoverBtn" onmouseenter="hoverDetected()">
+ Hover Over Me
+ </button>
+ </div>
+
+ <div class="form-result" id="clickResult"></div>
+ <div class="form-result" id="doubleClickResult"></div>
+ <div class="form-result" id="rightClickResult"></div>
+ <div class="form-result" id="hoverResult"></div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Single click</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"singleClickBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Double click using Actions</span>
+<span class="code-class">Actions</span> actions = <span class="code-keyword">new</span> <span class="code-class">Actions</span>(driver);
+<span class="code-class">WebElement</span> dblBtn = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"doubleClickBtn"</span>));
+actions.<span class="code-method">doubleClick</span>(dblBtn).<span class="code-method">perform</span>();
+
+<span class="code-comment">// Right click (context click)</span>
+<span class="code-class">WebElement</span> rightBtn = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"rightClickBtn"</span>));
+actions.<span class="code-method">contextClick</span>(rightBtn).<span class="code-method">perform</span>();
+
+<span class="code-comment">// Hover over element</span>
+<span class="code-class">WebElement</span> hoverBtn = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"hoverBtn"</span>));
+actions.<span class="code-method">moveToElement</span>(hoverBtn).<span class="code-method">perform</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- DRAG AND DROP SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="dragdrop">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Drag And Drop</h2>
+ <p>Practice clickAndHold(), dragAndDrop(), and dropping onto a target zone</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Advanced Drag And Drop Match</h3>
+ <p>Start with the instruction card below. Click Advance to open the full matching board, then drag each image from the left side to the correct text box on the right.</p>
+
+ <div class="drag-drop-intro" id="dragDropIntro">
+ <div class="drag-drop-intro-card">
+ <h4>Drag And Drop Practice</h4>
+ <p>Drag the correct image and drop it on the matching text box.</p>
+ <p>The left side shows images only. The right side shows names only.</p>
+ </div>
+ </div>
+
+ <div class="drag-drop-lab advanced-drag-drop hidden" id="dragDropBoard">
+ <div class="drag-source-panel">
+ <div class="drag-panel-title">Images All Here</div>
+ <div class="drag-card-grid" id="dragCardGrid">
+ <div class="drag-card" id="dragItemJava" draggable="true" data-item-id="java" data-item-name="Java">
+ <img alt="Java illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23dbeafe'/%3E%3Cpath d='M25 88h70v12H25z' fill='%236b7280' fill-opacity='.18'/%3E%3Ccircle cx='60' cy='52' r='28' fill='%2393c5fd'/%3E%3Ctext x='60' y='65' text-anchor='middle' font-size='36'%3E%E2%98%95%3C/text%3E%3C/svg%3E">
+ </div>
+ <div class="drag-card" id="dragItemSelenium" draggable="true" data-item-id="selenium" data-item-name="Selenium">
+ <img alt="Selenium illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23dcfce7'/%3E%3Cpath d='M20 82h80v16H20z' fill='%236b7280' fill-opacity='.18'/%3E%3Ccircle cx='60' cy='50' r='28' fill='%2386efac'/%3E%3Ctext x='60' y='63' text-anchor='middle' font-size='34'%3E%F0%9F%8C%90%3C/text%3E%3C/svg%3E">
+ </div>
+ <div class="drag-card" id="dragItemTestNG" draggable="true" data-item-id="testng" data-item-name="TestNG">
+ <img alt="TestNG illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23fce7f3'/%3E%3Cpath d='M20 82h80v16H20z' fill='%236b7280' fill-opacity='.18'/%3E%3Ccircle cx='60' cy='50' r='28' fill='%23f9a8d4'/%3E%3Ctext x='60' y='63' text-anchor='middle' font-size='34'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E">
+ </div>
+ <div class="drag-card" id="dragItemMaven" draggable="true" data-item-id="maven" data-item-name="Maven">
+ <img alt="Maven illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23e0e7ff'/%3E%3Cpath d='M20 82h80v16H20z' fill='%236b7280' fill-opacity='.18'/%3E%3Ccircle cx='60' cy='50' r='28' fill='%23a5b4fc'/%3E%3Ctext x='60' y='63' text-anchor='middle' font-size='34'%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E">
+ </div>
+ <div class="drag-card" id="dragItemPOM" draggable="true" data-item-id="pom" data-item-name="POM">
+ <img alt="POM illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23e0f2fe'/%3E%3Cpath d='M20 82h80v16H20z' fill='%236b7280' fill-opacity='.18'/%3E%3Ccircle cx='60' cy='50' r='28' fill='%237dd3fc'/%3E%3Ctext x='60' y='63' text-anchor='middle' font-size='34'%3E%F0%9F%8F%97%EF%B8%8F%3C/text%3E%3C/svg%3E">
+ </div>
+ </div>
+ </div>
+
+ <div class="drag-target-panel">
+ <div class="drag-panel-title">Text Here</div>
+ <div class="drop-target-list" id="dropTargetList">
+ <div class="drop-zone advanced-drop-zone match-target" id="dropTargetJava" data-match-id="java">
+ <span class="match-target-text">Java</span>
+ </div>
+ <div class="drop-zone advanced-drop-zone match-target" id="dropTargetSelenium" data-match-id="selenium">
+ <span class="match-target-text">Selenium</span>
+ </div>
+ <div class="drop-zone advanced-drop-zone match-target" id="dropTargetTestNG" data-match-id="testng">
+ <span class="match-target-text">TestNG</span>
+ </div>
+ <div class="drop-zone advanced-drop-zone match-target" id="dropTargetMaven" data-match-id="maven">
+ <span class="match-target-text">Maven</span>
+ </div>
+ <div class="drop-zone advanced-drop-zone match-target" id="dropTargetPOM" data-match-id="pom">
+ <span class="match-target-text">POM</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="form-result" id="dragDropResult"></div>
+
+ <div class="btn-group">
+ <button class="practice-btn practice-btn-blue" id="advanceDragDropBtn" onclick="advanceDragDrop()">
+ Advance
+ </button>
+ <button class="practice-btn practice-btn-orange" id="resetDragDropBtn" onclick="resetDragDrop()">
+ Reset Drag And Drop
+ </button>
+ </div>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Open the matching board</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"advanceDragDropBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Drag the selected image card to the matching text box</span>
+<span class="code-class">WebElement</span> source = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dragItemJava"</span>));
+<span class="code-class">WebElement</span> target = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dropTargetJava"</span>));
+<span class="code-class">Actions</span> actions = <span class="code-keyword">new</span> <span class="code-class">Actions</span>(driver);
+actions.<span class="code-method">dragAndDrop</span>(source, target).<span class="code-method">perform</span>();
+
+<span class="code-comment">// Read success or wrong-match message</span>
+<span class="code-class">String</span> result = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dragDropResult"</span>)).<span class="code-method">getText</span>();
+</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- IFRAME SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="iframe">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>iFrame Practice</h2>
+ <p>Practice switchTo().frame(), interact inside the frame, and switch back to default content</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Switch Into The Practice Frame</h3>
+ <p>Interact with the input and button inside the iframe, then read the success message from inside the frame.</p>
+
+ <div class="iframe-toolbar">
+ <button class="practice-btn practice-btn-blue" id="resetIframeBtn" onclick="resetPracticeFrame()">
+ Reset iFrame
+ </button>
+ </div>
+
+ <iframe
+ id="practiceFrame"
+ title="Selenium iframe practice area"
+ class="practice-iframe"
+ ></iframe>
+
+ <div class="form-result show" id="iframeHintResult">
+ Switch into <code>practiceFrame</code> or locate it by <code>id="practiceFrame"</code> before interacting with the elements inside it.
+ </div>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Switch into the iframe</span>
+driver.<span class="code-method">switchTo</span>().<span class="code-method">frame</span>(driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"practiceFrame"</span>)));
+
+<span class="code-comment">// Interact with elements inside the frame</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"frameNameInput"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"name"</span>);
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"frameSubmitBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Read text inside the frame</span>
+<span class="code-class">String</span> frameMessage = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"frameResult"</span>)).<span class="code-method">getText</span>();
+
+<span class="code-comment">// Return to the main page</span>
+driver.<span class="code-method">switchTo</span>().<span class="code-method">defaultContent</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- SCREENSHOT SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="screenshot">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Screenshot</h2>
+ <p>Practice TakesScreenshot and capturing page/element screenshots</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <div class="screenshot-box" id="screenshotArea">
+ <h3> Screenshot Practice Area</h3>
+ <p>Capture this section using Selenium's TakesScreenshot capability.</p>
+ <div class="screenshot-timestamp" id="screenshotTimestamp">Timestamp: Loading...</div>
+ <div style="margin-top: var(--space-md); display: flex; justify-content: center; gap: var(--space-md);">
+ <span style="font-size: 2rem;"></span>
+ <span style="font-size: 2rem;"></span>
+ <span style="font-size: 2rem;"></span>
+ </div>
+ </div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Take full page screenshot</span>
+<span class="code-class">TakesScreenshot</span> ts = (<span class="code-class">TakesScreenshot</span>) driver;
+<span class="code-class">File</span> screenshot = ts.<span class="code-method">getScreenshotAs</span>(<span class="code-class">OutputType</span>.FILE);
+<span class="code-class">FileUtils</span>.<span class="code-method">copyFile</span>(screenshot, <span class="code-keyword">new</span> <span class="code-class">File</span>(<span class="code-string">"screenshot.png"</span>));
+
+<span class="code-comment">// Take element screenshot</span>
+<span class="code-class">WebElement</span> area = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"screenshotArea"</span>));
+<span class="code-class">File</span> elemShot = area.<span class="code-method">getScreenshotAs</span>(<span class="code-class">OutputType</span>.FILE);
+<span class="code-class">FileUtils</span>.<span class="code-method">copyFile</span>(elemShot, <span class="code-keyword">new</span> <span class="code-class">File</span>(<span class="code-string">"element_screenshot.png"</span>));
+
+<span class="code-comment">// Screenshot as Base64 (for Extent Reports)</span>
+<span class="code-class">String</span> base64 = ts.<span class="code-method">getScreenshotAs</span>(<span class="code-class">OutputType</span>.BASE64);</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- CALENDAR SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="calendar">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Calendar Picker</h2>
+ <p>Practice selecting dates from compact popup calendars and reading the chosen values</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box compact-calendar-demo" data-compact-calendar-page>
+ <h3> Date Of Birth And Planning</h3>
+ <p>Click either field to open a compact white popup calendar. Date of Birth starts blank, and Planning starts with today selected.</p>
+
+ <div class="compact-calendar-fields">
+ <div class="compact-calendar-field-group">
+ <label class="compact-calendar-label" for="dobDateTrigger">Date Of Birth</label>
+ <input type="hidden" id="dobDateValue" value="">
+ <button class="compact-calendar-trigger" id="dobDateTrigger" type="button" data-calendar-target="dob">
+ <span class="compact-calendar-trigger-icon" aria-hidden="true">
+ <svg viewBox="0 0 24 24" role="img">
+ <path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v12a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3V2zm13 8H4v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8zM6 6v2h12V6H6z"></path>
+ </svg>
+ </span>
+ <span class="compact-calendar-trigger-copy">
+ <span class="compact-calendar-trigger-title">Date Of Birth</span>
+ <span class="compact-calendar-trigger-value is-empty" id="dobDateDisplay">Select your date of birth</span>
+ </span>
+ </button>
+ </div>
+
+ <div class="compact-calendar-field-group">
+ <label class="compact-calendar-label" for="planningDateTrigger">Planning</label>
+ <input type="hidden" id="planningDateValue" value="">
+ <button class="compact-calendar-trigger" id="planningDateTrigger" type="button" data-calendar-target="planning">
+ <span class="compact-calendar-trigger-icon" aria-hidden="true">
+ <svg viewBox="0 0 24 24" role="img">
+ <path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v12a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3V2zm13 8H4v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8zM6 6v2h12V6H6z"></path>
+ </svg>
+ </span>
+ <span class="compact-calendar-trigger-copy">
+ <span class="compact-calendar-trigger-title">Planning</span>
+ <span class="compact-calendar-trigger-value" id="planningDateDisplay">Loading...</span>
+ </span>
+ </button>
+ </div>
+ </div>
+
+ <div class="compact-calendar-popup" id="compactCalendarPopup" hidden>
+ <div class="compact-calendar-popup-header">
+ <button class="compact-calendar-nav" id="compactCalendarPrevBtn" type="button" aria-label="Previous month">&lt;</button>
+ <div class="compact-calendar-selectors">
+ <select class="compact-calendar-select" id="compactCalendarMonthSelect" aria-label="Select month"></select>
+ <select class="compact-calendar-select" id="compactCalendarYearSelect" aria-label="Select year"></select>
+ </div>
+ <button class="compact-calendar-nav" id="compactCalendarNextBtn" type="button" aria-label="Next month">&gt;</button>
+ </div>
+
+ <div class="compact-calendar-weekdays">
+ <span>Su</span>
+ <span>Mo</span>
+ <span>Tu</span>
+ <span>We</span>
+ <span>Th</span>
+ <span>Fr</span>
+ <span>Sa</span>
+ </div>
+
+ <div class="compact-calendar-days" id="compactCalendarDays"></div>
+ </div>
+ </div>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Open the Date Of Birth popup and choose a date</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dobDateTrigger"</span>)).<span class="code-method">click</span>();
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">cssSelector</span>(<span class="code-string">".compact-calendar-day[data-date='1998-08-12']"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Open Planning and choose a date</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"planningDateTrigger"</span>)).<span class="code-method">click</span>();
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">cssSelector</span>(<span class="code-string">".compact-calendar-day[data-date='2026-04-18']"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Read the stored ISO values</span>
+<span class="code-class">String</span> dobValue = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dobDateValue"</span>)).<span class="code-method">getAttribute</span>(<span class="code-string">"value"</span>);
+<span class="code-class">String</span> planningValue = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"planningDateValue"</span>)).<span class="code-method">getAttribute</span>(<span class="code-string">"value"</span>);
+
+<span class="code-comment">// Read the visible formatted values</span>
+<span class="code-class">String</span> dobText = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dobDateDisplay"</span>)).<span class="code-method">getText</span>();
+<span class="code-class">String</span> planningText = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"planningDateDisplay"</span>)).<span class="code-method">getText</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+
+
+ <!-- ============================== -->
+ <!-- TABLE HANDLING SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="table">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Table Handling</h2>
+ <p>Practice reading rows, columns, cells, and finding matching table data</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Employee Status Table</h3>
+ <p>Use Selenium to count rows, read specific cells, or find a row by employee name and verify its status.</p>
+
+ <div class="table-demo">
+ <table class="practice-table" id="employeeTable">
+ <thead>
+ <tr>
+ <th>Employee</th>
+ <th>Department</th>
+ <th>Location</th>
+ <th>Status</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Anita</td>
+ <td>QA</td>
+ <td>Chennai</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Rahul</td>
+ <td>Automation</td>
+ <td>Bangalore</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Priya</td>
+ <td>DevOps</td>
+ <td>Pune</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Karthik</td>
+ <td>Support</td>
+ <td>Hyderabad</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Sneha</td>
+ <td>QA</td>
+ <td>Mumbai</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Vikram</td>
+ <td>Development</td>
+ <td>Delhi</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Divya</td>
+ <td>Automation</td>
+ <td>Coimbatore</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Arjun</td>
+ <td>DevOps</td>
+ <td>Noida</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Meera</td>
+ <td>Support</td>
+ <td>Kochi</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Sanjay</td>
+ <td>QA</td>
+ <td>Chandigarh</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Latha</td>
+ <td>Automation</td>
+ <td>Madurai</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Ajay</td>
+ <td>Development</td>
+ <td>Visakhapatnam</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Nisha</td>
+ <td>QA</td>
+ <td>Jaipur</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Rohit</td>
+ <td>Support</td>
+ <td>Lucknow</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Keerthi</td>
+ <td>DevOps</td>
+ <td>Tiruppur</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Manoj</td>
+ <td>Automation</td>
+ <td>Nagpur</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Pooja</td>
+ <td>QA</td>
+ <td>Indore</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Harish</td>
+ <td>Development</td>
+ <td>Surat</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Neha</td>
+ <td>Support</td>
+ <td>Mysuru</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Gokul</td>
+ <td>Automation</td>
+ <td>Salem</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Farah</td>
+ <td>DevOps</td>
+ <td>Bhopal</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Yash</td>
+ <td>QA</td>
+ <td>Ahmedabad</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Kavya</td>
+ <td>Support</td>
+ <td>Trichy</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Deepak</td>
+ <td>developer</td>
+ <td>Patna</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Get all rows from the table body</span>
+<span class="code-class">List</span>&lt;<span class="code-class">WebElement</span>&gt; rows = driver.<span class="code-method">findElements</span>(
+ <span class="code-class">By</span>.<span class="code-method">cssSelector</span>(<span class="code-string">"#employeeTable tbody tr"</span>)
+);
+
+<span class="code-comment">// Create a 2D array based on row count and 4 columns</span>
+<span class="code-class">String</span>[][] tableData = <span class="code-keyword">new</span> <span class="code-class">String</span>[rows.<span class="code-method">size</span>()][4];
+
+<span class="code-comment">// Use nested loops to read every cell</span>
+<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i &lt; rows.<span class="code-method">size</span>(); i++) {
+ <span class="code-class">List</span>&lt;<span class="code-class">WebElement</span>&gt; cols = rows.<span class="code-method">get</span>(i).<span class="code-method">findElements</span>(<span class="code-class">By</span>.<span class="code-method">tagName</span>(<span class="code-string">"td"</span>));
+
+ <span class="code-keyword">for</span> (<span class="code-keyword">int</span> j = 0; j &lt; cols.<span class="code-method">size</span>(); j++) {
+ tableData[i][j] = cols.<span class="code-method">get</span>(j).<span class="code-method">getText</span>();
+ }
+}
+
+<span class="code-comment">// Print the full table data</span>
+<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i &lt; tableData.length; i++) {
+ <span class="code-keyword">for</span> (<span class="code-keyword">int</span> j = 0; j &lt; tableData[i].length; j++) {
+ <span class="code-class">System</span>.out.<span class="code-method">print</span>(tableData[i][j] + <span class="code-string">" | "</span>);
+ }
+ <span class="code-class">System</span>.out.<span class="code-method">println</span>();
+}</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ============================== -->
+ <!-- CLOSE BROWSER SECTION -->
+ <!-- ============================== -->
+ <div class="practice-section" data-category="clicks">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Close Browser</h2>
+ <p>Learn the difference between close() and quit()</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Close vs Quit</h3>
+ <p>Understanding the difference between driver.close() and driver.quit() is essential for proper cleanup.</p>
+
+ <div class="key-point">
+ <h4> driver.close()</h4>
+ <p>Closes only the <strong>current browser window/tab</strong>. Other windows remain open. Use this when working with multiple windows.</p>
+ </div>
+
+ <div class="key-point warning">
+ <h4> driver.quit()</h4>
+ <p>Closes <strong>all browser windows</strong> and ends the WebDriver session completely. Always use this in <code>@AfterMethod</code> or <code>@AfterTest</code>.</p>
+ </div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Close current window only</span>
+driver.<span class="code-method">close</span>();
+
+<span class="code-comment">// Quit close all windows & end session</span>
+driver.<span class="code-method">quit</span>();
+
+<span class="code-comment">// Best practice: in @AfterMethod</span>
+<span class="code-keyword">@AfterMethod</span>
+<span class="code-keyword">public void</span> <span class="code-method">tearDown</span>() {
+ <span class="code-keyword">if</span> (driver != <span class="code-keyword">null</span>) {
+ driver.<span class="code-method">quit</span>();
+ }
+}</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ </div>
+ </div>
+ </main>
+
+ <!-- Modal Overlay -->
+ <div class="modal-overlay" id="practiceModal">
+ <div class="modal-content">
+ <h3> Modal Popup</h3>
+ <p>This is a practice modal popup. In Selenium, you can interact with modal elements just like regular elements no need to switch context (unlike alerts).</p>
+ <p style="font-size: 0.85rem; color: var(--text-muted);">Modal ID: <code>practiceModal</code></p>
+ <div class="modal-actions">
+ <button class="practice-btn practice-btn-blue" id="modalCloseBtn" onclick="closeModal()"> Close</button>
+ <button class="practice-btn practice-btn-green" id="modalConfirmBtn" onclick="confirmModal()"> Confirm</button>
+ </div>
+ </div>
+ </div>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/practice.js?v=20260403-practice-fix"></script>
+</body>
+</html>
+

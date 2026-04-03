@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Checkbox — Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice checkbox selection, unselection, state checks, loops for multiple checkboxes, and enabled-state verification.">
+ <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/pages/checkbox.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>Checkbox <span class="gradient-text">Practice</span></h1>
+ <p>Practice checking, unchecking, verifying `isSelected()`, looping through multiple checkboxes, and checking enabled state.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Checkbox practice page loaded.</span></div>
+ </div>
+
+ <div class="practice-section" data-category="checkbox">
+ <div class="practice-section-header">
+ <div class="practice-section-icon">✅</div>
+ <div>
+ <h2>Checkboxes</h2>
+ <p>Practice single checkbox selection, state validation, best-practice conditional clicks, multi-select loops, and enabled checks.</p>
+ </div>
+ </div>
+
+ <div class="checkbox-grid">
+ <div class="glass-card checkbox-block">
+ <h3>1. Basic HTML Example</h3>
+ <p>Basic single checkbox example:</p>
+ <div class="checkbox-stack">
+ <label class="checkbox-option-card" for="subscribe">
+ <input type="checkbox" id="subscribe" name="subscribe">
+ <span>Subscribe</span>
+ </label>
+ </div>
+ <div class="checkbox-helper" id="subscribeStatus">Current state: unchecked</div>
+
+ </div>
+
+ <div class="glass-card checkbox-block">
+ <h3>2. Select Checkbox Only If Not Selected (Best Practice)</h3>
+ <p>Clicking the button below follows the best-practice flow of checking state first.</p>
+ <div class="checkbox-stack">
+ <label class="checkbox-option-card" for="bestPracticeCheckbox">
+ <input type="checkbox" id="bestPracticeCheckbox" name="bestPracticeCheckbox">
+ <span>Enable Best Practice Mode</span>
+ </label>
+ </div>
+
+ <div class="checkbox-helper" id="bestPracticeStatus">Waiting for action.</div>
+ </div>
+
+ <div class="glass-card checkbox-block">
+ <h3>3. Multiple Checkboxes (Loop Example)</h3>
+ <p>Multiple selections are allowed here. Testers can loop through the group and choose a target value like `selenium`.</p>
+ <div class="checkbox-stack" id="skillsCheckboxGroup">
+ <label class="checkbox-option-card" for="skillJava">
+ <input type="checkbox" name="skills" value="java" id="skillJava">
+ <span>Java</span>
+ </label>
+ <label class="checkbox-option-card" for="skillPython">
+ <input type="checkbox" name="skills" value="python" id="skillPython">
+ <span>Python</span>
+ </label>
+ <label class="checkbox-option-card" for="skillSelenium">
+ <input type="checkbox" name="skills" value="selenium" id="skillSelenium">
+ <span>Selenium</span>
+ </label>
+ <label class="checkbox-option-card disabled" for="skillDisabled">
+ <input type="checkbox" name="skills" value="disabled" id="skillDisabled" disabled>
+ <span>Disabled Skill</span>
+ </label>
+ </div>
+
+ <div class="checkbox-helper" id="skillsStatus">Selected skills: none</div>
+ </div>
+
+ <div class="glass-card checkbox-block">
+ <h3>Key Points</h3>
+ <ul>
+ <li>Checkbox allows multiple selections</li>
+ <li>Use `click()` to select or unselect</li>
+ <li>Use `isSelected()` to verify state</li>
+ <li>Always check state before clicking as a best practice</li>
+ <li>Use `isEnabled()` to verify whether a checkbox can be interacted with</li>
+ </ul>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// 1. Basic checkbox</span>
+<span class="code-class">WebElement</span> checkbox = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"subscribe"</span>));
+checkbox.<span class="code-method">click</span>();
+
+<span class="code-comment">// 2. Check if checkbox is selected</span>
+boolean isChecked = checkbox.<span class="code-method">isSelected</span>();
+System.out.println(isChecked);
+
+<span class="code-comment">// 3. Select checkbox only if not selected</span>
+if (!checkbox.<span class="code-method">isSelected</span>()) {
+    checkbox.<span class="code-method">click</span>();
+}
+
+<span class="code-comment">// 4. Uncheck checkbox</span>
+if (checkbox.<span class="code-method">isSelected</span>()) {
+    checkbox.<span class="code-method">click</span>();
+}
+
+<span class="code-comment">// 5. Multiple checkboxes loop example</span>
+List&lt;WebElement&gt; checkboxes = driver.<span class="code-method">findElements</span>(<span class="code-class">By</span>.<span class="code-method">name</span>(<span class="code-string">"skills"</span>));
+for (<span class="code-class">WebElement</span> cb : checkboxes) {
+    if (cb.<span class="code-method">getAttribute</span>(<span class="code-string">"value"</span>).<span class="code-method">equals</span>(<span class="code-string">"selenium"</span>)) {
+        cb.<span class="code-method">click</span>();
+    }
+}
+
+<span class="code-comment">// 6. Verify checkbox is enabled</span>
+boolean isEnabled = checkbox.<span class="code-method">isEnabled</span>();</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+ <script>
+ function setCheckboxResult(element, message, type) {
+   element.textContent = message;
+   element.classList.add('show');
+
+   if (type === 'error') {
+     element.style.borderColor = 'rgba(251, 146, 60, 0.3)';
+     element.style.background = 'rgba(251, 146, 60, 0.05)';
+     element.style.color = '#fb923c';
+     return;
+   }
+
+   element.style.borderColor = 'rgba(0, 255, 136, 0.3)';
+   element.style.background = 'rgba(0, 255, 136, 0.05)';
+   element.style.color = '#00ff88';
+ }
+
+ function updateSkillsStatus() {
+   const selectedSkills = Array.from(document.querySelectorAll('input[name="skills"]:checked')).map((checkbox) => checkbox.value);
+   document.getElementById('skillsStatus').textContent = selectedSkills.length
+     ? `Selected skills: ${selectedSkills.join(', ')}`
+     : 'Selected skills: none';
+ }
+
+ document.addEventListener('DOMContentLoaded', () => {
+   const subscribeCheckbox = document.getElementById('subscribe');
+   const subscribeStatus = document.getElementById('subscribeStatus');
+   const bestPracticeCheckbox = document.getElementById('bestPracticeCheckbox');
+   const bestPracticeStatus = document.getElementById('bestPracticeStatus');
+   const skillCheckboxes = document.querySelectorAll('input[name="skills"]');
+
+   subscribeCheckbox.addEventListener('change', () => {
+     subscribeStatus.textContent = `Current state: ${subscribeCheckbox.checked ? 'checked' : 'unchecked'}`;
+     addLog(`Subscribe checkbox changed to ${subscribeCheckbox.checked}`);
+   });
+
+   bestPracticeCheckbox.addEventListener('change', () => {
+     bestPracticeStatus.textContent = bestPracticeCheckbox.checked
+       ? 'Best practice target is selected.'
+       : 'Best practice target is not selected.';
+     addLog(`Best practice checkbox changed to ${bestPracticeCheckbox.checked}`);
+   });
+
+   skillCheckboxes.forEach((checkbox) => {
+     checkbox.addEventListener('change', () => {
+       updateSkillsStatus();
+       addLog(`Skill checkbox ${checkbox.value} changed to ${checkbox.checked}`);
+     });
+   });
+
+   updateSkillsStatus();
+ });
+ </script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+/* ========================================
+   ICONS - CSS-only icon layer
+   Restores icons without depending on encoded text in HTML
+   ======================================== */
+
+.logo-icon::before,
+.section-badge::before,
+.btn-icon::before,
+.practice-section-icon::before,
+.practice-nav-btn::before,
+.theme-toggle::before,
+.feature-icon::before,
+.topic-icon::before,
+.pp-icon::before {
+  display: inline-block;
+  line-height: 1;
+}
+
+.logo-icon::before {
+  content: "\1F916";
+  color: #fff;
+  font-size: 1.15rem;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.section-badge::before {
+  content: "\2726";
+}
+
+.hero-badge::before {
+  content: "\1F680";
+  margin-right: 8px;
+}
+
+.btn-icon:empty::before {
+  content: "\2192";
+}
+
+.hero-actions a[href*="learn"] .btn-icon:empty::before {
+  content: "\1F4D6";
+}
+
+.hero-actions a[href*="practice"] .btn-icon:empty::before {
+  content: "\2699";
+}
+
+.practice-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.practice-nav-btn::before {
+  width: 1.1rem;
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+.theme-toggle::before {
+  content: "\1F319";
+}
+
+[data-theme="light"] .theme-toggle::before {
+  content: "\1F31E";
+}
+
+.practice-nav-btn[href*="practice.html"]::before {
+  content: "\1F50D";
+  color: #a78bfa;
+}
+
+.practice-nav-btn[href*="practice-forms"]::before {
+  content: "\1F4DD";
+  color: #fca5a5;
+}
+
+.practice-nav-btn[href*="practice-alerts"]::before {
+  content: "\26A0";
+  color: #fbbf24;
+}
+
+.practice-nav-btn[href*="practice-popup"]::before {
+  content: "\229E";
+  color: #93c5fd;
+}
+
+.practice-nav-btn[href*="practice-scroll"]::before {
+  content: "\1F4DC";
+  color: #fdba74;
+}
+
+.practice-nav-btn[href*="practice-windows"]::before {
+  content: "\1F504";
+  color: #60a5fa;
+}
+
+.practice-nav-btn[href*="practice-waits"]::before {
+  content: "\231B";
+  color: #fde68a;
+}
+
+.practice-nav-btn[href*="practice-text"]::before {
+  content: "\1F4D6";
+  color: #c4b5fd;
+}
+
+.practice-nav-btn[href*="practice-clicks"]::before {
+  content: "\1F5B1";
+  color: #d1d5db;
+}
+
+.practice-nav-btn[href*="practice-dragdrop"]::before {
+  content: "\1F9F2";
+  color: #f472b6;
+}
+
+.practice-nav-btn[href*="practice-iframe"]::before {
+  content: "\229F";
+  color: #93c5fd;
+}
+
+.practice-nav-btn[href*="practice-screenshot"]::before {
+  content: "\1F4F8";
+  color: #fcd34d;
+}
+
+.practice-nav-btn[href*="practice-calendar"]::before {
+  content: "\1F4C5";
+  color: #86efac;
+}
+
+.practice-nav-btn[href*="practice-table"]::before {
+  content: "\1F4CA";
+  color: #93c5fd;
+}
+
+.practice-nav-btn.active::before {
+  color: inherit;
+}
+
+.practice-section-icon {
+  position: relative;
+}
+
+.practice-section[data-category="forms"] .practice-section-icon::before {
+  content: "\1F4DD";
+}
+
+.practice-section[data-category="alerts"] .practice-section-icon::before {
+  content: "\26A0";
+}
+
+.practice-section[data-category="popup"] .practice-section-icon::before {
+  content: "\25A3";
+}
+
+.practice-section[data-category="scroll"] .practice-section-icon::before {
+  content: "\21F5";
+}
+
+.practice-section[data-category="windows"] .practice-section-icon::before {
+  content: "\21C4";
+}
+
+.practice-section[data-category="waits"] .practice-section-icon::before {
+  content: "\231B";
+}
+
+.practice-section[data-category="text"] .practice-section-icon::before {
+  content: "\1F4D6";
+}
+
+.practice-section[data-category="dragdrop"] .practice-section-icon::before {
+  content: "\21F2";
+}
+
+.practice-section[data-category="iframe"] .practice-section-icon::before {
+  content: "\25A4";
+}
+
+.practice-section[data-category="screenshot"] .practice-section-icon::before {
+  content: "\1F4F8";
+}
+
+.practice-section[data-category="calendar"] .practice-section-icon::before {
+  content: "\1F4C5";
+}
+
+.practice-section[data-category="table"] .practice-section-icon::before {
+  content: "\1F4CA";
+}
+
+.feature-icon::before,
+.topic-icon::before,
+.pp-icon::before {
+  font-size: 1.35rem;
+}
+
+.feature-icon.blue::before {
+  content: "\1F4DA";
+}
+
+.feature-icon.green::before {
+  content: "\2699";
+}
+
+.feature-icon.purple::before {
+  content: "\1F4BB";
+}
+
+a[href="learn.html#java"] .topic-icon::before {
+  content: "\2615";
+}
+
+a[href="learn.html#selenium"] .topic-icon::before {
+  content: "\1F50D";
+}
+
+a[href="learn.html#testng"] .topic-icon::before {
+  content: "\2705";
+}
+
+a[href="learn.html#maven"] .topic-icon::before {
+  content: "\1F4E6";
+}
+
+a[href="learn.html#extent"] .topic-icon::before {
+  content: "\1F4CA";
+}
+
+a[href="learn.html#eclipse"] .topic-icon::before {
+  content: "\1F4A1";
+}
+
+a[href="learn.html#pom"] .topic-icon::before {
+  content: "\1F5C2";
+}
+
+.practice-preview-item:nth-child(1) .pp-icon::before {
+  content: "\1F4DD";
+}
+
+.practice-preview-item:nth-child(2) .pp-icon::before {
+  content: "\26A0";
+}
+
+.practice-preview-item:nth-child(3) .pp-icon::before {
+  content: "\229E";
+}
+
+.practice-preview-item:nth-child(4) .pp-icon::before {
+  content: "\21F5";
+}
+
+.practice-preview-item:nth-child(5) .pp-icon::before {
+  content: "\1F5D7";
+}
+
+.practice-preview-item:nth-child(6) .pp-icon::before {
+  content: "\2328";
+}
+
+.practice-preview-item:nth-child(7) .pp-icon::before {
+  content: "\1F5B1";
+}
+
+.practice-preview-item:nth-child(8) .pp-icon::before {
+  content: "\1F4AC";
+}
+
+.practice-preview-item:nth-child(9) .pp-icon::before {
+  content: "\231B";
+}
+
+.practice-preview-item:nth-child(10) .pp-icon::before {
+  content: "\1F4F8";
+}
+
+.practice-preview-item:nth-child(11) .pp-icon::before {
+  content: "\1F4C5";
+}
+
+.practice-preview-item:nth-child(12) .pp-icon::before {
+  content: "\1F4CA";
+}

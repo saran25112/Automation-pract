@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Windows — Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice opening, switching, and closing windows and tabs.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>Windows <span class="gradient-text">Practice</span></h1>
+ <p>Practice opening, switching, and closing windows and tabs.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Windows practice page loaded.</span></div>
+ </div>
+
+<div class="practice-section" data-category="windows">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Window Handling</h2>
+ <p>Practice getWindowHandles(), switchTo().window(), and managing multiple windows/tabs</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Open New Windows & Tabs</h3>
+ <p>Open new browser windows/tabs and practice switching between them.</p>
+
+ <div class="btn-group">
+ <button class="practice-btn practice-btn-blue" id="openWindowBtn" onclick="openNewWindow()">
+ Open New Window
+ </button>
+ <button class="practice-btn practice-btn-green" id="openTabBtn" onclick="openNewTab()">
+ Open New Tab
+ </button>
+ </div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Store current window handle</span>
+<span class="code-class">String</span> mainWindow = driver.<span class="code-method">getWindowHandle</span>();
+
+<span class="code-comment">// Click button to open new window</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"openWindowBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Get all window handles</span>
+<span class="code-class">Set</span>&lt;<span class="code-class">String</span>&gt; handles = driver.<span class="code-method">getWindowHandles</span>();
+
+<span class="code-comment">// Switch to new window</span>
+<span class="code-keyword">for</span> (<span class="code-class">String</span> handle : handles) {
+ <span class="code-keyword">if</span> (!handle.<span class="code-method">equals</span>(mainWindow)) {
+ driver.<span class="code-method">switchTo</span>().<span class="code-method">window</span>(handle);
+ <span class="code-keyword">break</span>;
+ }
+}
+
+<span class="code-comment">// Perform actions on new window</span>
+<span class="code-class">System</span>.out.<span class="code-method">println</span>(driver.<span class="code-method">getTitle</span>());
+
+<span class="code-comment">// Close new window and switch back</span>
+driver.<span class="code-method">close</span>();
+driver.<span class="code-method">switchTo</span>().<span class="code-method">window</span>(mainWindow);</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+<!-- Modal Overlay -->
+ <div class="modal-overlay" id="practiceModal">
+ <div class="modal-content">
+ <h3> Modal Popup</h3>
+ <p>This is a practice modal popup. In Selenium, you can interact with modal elements just like regular elements no need to switch context (unlike alerts).</p>
+ <p style="font-size: 0.85rem; color: var(--text-muted);">Modal ID: <code>practiceModal</code></p>
+ <div class="modal-actions">
+ <button class="practice-btn practice-btn-blue" id="modalCloseBtn" onclick="closeModal()"> Close</button>
+ <button class="practice-btn practice-btn-green" id="modalConfirmBtn" onclick="confirmModal()"> Confirm</button>
+ </div>
+ </div>
+ </div>
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+</body>
+</html>
+

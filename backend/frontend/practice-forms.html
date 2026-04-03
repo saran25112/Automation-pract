@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Forms — Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice form filling, selection controls, and submission flows.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>Forms <span class="gradient-text">Practice</span></h1>
+ <p>Practice form filling, selection controls, and submission flows.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Forms practice page loaded.</span></div>
+ </div>
+
+<div class="practice-section" data-category="forms">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Forms & Inputs</h2>
+ <p>Practice sendKeys(), click(), Select dropdown, checkboxes, and form submission</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Registration Form</h3>
+ <p>Fill out this form using Selenium text fields, dropdowns, radio buttons, checkboxes, and submit.</p>
+
+ <form id="registrationForm" class="practice-form" onsubmit="event.preventDefault();">
+ <div class="form-row">
+ <div class="form-group">
+ <label for="firstName">First Name *</label>
+ <input type="text" id="firstName" name="firstName" placeholder="Enter first name">
+ </div>
+ <div class="form-group">
+ <label for="lastName">Last Name *</label>
+ <input type="text" id="lastName" name="lastName" placeholder="Enter last name">
+ </div>
+ </div>
+
+ <div class="form-row">
+ <div class="form-group">
+ <label for="email">Email Address *</label>
+ <input type="email" id="email" name="email" placeholder="you@example.com">
+ </div>
+ <div class="form-group">
+ <label for="phone">Phone Number</label>
+ <input type="tel" id="phone" name="phone" placeholder="+91 9876543210">
+ </div>
+ </div>
+
+ <div class="form-group">
+ <label>Gender</label>
+ <div class="radio-group">
+ <label><input type="radio" name="gender" value="Male" id="genderMale"> Male</label>
+ <label><input type="radio" name="gender" value="Female" id="genderFemale"> Female</label>
+ <label><input type="radio" name="gender" value="Other" id="genderOther"> Other</label>
+ </div>
+ </div>
+
+ <div class="form-group">
+ <label for="country">Country</label>
+ <select id="country" name="country">
+ <option value="">-- Select Country --</option>
+ <option value="India">India</option>
+ <option value="USA">USA</option>
+ <option value="UK">UK</option>
+ <option value="Canada">Canada</option>
+ <option value="Australia">Australia</option>
+ <option value="Germany">Germany</option>
+ <option value="Japan">Japan</option>
+ </select>
+ </div>
+
+ <div class="form-group">
+ <label>Hobbies</label>
+ <div class="checkbox-group">
+ <label><input type="checkbox" name="hobby" value="Reading" id="hobbyReading"> Reading</label>
+ <label><input type="checkbox" name="hobby" value="Coding" id="hobbyCoding"> Coding</label>
+ <label><input type="checkbox" name="hobby" value="Sports" id="hobbySports"> Sports</label>
+ <label><input type="checkbox" name="hobby" value="Music" id="hobbyMusic"> Music</label>
+ <label><input type="checkbox" name="hobby" value="Travel" id="hobbyTravel"> Travel</label>
+ </div>
+ </div>
+
+ <div class="form-group">
+ <label for="registrationMessage">Message</label>
+ <textarea id="registrationMessage" name="message" placeholder="Write something..."></textarea>
+ </div>
+
+ <div class="btn-group">
+ <button type="button" class="practice-btn practice-btn-green" id="submitBtn" onclick="submitRegistrationForm()"> Submit Form</button>
+ <button type="button" class="practice-btn practice-btn-orange" id="resetBtn" onclick="resetRegistrationForm()"> Reset Form</button>
+ </div>
+ </form>
+
+ <div class="form-result" id="formResult"></div>
+
+ <!-- Sample Code -->
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Fill out the registration form</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"firstName"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"John"</span>);
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"lastName"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"Doe"</span>);
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"email"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"john@example.com"</span>);
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"phone"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"+91 9876543210"</span>);
+
+<span class="code-comment">// Select radio button</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"genderMale"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Select from dropdown</span>
+<span class="code-class">Select</span> country = <span class="code-keyword">new</span> <span class="code-class">Select</span>(driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"country"</span>)));
+country.<span class="code-method">selectByVisibleText</span>(<span class="code-string">"India"</span>);
+
+<span class="code-comment">// Check checkboxes</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"hobbyCoding"</span>)).<span class="code-method">click</span>();
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"hobbyReading"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Enter text in textarea</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"registrationMessage"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"Hello!"</span>);
+
+<span class="code-comment">// Submit form</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"submitBtn"</span>)).<span class="code-method">click</span>();</pre>
+ </div>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box dummy-login-card">
+ <div class="dummy-login-header">
+ <div>
+ <h3> Dummy Login Practice</h3>
+ <p>This is a separate practice widget for Selenium only. It does not connect to the real login page.</p>
+ </div>
+ <span class="dummy-login-badge">Practice Only</span>
+ </div>
+
+ <div class="dummy-login-grid">
+ <div class="dummy-login-panel">
+ <div class="dummy-login-note">
+ <strong>Use these demo credentials</strong>
+ <span><code>Username:</code> <strong>admin</strong></span>
+ <span><code>Password:</code> <strong>Admin@123</strong></span>
+ </div>
+
+ <form id="practiceDummyLoginForm" class="practice-form" onsubmit="event.preventDefault();">
+ <div class="form-group">
+ <label for="dummyUsername">Username</label>
+ <input type="text" id="dummyUsername" name="dummyUsername" placeholder="Enter demo username" autocomplete="off">
+ </div>
+
+ <div class="form-group">
+ <label for="dummyPassword">Password</label>
+ <div class="dummy-password-row">
+ <input type="password" id="dummyPassword" name="dummyPassword" placeholder="Enter demo password" autocomplete="off">
+ <button type="button" class="practice-btn practice-btn-blue dummy-toggle-btn" id="dummyPasswordToggle">Show</button>
+ </div>
+ </div>
+
+ <div class="btn-group">
+ <button type="button" class="practice-btn practice-btn-green" id="dummyLoginSubmitBtn">Check Login</button>
+ <button type="button" class="practice-btn practice-btn-orange" id="dummyLoginResetBtn">Reset Login</button>
+ </div>
+ </form>
+
+ <div class="form-result" id="dummyLoginResult"></div>
+ </div>
+
+ <div class="dummy-login-panel">
+ <h4>Selenium Practice Goal</h4>
+ <ul class="dummy-login-points">
+ <li>Locate the username and password fields by <code>id</code>.</li>
+ <li>Use <code>sendKeys()</code> to enter the dummy credentials.</li>
+ <li>Click the practice login button and validate the result text.</li>
+ <li>This lab stays isolated from <a href="login.html">the real login page</a>.</li>
+ </ul>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn">
+ <span class="arrow"></span> View Dummy Login Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Dummy login practice only - not the real login page</span>
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dummyUsername"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"admin"</span>);
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dummyPassword"</span>)).<span class="code-method">sendKeys</span>(<span class="code-string">"Admin@123"</span>);
+driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dummyLoginSubmitBtn"</span>)).<span class="code-method">click</span>();
+
+<span class="code-comment">// Verify the response text</span>
+String loginResult = driver.<span class="code-method">findElement</span>(<span class="code-class">By</span>.<span class="code-method">id</span>(<span class="code-string">"dummyLoginResult"</span>)).<span class="code-method">getText</span>();
+<span class="code-class">Assert</span>.<span class="code-method">assertTrue</span>(loginResult.<span class="code-method">contains</span>(<span class="code-string">"Login successful"</span>));</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+<!-- Modal Overlay -->
+ <div class="modal-overlay" id="practiceModal">
+ <div class="modal-content">
+ <h3> Modal Popup</h3>
+ <p>This is a practice modal popup. In Selenium, you can interact with modal elements just like regular elements no need to switch context (unlike alerts).</p>
+ <p style="font-size: 0.85rem; color: var(--text-muted);">Modal ID: <code>practiceModal</code></p>
+ <div class="modal-actions">
+ <button class="practice-btn practice-btn-blue" id="modalCloseBtn" onclick="closeModal()"> Close</button>
+ <button class="practice-btn practice-btn-green" id="modalConfirmBtn" onclick="confirmModal()"> Confirm</button>
+ </div>
+ </div>
+ </div>
+
+ <div id="siteFooter"></div>
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+</body>
+</html>
+

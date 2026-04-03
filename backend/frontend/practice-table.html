@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Table Handling - Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice Selenium table handling with rows, columns, and cell lookup.">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>Table <span class="gradient-text">Practice</span></h1>
+ <p>Practice table row, column, and cell handling with Selenium.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Table handling practice page loaded.</span></div>
+ </div>
+
+ <div class="practice-section" data-category="table">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Table Handling</h2>
+ <p>Practice counting rows, reading cells, and locating rows by text</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box">
+ <h3> Employee Status Table</h3>
+ <p>Use Selenium to inspect rows and verify the right employee status.</p>
+
+ <div class="table-demo">
+ <table class="practice-table" id="employeeTable">
+ <thead>
+ <tr>
+ <th>Employee</th>
+ <th>Department</th>
+ <th>Location</th>
+ <th>Status</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Anita</td>
+ <td>QA</td>
+ <td>Chennai</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Rahul</td>
+ <td>Automation</td>
+ <td>Bangalore</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Priya</td>
+ <td>DevOps</td>
+ <td>Pune</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Karthik</td>
+ <td>Support</td>
+ <td>Hyderabad</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Sneha</td>
+ <td>QA</td>
+ <td>Mumbai</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Vikram</td>
+ <td>Development</td>
+ <td>Delhi</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Divya</td>
+ <td>Automation</td>
+ <td>Coimbatore</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Arjun</td>
+ <td>DevOps</td>
+ <td>Noida</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Meera</td>
+ <td>Support</td>
+ <td>Kochi</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Sanjay</td>
+ <td>QA</td>
+ <td>Chandigarh</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Latha</td>
+ <td>Automation</td>
+ <td>Madurai</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Ajay</td>
+ <td>Development</td>
+ <td>Visakhapatnam</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Nisha</td>
+ <td>QA</td>
+ <td>Jaipur</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Rohit</td>
+ <td>Support</td>
+ <td>Lucknow</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Keerthi</td>
+ <td>DevOps</td>
+ <td>Tiruppur</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Manoj</td>
+ <td>Automation</td>
+ <td>Nagpur</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Pooja</td>
+ <td>QA</td>
+ <td>Indore</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Harish</td>
+ <td>Development</td>
+ <td>Surat</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Neha</td>
+ <td>Support</td>
+ <td>Mysuru</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Gokul</td>
+ <td>Automation</td>
+ <td>Salem</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ <tr>
+ <td>Farah</td>
+ <td>DevOps</td>
+ <td>Bhopal</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Yash</td>
+ <td>QA</td>
+ <td>Ahmedabad</td>
+ <td><span class="status-pill info">Training</span></td>
+ </tr>
+ <tr>
+ <td>Kavya</td>
+ <td>Support</td>
+ <td>Trichy</td>
+ <td><span class="status-pill success">Active</span></td>
+ </tr>
+ <tr>
+ <td>Deepak</td>
+ <td>Development</td>
+ <td>Patna</td>
+ <td><span class="status-pill warning">Pending</span></td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre><span class="code-comment">// Get all rows from the table body</span>
+<span class="code-class">List</span>&lt;<span class="code-class">WebElement</span>&gt; rows = driver.<span class="code-method">findElements</span>(
+ <span class="code-class">By</span>.<span class="code-method">xpath</span>(<span class="code-string">"//table[@id='employeeTable']/tbody/tr"</span>)
+);
+
+<span class="code-keyword">int</span> rowCount = rows.<span class="code-method">size</span>();
+<span class="code-keyword">int</span> colCount = rows.<span class="code-method">get</span>(0).<span class="code-method">findElements</span>(<span class="code-class">By</span>.<span class="code-method">tagName</span>(<span class="code-string">"td"</span>)).<span class="code-method">size</span>();
+
+<span class="code-comment">// Create a 2D array based on row count and 4 columns</span>
+<span class="code-class">String</span>[][] tableData = <span class="code-keyword">new</span> <span class="code-class">String</span>[rowCount][colCount];
+
+<span class="code-comment">// Use nested loops to read every cell</span>
+<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i &lt; rows.<span class="code-method">size</span>(); i++) {
+ <span class="code-class">List</span>&lt;<span class="code-class">WebElement</span>&gt; cols = rows.<span class="code-method">get</span>(i).<span class="code-method">findElements</span>(<span class="code-class">By</span>.<span class="code-method">tagName</span>(<span class="code-string">"td"</span>));
+
+ <span class="code-keyword">for</span> (<span class="code-keyword">int</span> j = 0; j &lt; cols.<span class="code-method">size</span>(); j++) {
+ tableData[i][j] = cols.<span class="code-method">get</span>(j).<span class="code-method">getText</span>();
+ }
+}
+
+<span class="code-comment">// Print the full table data</span>
+<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i &lt; tableData.length; i++) {
+ <span class="code-keyword">for</span> (<span class="code-keyword">int</span> j = 0; j &lt; tableData[i].length; j++) {
+ <span class="code-class">System</span>.out.<span class="code-method">print</span>(tableData[i][j] + <span class="code-string">" | "</span>);
+ }
+ <span class="code-class">System</span>.out.<span class="code-method">println</span>();
+}</pre>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+ <div class="modal-overlay" id="practiceModal">
+ <div class="modal-content">
+ <h3> Modal Popup</h3>
+ <p>This is a practice modal popup.</p>
+ <div class="modal-actions">
+ <button class="practice-btn practice-btn-blue" id="modalCloseBtn" onclick="closeModal()"> Close</button>
+ <button class="practice-btn practice-btn-green" id="modalConfirmBtn" onclick="confirmModal()"> Confirm</button>
+ </div>
+ </div>
+ </div>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js"></script>
+ <script src="static/js/practice.js"></script>
+</body>
+</html>

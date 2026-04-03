@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Calendar - Practice Lab | AutomateLearn</title>
+ <meta name="description" content="Practice calendar picker and date input automation with Selenium.">
+ <link rel="stylesheet" href="static/css/style.css?v=20260321-calendar2">
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+
+ <div class="bg-grid"></div>
+ <div class="bg-glow bg-glow-1"></div>
+ <div class="bg-glow bg-glow-2"></div>
+
+ <div id="siteHeader"></div>
+
+ <main class="main-content">
+ <div class="container">
+ <div class="practice-hero">
+ <div class="section-badge">🤖 Interactive Lab</div>
+ <h1>Calendar <span class="gradient-text">Practice</span></h1>
+ <p>Practice selecting dates from compact popup calendars with Selenium.</p>
+ </div>
+ <div id="practiceNav"></div>
+
+ <div class="action-log" id="actionLog">
+ <div class="log-entry"><span class="log-time">[Ready]</span> <span class="log-msg">Calendar practice page loaded.</span></div>
+ </div>
+
+ <div class="practice-section" data-category="calendar">
+ <div class="practice-section-header">
+ <div class="practice-section-icon"></div>
+ <div>
+ <h2>Calendar Picker</h2>
+ <p>Practice selecting dates from compact popup calendars and reading the chosen values</p>
+ </div>
+ </div>
+
+ <div class="glass-card practice-box compact-calendar-demo" data-compact-calendar-page>
+ <h3> Date Of Birth And Planning</h3>
+ <p>Click either field to open a compact white popup calendar. Date of Birth starts blank, and Planning starts with today selected.</p>
+
+ <div class="compact-calendar-fields">
+ <div class="compact-calendar-field-group">
+ <label class="compact-calendar-label" for="dobDateTrigger">Date Of Birth</label>
+ <input type="hidden" id="dobDateValue" value="">
+ <button class="compact-calendar-trigger" id="dobDateTrigger" type="button" data-calendar-target="dob">
+ <span class="compact-calendar-trigger-icon" aria-hidden="true">
+ <svg viewBox="0 0 24 24" role="img">
+ <path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v12a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3V2zm13 8H4v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8zM6 6v2h12V6H6z"></path>
+ </svg>
+ </span>
+ <span class="compact-calendar-trigger-copy">
+ <span class="compact-calendar-trigger-title">Date Of Birth</span>
+ <span class="compact-calendar-trigger-value is-empty" id="dobDateDisplay">Select your date of birth</span>
+ </span>
+ </button>
+ </div>
+
+ <div class="compact-calendar-field-group">
+ <label class="compact-calendar-label" for="planningDateTrigger">Planning</label>
+ <input type="hidden" id="planningDateValue" value="">
+ <button class="compact-calendar-trigger" id="planningDateTrigger" type="button" data-calendar-target="planning">
+ <span class="compact-calendar-trigger-icon" aria-hidden="true">
+ <svg viewBox="0 0 24 24" role="img">
+ <path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v12a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3V2zm13 8H4v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8zM6 6v2h12V6H6z"></path>
+ </svg>
+ </span>
+ <span class="compact-calendar-trigger-copy">
+ <span class="compact-calendar-trigger-title">Planning</span>
+ <span class="compact-calendar-trigger-value" id="planningDateDisplay">Loading...</span>
+ </span>
+ </button>
+ </div>
+ </div>
+
+ <div class="compact-calendar-popup" id="compactCalendarPopup" hidden>
+ <div class="compact-calendar-popup-header">
+ <button class="compact-calendar-nav" id="compactCalendarPrevBtn" type="button" aria-label="Previous month">&lt;</button>
+ <div class="compact-calendar-selectors">
+ <select class="compact-calendar-select" id="compactCalendarMonthSelect" aria-label="Select month"></select>
+ <select class="compact-calendar-select" id="compactCalendarYearSelect" aria-label="Select year"></select>
+ </div>
+ <button class="compact-calendar-nav" id="compactCalendarNextBtn" type="button" aria-label="Next month">&gt;</button>
+ </div>
+
+ <div class="compact-calendar-weekdays">
+ <span>Su</span>
+ <span>Mo</span>
+ <span>Tu</span>
+ <span>We</span>
+ <span>Th</span>
+ <span>Fr</span>
+ <span>Sa</span>
+ </div>
+
+ <div class="compact-calendar-days" id="compactCalendarDays"></div>
+ </div>
+ </div>
+
+ <div class="sample-code-toggle">
+ <div class="sample-code-btn open">
+ <span class="arrow"></span> View Selenium Code
+ </div>
+ <div class="sample-code-content">
+ <div class="code-block">
+ <div class="code-block-header">
+ <span class="code-block-lang">Java Selenium</span>
+ <button class="code-block-copy" onclick="copyCode(this)">Copy</button>
+ </div>
+ <pre>
+<span class="code-comment">// Import required Selenium classes</span>
+<span class="code-keyword">import</span> org.openqa.selenium.*;
+<span class="code-keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;
+<span class="code-keyword">import</span> org.openqa.selenium.support.ui.*;
+<span class="code-keyword">import</span> java.time.Duration;
+<span class="code-keyword">import</span> java.util.List;
+
+<span class="code-keyword">public class</span> <span class="code-class">ChromeLaunch</span> {
+
+    <span class="code-comment">// WebDriver instance</span>
+    <span class="code-keyword">private static</span> WebDriver driver;
+
+    <span class="code-comment">// JavaScript Executor for advanced actions</span>
+    <span class="code-keyword">private static</span> JavascriptExecutor js;
+
+    <span class="code-comment">// Explicit wait</span>
+    <span class="code-keyword">private static</span> WebDriverWait wait;
+
+    <span class="code-keyword">public static void</span> <span class="code-method">main</span>(String[] args) {
+
+        <span class="code-comment">// Launch Chrome browser</span>
+        driver = <span class="code-keyword">new</span> ChromeDriver();
+        driver.manage().window().maximize();
+
+        <span class="code-comment">// Open the calendar page</span>
+        driver.get(<span class="code-string">"practice-calendar"</span>);
+
+        js = (JavascriptExecutor) driver;
+        wait = <span class="code-keyword">new</span> WebDriverWait(driver, Duration.ofSeconds(10));
+
+        <span class="code-comment">// Click Date of Birth calendar button</span>
+        WebElement dobCalander = driver.findElement(By.id(<span class="code-string">"dobDateTrigger"</span>));
+        clickElement(dobCalander);
+
+        <span class="code-comment">// Select Year from dropdown</span>
+        WebElement years = driver.findElement(By.id(<span class="code-string">"compactCalendarYearSelect"</span>));
+        selectByText(years, <span class="code-string">"2002"</span>);
+
+        <span class="code-comment">// Select Month (index based)</span>
+        WebElement months = driver.findElement(By.id(<span class="code-string">"compactCalendarMonthSelect"</span>));
+        selectByIndex(months, <span class="code-number">11</span>);
+
+        <span class="code-comment">// Select Date from calendar</span>
+        List&lt;WebElement&gt; days = driver.findElements(
+            By.xpath(<span class="code-string">"//button[contains(@class,'compact-calendar-day')]"</span>)
+        );
+        selectDate(days, <span class="code-string">"25"</span>);
+    }
+
+    <span class="code-comment">// Click element safely (handles scroll + interception)</span>
+    <span class="code-keyword">public static void</span> <span class="code-method">clickElement</span>(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+        <span class="code-comment">// Scroll element to center of screen</span>
+        js.executeScript(<span class="code-string">"arguments[0].scrollIntoView({block:'center'});"</span>, element);
+
+        <span class="code-keyword">try</span> {
+            element.click();
+        } <span class="code-keyword">catch</span> (Exception e) {
+            <span class="code-comment">// Fallback using JavaScript click</span>
+            js.executeScript(<span class="code-string">"arguments[0].click();"</span>, element);
+        }
+    }
+
+    <span class="code-comment">// Select dropdown using visible text</span>
+    <span class="code-keyword">public static void</span> <span class="code-method">selectByText</span>(WebElement element, String text) {
+        Select select = <span class="code-keyword">new</span> Select(element);
+        select.selectByVisibleText(text);
+    }
+
+    <span class="code-comment">// Select dropdown using index</span>
+    <span class="code-keyword">public static void</span> <span class="code-method">selectByIndex</span>(WebElement element, int index) {
+        Select select = <span class="code-keyword">new</span> Select(element);
+        select.selectByIndex(index);
+    }
+
+    <span class="code-comment">// Select a specific date from calendar</span>
+    <span class="code-keyword">public static void</span> <span class="code-method">selectDate</span>(List&lt;WebElement&gt; days, String date) {
+
+        <span class="code-keyword">for</span> (WebElement day : days) {
+            <span class="code-keyword">if</span> (day.getText().equals(date)) {
+
+                <span class="code-comment">// Click using JS to avoid interception issues</span>
+                js.executeScript(<span class="code-string">"arguments[0].click();"</span>, day);
+                <span class="code-keyword">break</span>;
+            }
+        }
+    }
+}
+</pre>
+ </div>
+ <div class="alert-note">
+  <div class="alert-title">⚠️ Important</div>
+  <div class="alert-message">
+    <b>using JavaScript click for calendar button , click may not work </b><br>
+    explicit wait  and  scroll element to view or optional.
+  </div>
+</div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </main>
+
+ <div class="modal-overlay" id="practiceModal">
+ <div class="modal-content">
+ <h3> Modal Popup</h3>
+ <p>This is a practice modal popup.</p>
+ <div class="modal-actions">
+ <button class="practice-btn practice-btn-blue" id="modalCloseBtn" onclick="closeModal()"> Close</button>
+ <button class="practice-btn practice-btn-green" id="modalConfirmBtn" onclick="confirmModal()"> Confirm</button>
+ </div>
+ </div>
+ </div>
+
+ <div id="siteFooter"></div>
+
+ <script src="static/js/shared-layout.js?v=20260403-global-badge2"></script>
+ <script src="static/js/main.js?v=20260403-global-badge2"></script>
+ <script src="static/js/learn.js?v=20260321-calendar2"></script>
+ <script src="static/js/practice.js?v=20260321-calendar2"></script>
+</body>
+</html>

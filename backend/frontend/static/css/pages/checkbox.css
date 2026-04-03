@@ -1,0 +1,40 @@
+.checkbox-grid {
+   display: grid;
+   gap: var(--space-lg);
+ }
+
+ .checkbox-block {
+   padding: var(--space-lg);
+ }
+
+ .checkbox-stack {
+   display: grid;
+   gap: 12px;
+   margin-top: 14px;
+ }
+
+ .checkbox-option-card {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   padding: 14px 16px;
+   border: 1px solid rgba(255, 255, 255, 0.08);
+   border-radius: var(--radius-md);
+   background: rgba(255, 255, 255, 0.03);
+ }
+
+ .checkbox-option-card.disabled {
+   opacity: 0.5;
+   cursor: not-allowed;
+ }
+
+ .checkbox-option-card input[type="checkbox"] {
+   width: 18px;
+   height: 18px;
+ }
+
+ .checkbox-helper {
+   margin-top: 10px;
+   color: var(--text-muted);
+   font-size: 0.95rem;
+ }
